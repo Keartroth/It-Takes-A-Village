@@ -3,6 +3,10 @@
     width: 50%;
 }
 
+.registration {
+    text-align: center;
+}
+
 .registration__container {
     margin: auto;
     width: 50%;
