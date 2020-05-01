@@ -18,7 +18,7 @@ export const RegisterForm = ({ toggle }) => {
     const avatar = useRef()
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/customers?email=${email.current.value}`)
+        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
             .then(_ => _.json())
             .then(user => {
                 if (user.length) {
@@ -30,11 +30,11 @@ export const RegisterForm = ({ toggle }) => {
 
     const handleRegister = (e) => {
         e.preventDefault()
-
+        
         if (password.current.value === verifyPassword.current.value) {
             existingUserCheck()
                 .then(() => {
-                    fetch("http://localhost:8088/customers", {
+                    fetch("http://localhost:8088/users", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
