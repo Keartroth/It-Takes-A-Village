@@ -39,14 +39,14 @@ export const Login = ({ toggle }) => {
                 <Form onSubmit={handleLogin}>
                     <Form.Group controlId="formGridEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control ref={email} type="email" placeholder="Enter email" />
+                        <Form.Control ref={email} type="email" placeholder="Enter email" required />
                         <Form.Text className="text-muted">
                             We'll never share your email with anyone else.
                         </Form.Text>
                     </Form.Group>
                     <Form.Group controlId="formGridPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control ref={password} type="password" placeholder="Password" />
+                        <Form.Control ref={password} type="password" placeholder="Password" required />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Submit

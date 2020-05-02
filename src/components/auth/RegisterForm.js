@@ -30,34 +30,39 @@ export const RegisterForm = ({ toggle }) => {
 
     const handleRegister = (e) => {
         e.preventDefault()
-        
+
         if (password.current.value === verifyPassword.current.value) {
             existingUserCheck()
-                .then(() => {
-                    fetch("http://localhost:8088/users", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            password: password.current.value,
-                            firstName: firstName.current.value,
-                            lastName: lastName.current.value,
-                            phone: phone.current.value,
-                            address: address.current.value + ", " + city.current.value + ", " + state.current.value + ", " + zip.current.value,
-                            image: avatar.current.value
+                .then((result) => {
+                    if (!result) {
+                        fetch("http://localhost:8088/users", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                email: email.current.value,
+                                password: password.current.value,
+                                firstName: firstName.current.value,
+                                lastName: lastName.current.value,
+                                phone: phone.current.value,
+                                address: address.current.value + ", " + city.current.value + ", " + state.current.value + ", " + zip.current.value,
+                                image: avatar.current.value
+                            })
                         })
-                    })
-                        .then(_ => _.json())
-                        .then(createdUser => {
-                            if (createdUser.hasOwnProperty("id")) {
-                                localStorage.setItem("villager", createdUser.id)
-                                toggle()
-                            }
-                        })
+                            .then(_ => _.json())
+                            .then(createdUser => {
+                                if (createdUser.hasOwnProperty("id")) {
+                                    localStorage.setItem("villager", createdUser.id)
+                                    toggle()
+                                }
+                            })
+                    } else {
+                        window.alert("Email already in use.")
+                    }
                 })
         } else {
-            window.alert("Passwords do not match")
+            window.alert("Passwords do not match.")
         }
     }
 
@@ -67,31 +72,31 @@ export const RegisterForm = ({ toggle }) => {
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridEmail">
                         <Form.Label>Email *</Form.Label>
-                        <Form.Control ref={email} type="email" placeholder="Enter email" />
+                        <Form.Control ref={email} type="email" placeholder="Enter email" required />
                     </Form.Group>
                 </Form.Row>
 
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridPassword">
                         <Form.Label>Password *</Form.Label>
-                        <Form.Control ref={password} type="password" placeholder="Password" />
+                        <Form.Control ref={password} type="password" placeholder="Password" required />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridVerifyPassword">
                         <Form.Label>Verify Password *</Form.Label>
-                        <Form.Control ref={verifyPassword} type="password" placeholder="Verify Password" />
+                        <Form.Control ref={verifyPassword} type="password" placeholder="Verify Password" required />
                     </Form.Group>
                 </Form.Row>
 
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridFirstName">
                         <Form.Label>First Name *</Form.Label>
-                        <Form.Control ref={firstName} placeholder="Enter First Name" />
+                        <Form.Control ref={firstName} placeholder="Enter First Name" required />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridLastName">
                         <Form.Label>Last Name *</Form.Label>
-                        <Form.Control ref={lastName} placeholder="Enter Last Name" />
+                        <Form.Control ref={lastName} placeholder="Enter Last Name" required />
                     </Form.Group>
                 </Form.Row>
 

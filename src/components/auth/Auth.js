@@ -57,7 +57,7 @@ export const Auth = ({ toggle }) => {
 
     return (
         <main className="mainContainer">
-            <Navbar bg="light" expand="lg">
+            <Navbar bg="warning" variant="light" expand="lg">
                 <Navbar.Brand onClick={() => setActiveList("home")} >It Takes a Village</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

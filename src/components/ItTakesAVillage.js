@@ -1,7 +1,8 @@
 import React, { useState } from "react"
-import Dashboard from "./Dashboard"
-import "./ItTakesAVillage.css"
 import { Auth } from "./auth/Auth"
+import { Dashboard } from "./Dashboard"
+import { VillageUsersProvider } from "./providers/VillageUsersProvider"
+import "./ItTakesAVillage.css"
 
 
 export const ItTakesAVillage = () => {
@@ -9,5 +10,10 @@ export const ItTakesAVillage = () => {
     const toggle = () => update(!check)
 
     return (
-        localStorage.getItem("villager") ? <Dashboard toggle={toggle} /> : <Auth toggle={toggle} />
-)}
+        localStorage.getItem("villager") ?
+            <VillageUsersProvider>
+                <Dashboard toggle={toggle} />
+            </VillageUsersProvider>
+            : <Auth toggle={toggle} />
+    )
+}
