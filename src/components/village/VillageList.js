@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react"
+import React, { useContext, useState } from "react"
 import { Modal } from "reactstrap"
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
@@ -41,13 +41,19 @@ export const VillageList = props => {
         })
     }
 
-    const blankBudget = { budgetValue: null, budgetType: null }
-    const [budgetState, setBudgetState] = useState([
-        { ...blankBudget }
-    ])
+    const blankBudget = { budgetValue: null, budgetTypesId: null }
+    const [budgetState, setBudgetState] = useState([])
 
-    const addBudgetExpense = () => {
+    const addBudgetExpense = (e) => {
+        e.preventDefault()
         setBudgetState([...budgetState, { ...blankBudget }])
+    }
+
+    const removeBudgetExpense = (index) => {
+        debugger
+        const updatedBudget = [...budgetState]
+        updatedBudget.splice(index, 1)
+        setBudgetState(updatedBudget)
     }
 
     const handleBudgetChange = (e) => {
@@ -58,7 +64,7 @@ export const VillageList = props => {
 
     const [modal, setModal] = useState(false)
     const toggle = () => {
-        setBudgetState([{ ...blankBudget }])
+        setBudgetState([])
         setModal(!modal)
     }
 
@@ -111,7 +117,7 @@ export const VillageList = props => {
                 </section>
             </section>
 
-            <Modal isOpen={modal} toggle={toggle} onSubmit={constructVillage}>
+            <Modal size="lg" isOpen={modal} toggle={toggle} onSubmit={constructVillage}>
                 <button type="button" id="closeButton" className="close" data-dismiss="modal" aria-label="Close" onClick={toggle}>
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -146,11 +152,11 @@ export const VillageList = props => {
                             const budgetValueId = `budgetValue-${idx}`
                             const budgetTypesId = `budgetTypesId-${idx}`
                             return <Form.Row key={`budget-${idx}`}>
-                                <Col>
+                                <Col className="col-5">
                                     <Form.Label>Expected Monthly Expense:</Form.Label>
                                     <Form.Control className="budgetValue" id={budgetValueId} type="number" data-idx={idx} onChange={handleBudgetChange} required />
                                 </Col>
-                                <Col>
+                                <Col className="col-6">
                                     <Form.Group as={Col} id="formGridBudget">
                                         <Form.Label>Budget Type:</Form.Label>
                                         <Form.Control className="budgetTypesId" id={budgetTypesId} as="select" defaultValue="Choose..." data-idx={idx} onChange={handleBudgetChange} required>
@@ -163,14 +169,16 @@ export const VillageList = props => {
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
+                                <Col  className="col-1">
+                                    <button type="button" id="closeButton" className="close" data-dismiss="modal" aria-label="Close" onClick={(e) => { removeBudgetExpense(idx) }}>
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </Col>
                             </Form.Row>
                         })
                     }
                     <Form.Group id="buttonContainer">
-                        <Button onClick={(e) => {
-                            e.preventDefault()
-                            addBudgetExpense()
-                        }}>Add another monthly expense</Button>
+                        {budgetState.length === 0 ? <Button onClick={(e) => { addBudgetExpense(e) }}>Add a monthly expense</Button> : <Button onClick={(e) => { addBudgetExpense(e) }}>Add another monthly expense</Button>}
                         <Button type="submit">Create village</Button>
                     </Form.Group>
                 </Form>
@@ -178,3 +186,7 @@ export const VillageList = props => {
         </>
     )
 }
+
+{/* <Button onClick={(e) => {
+                            e.preventDefault()
+                            addBudgetExpense()}}>Add another monthly expense</Button> */}
