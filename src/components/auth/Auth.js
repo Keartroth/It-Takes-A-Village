@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react"
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 import { Login } from "./Login"
 import { About } from "../home/About"
 import { Home } from "../home/Home"
@@ -55,16 +57,23 @@ export const Auth = ({ toggle }) => {
 
     return (
         <main className="mainContainer">
-            <div className="navBar">
-                <div className="fakeLink href" onClick={() => setActiveList("home")}>Home</div>
-                <div className="fakeLink href" onClick={() => setActiveList("about")}>About</div>
-                <div className="fakeLink href" onClick={() => setActiveList("login")}>Login</div>
-            </div>
+            <Navbar bg="warning" variant="light" expand="lg">
+                <Navbar.Brand onClick={() => setActiveList("home")} >It Takes a Village</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Link onClick={() => setActiveList("home")} >Home</Nav.Link>
+                        <Nav.Link onClick={() => setActiveList("about")} >About</Nav.Link>
+                        <Nav.Link onClick={() => setActiveList("login")} >Login</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+
             <div className="listDisplay">
                 {components}
             </div>
             <div className="authContainer">
-                {activeList === "login" ? <div className="fakeLink href" onClick={() => setActiveList("register")}>Register</div> : ""}
+                {activeList === "login" ? <div className="fakeLink href registration" onClick={() => setActiveList("register")}>Not a villager? Register here!</div> : ""}
             </div>
         </main>
     )
