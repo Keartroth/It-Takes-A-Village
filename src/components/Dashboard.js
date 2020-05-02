@@ -21,7 +21,7 @@ export const Dashboard = ({ toggle }) => {
     const protegeCheck = villageUsers.find(vu => vu.userId === userId && vu.protege === true)
 
     const villageLink = () => {
-        setActiveList("previewVillage")
+        setActiveList("visitVillage")
     }
 
     // HIGHER ORDER FUNCTION. IT RETURNS OTHER FUNCTION (i.e. COMPONENTS)
@@ -39,6 +39,20 @@ export const Dashboard = ({ toggle }) => {
         </BudgetsProvider>
     )
 
+    const showPatronedVillageList = () => (
+        <BudgetsProvider>
+            <BudgetTypesProvider>
+                <UserProvider>
+                    <VillageUsersProvider>
+                        <VillagesProvider>
+                            <VillageList home={false} villageLink={villageLink} />
+                        </VillagesProvider>
+                    </VillageUsersProvider>
+                </UserProvider>
+            </BudgetTypesProvider>
+        </BudgetsProvider>
+    )
+
     /*
         This effect hook determines which list is shown
         based on the state of the `activeList` variable.
@@ -46,6 +60,9 @@ export const Dashboard = ({ toggle }) => {
     useEffect(() => {
         if (activeList === "home") {
             setComponents(showHome)
+        }
+        else if (activeList === "patronedVillageList") {
+            setComponents(showPatronedVillageList)
         }
     }, [activeList])
 
