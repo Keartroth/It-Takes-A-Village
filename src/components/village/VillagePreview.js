@@ -18,7 +18,7 @@ export const VillagePreview = (props) => {
                         {village.description}
                     </p>
                 </div>
-                <Button onClick={villageLink}>Visit this village!</Button>
+                <Button onClick={() => {villageLink(village.id)}}>Visit this village!</Button>
             </section>
         </>
     )

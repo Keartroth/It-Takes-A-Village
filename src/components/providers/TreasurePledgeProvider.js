@@ -52,7 +52,7 @@ export const TreasurePledgesProvider = (props) => {
         an empty array is the second argument to avoid infinite loop.
     */
     useEffect(() => {
-        gettreasurePledgess()
+        getTreasurePledges()
     }, [])
 
     return (

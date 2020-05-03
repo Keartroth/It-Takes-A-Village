@@ -15,10 +15,16 @@ export const VillageList = props => {
     const home = props.home
     const villageLink = props.villageLink
     const currentUser = parseInt(localStorage.getItem("villager"))
-    const patronedVillageArray = villages.filter(v => {
-        let patronedVillage = villageUsers.find(vu => vu.userId === currentUser && vu.protege === false)
-        if (patronedVillage) return v
+    const villagesArrayCopy = villages.slice()
+    villagesArrayCopy.map(v => {
+        let villageRelationship = villageUsers.find(vu => vu.userId === currentUser && vu.protege === false) || {}
+        if (villageRelationship.protege === false) {
+            v.patron = true
+        } else {
+            v.protege = false
+        }
     })
+    const patronedVillageArray = villagesArrayCopy.filter(v => v.patron === true)
 
     const [budgetState, setBudgetState] = useState([])
 
@@ -69,12 +75,12 @@ export const VillageList = props => {
 
     return (
         <>
-            <section className="villageContainer">
-                <div className="villageContainer__header">
+            <section className="villageListContainer">
+                <div className="villageListContainer__header">
                     {home ? <h1>Visit a village to volunteer!</h1> : ""}
                     {home ? <Button variant="primary" onClick={toggle}>Create a village</Button> : ""}
                 </div>
-                <section className="villalgesList">
+                <section className="villageList">
                     {home ? homeList() : patronList()}
                 </section>
 

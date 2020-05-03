@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useContext } from "react"
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import { About } from "./home/About"
+import { BudgetsProvider } from "./providers/BudgetsProvider"
+import { BudgetTypesProvider } from "./providers/BudgetTypesProvider"
 import { FakePartnersProvider } from "./providers/FakePartnersProvider"
 import { FakeTestimonialsProvider } from "./providers/FakeTestimonialsProvider"
 import { QuotesProvider } from "./providers/QuotesProvider"
+import { TimePledgesProvider } from "./providers/TimePledgeProvider"
+import { TreasurePledgesProvider } from "./providers/TreasurePledgeProvider"
 import { UserProvider } from "./providers/UsersProvider"
-import { VillageUsersContext, VillageUsersProvider } from "./providers/VillageUsersProvider"
-import { VillagesProvider } from "./providers/VillagesProvider"
-import { BudgetTypesProvider } from "./providers/BudgetTypesProvider"
+import { Village } from "./village/Village"
 import { VillageList } from "./village/VillageList"
-import { BudgetsProvider } from "./providers/BudgetsProvider"
-import { About } from "./home/About"
+import { VillagesProvider } from "./providers/VillagesProvider"
+import { VillageUsersContext, VillageUsersProvider } from "./providers/VillageUsersProvider"
 
 export const Dashboard = ({ toggle }) => {
     const { villageUsers } = useContext(VillageUsersContext)
@@ -19,7 +22,10 @@ export const Dashboard = ({ toggle }) => {
     const userId = parseInt(localStorage.getItem("villager"))
     const protegeCheck = villageUsers.find(vu => vu.userId === userId && vu.protege === true)
 
-    const villageLink = () => {
+    const [visitVillageId, setVisitVillageId] = useState(null)
+
+    const villageLink = (id) => {
+        setVisitVillageId(id)
         setActiveList("visitVillage")
     }
 
@@ -60,6 +66,24 @@ export const Dashboard = ({ toggle }) => {
         </BudgetsProvider>
     )
 
+    const showVisitVillage = () => (
+        <TimePledgesProvider>
+            <TreasurePledgesProvider>
+                <BudgetTypesProvider>
+                    <BudgetsProvider>
+                        <UserProvider>
+                            <VillagesProvider>
+                                <VillageUsersProvider>
+                                    <Village villageId={visitVillageId} />
+                                </VillageUsersProvider>
+                            </VillagesProvider>
+                        </UserProvider>
+                    </BudgetsProvider>
+                </BudgetTypesProvider>
+            </TreasurePledgesProvider>
+        </TimePledgesProvider>
+    )
+
     /*
         This effect hook determines which list is shown
         based on the state of the `activeList` variable.
@@ -73,6 +97,9 @@ export const Dashboard = ({ toggle }) => {
         }
         else if (activeList === "about") {
             setComponents(showAbout)
+        }
+        else if (activeList === "visitVillage") {
+            setComponents(showVisitVillage)
         }
     }, [activeList])
 
