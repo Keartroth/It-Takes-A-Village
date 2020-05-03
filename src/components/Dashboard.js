@@ -10,8 +10,7 @@ import { VillagesProvider } from "./providers/VillagesProvider"
 import { BudgetTypesProvider } from "./providers/BudgetTypesProvider"
 import { VillageList } from "./village/VillageList"
 import { BudgetsProvider } from "./providers/BudgetsProvider"
-
-
+import { About } from "./home/About"
 
 export const Dashboard = ({ toggle }) => {
     const { villageUsers } = useContext(VillageUsersContext)
@@ -25,6 +24,14 @@ export const Dashboard = ({ toggle }) => {
     }
 
     // HIGHER ORDER FUNCTION. IT RETURNS OTHER FUNCTION (i.e. COMPONENTS)
+    const showAbout = () => (
+        <FakeTestimonialsProvider>
+            <FakePartnersProvider>
+                <About />
+            </FakePartnersProvider>
+        </FakeTestimonialsProvider>
+    )
+
     const showHome = () => (
         <BudgetsProvider>
             <BudgetTypesProvider>
@@ -63,6 +70,9 @@ export const Dashboard = ({ toggle }) => {
         }
         else if (activeList === "patronedVillageList") {
             setComponents(showPatronedVillageList)
+        }
+        else if (activeList === "about") {
+            setComponents(showAbout)
         }
     }, [activeList])
 
