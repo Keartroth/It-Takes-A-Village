@@ -10,8 +10,10 @@ export const Calendar = props => {
     const users = props.users
     const villageId = props.villageId
     const villageProtege = props.villageProtege
-    const { userVillageEvents, addUserVillageEvent } = useContext(UserVillageEventsContext)
-    const { villageEvents, addVillageEvent } = useContext(VillageEventsContext)
+    const currentUserId = props.currentUserId
+    const currentUserIsProtegeCheck = props.currentUserIsProtegeCheck
+    const { villageEvents, addVillageEvent, deleteVillageEvent } = useContext(VillageEventsContext)
+    const { userVillageEvents, addUserVillageEvent, deleteUserVillageEvent } = useContext(UserVillageEventsContext)
     const currentVillageEvents = villageEvents.filter(ve => ve.villageId === villageId) || []
 
     const [modal, setModal] = useState(false)
@@ -23,6 +25,23 @@ export const Calendar = props => {
 
     const [eventState, setEventState] = useState({})
 
+    const joinEvent = (eventId) => {
+        let userVillageEvent = {
+            villageEventsId: eventId,
+            userId: currentUserId
+        }
+        addUserVillageEvent(userVillageEvent)
+    }
+
+    const leaveEvent = (currentEventUsers) => {
+        const foundEventUser = currentEventUsers.find(ceu => ceu.userId === currentUserId)
+        deleteUserVillageEvent(foundEventUser.id)
+    }
+
+    const cancelEvent = (eventId) => {
+        deleteVillageEvent(eventId)
+    }
+
     return (
         <>
             <Container className="calendar">
@@ -30,6 +49,7 @@ export const Calendar = props => {
                 {
                     currentVillageEvents.map(cve => {
                         const currentEventUsers = userVillageEvents.filter(uve => uve.villageEventsId === cve.id) || []
+                        const rsvpCheck = currentEventUsers.find(ceu => ceu.userId === currentUserId)
                         return <div key={cve.id} className="calendar__event">
                             <h5>{cve.name}</h5>
                             <p>Date: {cve.date} Time: {cve.time}<br></br>Estimated Cost: ${cve.cost}<br></br>Event description: {cve.description}</p>
@@ -42,11 +62,14 @@ export const Calendar = props => {
                                     })
                                 }
                             </ul>
+
+                            {rsvpCheck ? <Button onClick={() => { leaveEvent(currentEventUsers) }}>Leave this event</Button> : <Button onClick={() => { joinEvent(cve.id) }}>Join this event</Button>}
+                            {currentUserIsProtegeCheck ? <Button onClick={() => { cancelEvent(cve.id) }}>Cancel this event</Button> : ""}
                         </div>
                     })
                 }
 
-                <AddEventForm 
+                <AddEventForm
                     modal={modal}
                     villageId={villageId}
                     eventState={eventState}

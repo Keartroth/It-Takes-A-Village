@@ -34,30 +34,11 @@ export const VillageList = props => {
         setModal(!modal)
     }
 
-    const homeList = () => {
+    const List = (array) => {
         return (
             <>
                 {
-                    villages.map(v => {
-                        const foundRelationship = villageUsers.find(vu => vu.villageId === v.id && vu.protege === true) || []
-                        const protege = users.find(u => u.id === foundRelationship.userId) || {}
-
-                        return <VillagePreview key={v.id}
-                            villageLink={villageLink}
-                            villageObject={v}
-                            protege={protege}
-                        />
-                    })
-                }
-            </>
-        )
-    }
-
-    const patronList = () => {
-        return (
-            <>
-                {
-                    patronedVillageArray.map(v => {
+                    array.map(v => {
                         const foundRelationship = villageUsers.find(vu => vu.villageId === v.id && vu.protege === true) || []
                         const protege = users.find(u => u.id === foundRelationship.userId) || {}
 
@@ -80,7 +61,7 @@ export const VillageList = props => {
                     {home ? <Button variant="primary" onClick={toggle}>Create a village</Button> : ""}
                 </div>
                 <section className="villageList">
-                    {home ? homeList() : patronList()}
+                    {home ? List(villages) : List(patronedVillageArray)}
                 </section>
 
                 <CreateVillageForm

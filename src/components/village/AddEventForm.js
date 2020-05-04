@@ -24,12 +24,11 @@ export const AddEventForm = props => {
         const updatedEvent = { ...eventState }
         updatedEvent[e.target.id] = e.target.value
         setEventState(updatedEvent)
-        console.log(updatedEvent)
     }
 
     const addEvent = () => {
         const userEventId = villageEvents.length + 1
-        debugger
+        
         let eventObject = {
             villageId: villageId,
             date: eventState.date,
@@ -68,30 +67,30 @@ export const AddEventForm = props => {
                         <Form.Row>
                             <Col>
                                 <Form.Label>Date:</Form.Label>
-                                <Form.Control id="date" value={eventState.date} type="date" onChange={handleEventChange} required />
+                                <Form.Control id="date" type="date" onChange={handleEventChange} required />
                             </Col>
                             <Col>
                                 <Form.Label>Time:</Form.Label>
-                                <Form.Control id="time" step="300" value={eventState.time} type="time" onChange={handleEventChange} required />
+                                <Form.Control id="time" step="300" type="time" onChange={handleEventChange} required />
                             </Col>
                         </Form.Row>
                         <Form.Row>
                             <Col>
                                 <Form.Label>Event Name:</Form.Label>
-                                <Form.Control id="name" value={eventState.name} onChange={handleEventChange} required />
+                                <Form.Control id="name" onChange={handleEventChange} required />
                             </Col>
                             <Col>
                                 <Form.Label>Estimated Cost:</Form.Label>
-                                <Form.Control id="cost" value={eventState.cost} type="number" min="0" step="1" onChange={handleEventChange} required />
+                                <Form.Control id="cost" type="number" min="0" step="1" onChange={handleEventChange} required />
                             </Col>
                         </Form.Row>
                         <Form.Row>
                             <Form.Label>Location:</Form.Label>
-                            <Form.Control id="location" value={eventState.location} onChange={handleEventChange} required />
+                            <Form.Control id="location" onChange={handleEventChange} required />
                         </Form.Row>
                         <Form.Row>
                             <Form.Label>Description:</Form.Label>
-                            <Form.Control id="description" as="textarea" value={eventState.description} onChange={handleEventChange} required />
+                            <Form.Control id="description" as="textarea" onChange={handleEventChange} required />
                         </Form.Row>
                         <Form.Group id="buttonContainer">
                             <Button type="submit">Add and join event!</Button>

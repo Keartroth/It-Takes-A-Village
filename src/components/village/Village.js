@@ -4,9 +4,9 @@ import { UserContext } from "../providers/UsersProvider"
 import { VillagesContext } from "../providers/VillagesProvider"
 import { VillageUsersContext } from "../providers/VillageUsersProvider"
 import { Budget } from "./Budget"
+import { Calendar } from "./Calendar"
 import { JoinVillageForm } from "./JoinVillageForm"
 import "./Village.css"
-import { Calendar } from "./Calendar"
 
 export const Village = props => {
     const { villages } = useContext(VillagesContext)
@@ -34,9 +34,12 @@ export const Village = props => {
                 <h1>{villageProtege.firstName} {villageProtege.lastName}'s Village</h1>
 
                 {currentUserIsPatronCheck || currentUserIsProtegeCheck ? <Calendar
-                    villageProtege={villageProtege}
+                    users={users}
                     villageId={villageId}
-                    users={users} /> : ""}
+                    currentUserId={currentUserId}
+                    villageProtege={villageProtege}
+                    currentUserIsProtegeCheck={currentUserIsProtegeCheck}
+                /> : ""}
 
                 <Budget
                     villageId={villageId}
