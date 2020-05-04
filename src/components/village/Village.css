@@ -14,8 +14,20 @@
     margin-top: 1rem;
 }
 
+.calendar__event {
+    border: 1px solid black;
+}
+
 #closeButton {
     position: absolute;
     right: 1rem;
     top: 1rem;
+}
+
+#joinVillageForm {
+    padding: 3rem;
+}
+
+#modal-header {
+    justify-content: center;
 }
