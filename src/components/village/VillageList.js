@@ -56,7 +56,6 @@ export const VillageList = props => {
     const patronList = () => {
         return (
             <>
-                {patronedVillageArray.length === 0 ? <h1>You haven't patroned any villages, yet. Visit the home screen to view villages to join!</h1> : ""}
                 {
                     patronedVillageArray.map(v => {
                         const foundRelationship = villageUsers.find(vu => vu.villageId === v.id && vu.protege === true) || []

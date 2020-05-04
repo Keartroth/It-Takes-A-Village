@@ -6,7 +6,6 @@ import { BudgetsProvider } from "./providers/BudgetsProvider"
 import { BudgetTypesProvider } from "./providers/BudgetTypesProvider"
 import { FakePartnersProvider } from "./providers/FakePartnersProvider"
 import { FakeTestimonialsProvider } from "./providers/FakeTestimonialsProvider"
-import { QuotesProvider } from "./providers/QuotesProvider"
 import { TimePledgesProvider } from "./providers/TimePledgeProvider"
 import { TreasurePledgesProvider } from "./providers/TreasurePledgeProvider"
 import { UserProvider } from "./providers/UsersProvider"
@@ -14,6 +13,8 @@ import { Village } from "./village/Village"
 import { VillageList } from "./village/VillageList"
 import { VillagesProvider } from "./providers/VillagesProvider"
 import { VillageUsersContext, VillageUsersProvider } from "./providers/VillageUsersProvider"
+import { UserVillageEventsProvider } from "./providers/UserVillageEventsProvider"
+import { VillageEventsProvider } from "./providers/VillageEventsProvider"
 
 export const Dashboard = ({ toggle }) => {
     const { villageUsers } = useContext(VillageUsersContext)
@@ -21,6 +22,7 @@ export const Dashboard = ({ toggle }) => {
     const [components, setComponents] = useState()
     const userId = parseInt(localStorage.getItem("villager"))
     const protegeCheck = villageUsers.find(vu => vu.userId === userId && vu.protege === true)
+    const patronCheck = villageUsers.find(vu => vu.userId === userId && vu.protege === false)
 
     const [visitVillageId, setVisitVillageId] = useState(null)
 
@@ -67,21 +69,25 @@ export const Dashboard = ({ toggle }) => {
     )
 
     const showVisitVillage = () => (
-        <TimePledgesProvider>
-            <TreasurePledgesProvider>
-                <BudgetTypesProvider>
-                    <BudgetsProvider>
-                        <UserProvider>
-                            <VillagesProvider>
-                                <VillageUsersProvider>
-                                    <Village villageId={visitVillageId} />
-                                </VillageUsersProvider>
-                            </VillagesProvider>
-                        </UserProvider>
-                    </BudgetsProvider>
-                </BudgetTypesProvider>
-            </TreasurePledgesProvider>
-        </TimePledgesProvider>
+        <VillageEventsProvider>
+            <UserVillageEventsProvider>
+                <TimePledgesProvider>
+                    <TreasurePledgesProvider>
+                        <BudgetTypesProvider>
+                            <BudgetsProvider>
+                                <UserProvider>
+                                    <VillagesProvider>
+                                        <VillageUsersProvider>
+                                            <Village villageId={visitVillageId} />
+                                        </VillageUsersProvider>
+                                    </VillagesProvider>
+                                </UserProvider>
+                            </BudgetsProvider>
+                        </BudgetTypesProvider>
+                    </TreasurePledgesProvider>
+                </TimePledgesProvider>
+            </UserVillageEventsProvider>
+        </VillageEventsProvider>
     )
 
     /*
@@ -116,8 +122,8 @@ export const Dashboard = ({ toggle }) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link onClick={() => setActiveList("home")} >Home</Nav.Link>
-                        {protegeCheck ? <Nav.Link onClick={() => setActiveList("myVillalge")} >My Village</Nav.Link> : ""}
-                        <Nav.Link onClick={() => setActiveList("patronedVillageList")} >Patroned Villages</Nav.Link>
+                        {protegeCheck ? <Nav.Link onClick={() => villageLink(protegeCheck.villageId)} >My Village</Nav.Link> : ""}
+                        {patronCheck ? <Nav.Link onClick={() => setActiveList("patronedVillageList")} >Patroned Villages</Nav.Link> : ""}
                         <Nav.Link onClick={() => setActiveList("account")} >Account</Nav.Link>
                         <Nav.Link onClick={() => setActiveList("about")} >About</Nav.Link>
                         <Nav.Link onClick={() => logout()} >Logout</Nav.Link>
