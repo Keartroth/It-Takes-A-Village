@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react"
+import React from "react"
 import Button from 'react-bootstrap/Button'
 import "./Village.css"
 

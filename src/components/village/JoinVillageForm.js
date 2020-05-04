@@ -47,7 +47,7 @@ export const JoinVillageForm = props => {
         const treasurePromiseArray = promiseState.filter(p => p.promiseType === "Treasure")
         const numberOfTimePromises = timePromiseArray.length
         const numberOfTreasurePromises = treasurePromiseArray.length
-        debugger
+        
         for (var i = 0; i < numberOfTimePromises; i++) {
             const presentTimeObject = timePromiseArray[i]
             let timeObject = {
