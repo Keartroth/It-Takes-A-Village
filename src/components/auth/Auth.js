@@ -30,7 +30,7 @@ export const Auth = ({ toggle }) => {
     )
 
     const showLogin = () => (
-        <Login toggle={toggle} />
+        <Login toggle={toggle} setActiveList={setActiveList} />
     )
 
     const showRegister = () => (
@@ -75,8 +75,7 @@ export const Auth = ({ toggle }) => {
             <div className="listDisplay">
                 {components}
             </div>
-            <div className="authContainer">
-                {activeList === "login" ? <div className="fakeLink href registration" onClick={() => setActiveList("register")}>Not a villager? Register here!</div> : ""}
+            <div className="footer">
             </div>
         </main>
     )

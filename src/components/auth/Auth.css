@@ -1,13 +1,76 @@
-.login__container {
-    margin: auto;
-    width: 50%;
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.registration {
-    text-align: center;
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.login__container {
+    background-color: #ffffff;
+    border-radius: 2.5%;
+    flex: 2;
+    margin: auto;
+    padding: 7.5rem 0rem;
+}
+
+.login__column--left {
+    background-color: #cccccc;
+    background-image: url("https://lh3.googleusercontent.com/proxy/_-Ux3hpUYDRuQ-abzpwtE38doZlq5AEPw7-MkcYfox2lsnqWIDBmO2smCUtqmUbBU7-fx8xCTC1XcIt_mLEq-M9oTed03gwUmchToIDJIlrUeaycIin1uQHGMTcF3JnVbNv_5Mm3RkH7jvAodMLD_oO0xjmECBytPXAxuqBt6Vs");
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1;
+}
+
+.login__column--right {
+    background-color: #cccccc;
+    background-image: url("https://justimagine-ddoc.com/wp-content/gallery/25-astonishing-black-and-white-portraits-of-the-homeless-by-lee-jeffries/homeless-black-and-white-portraits-lee-jeffries-10.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1;
+}
+
+.mainContainer__login {
+    background-color: #cccccc;
+    display: flex;
+    height: 700px;
+}
+
+.mainContainer__registration {
+    display: flex;
+    height: 700px;
+}
+
+#registration--button {
+    display: block;
+    margin: auto;
 }
 
 .registration__container {
+    flex: 2;
     margin: auto;
-    width: 50%;
+}
+
+.registration__column--left {
+    background-color: #cccccc;
+    background-image: url("https://lh3.googleusercontent.com/proxy/_-Ux3hpUYDRuQ-abzpwtE38doZlq5AEPw7-MkcYfox2lsnqWIDBmO2smCUtqmUbBU7-fx8xCTC1XcIt_mLEq-M9oTed03gwUmchToIDJIlrUeaycIin1uQHGMTcF3JnVbNv_5Mm3RkH7jvAodMLD_oO0xjmECBytPXAxuqBt6Vs");
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1;
+}
+
+.registration__column--right {
+    background-color: #cccccc;
+    background-image: url("https://justimagine-ddoc.com/wp-content/gallery/25-astonishing-black-and-white-portraits-of-the-homeless-by-lee-jeffries/homeless-black-and-white-portraits-lee-jeffries-10.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1;
+}
+
+.registration--link {
+    text-align: center;
 }
