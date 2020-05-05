@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import ModalBody from 'react-bootstrap/ModalBody'
 import ModalHeader from 'react-bootstrap/ModalHeader'
-import "./Village.css"
+import "./Dialog.css"
 
 export const AddEventForm = props => {
     const modal = props.modal

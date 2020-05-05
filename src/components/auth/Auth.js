@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import { About } from "../home/About"
+import { About } from "../about/About"
 import { FakePartnersProvider } from "../providers/FakePartnersProvider"
 import { FakeTestimonialsProvider } from "../providers/FakeTestimonialsProvider"
 import { Home } from "../home/Home"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import { About } from "./home/About"
+import { About } from "./about/About"
 import { Account } from "./account/Account"
 import { BudgetsProvider } from "./providers/BudgetsProvider"
 import { BudgetTypesProvider } from "./providers/BudgetTypesProvider"

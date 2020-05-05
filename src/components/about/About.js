@@ -1,11 +1,12 @@
 import React, { useContext } from "react"
 import { FakePartnersContext } from "../providers/FakePartnersProvider"
 import { FakeTestimonialsContext } from "../providers/FakeTestimonialsProvider"
+import './About.css'
 
 export const About = () => {
     const { fakePartners } = useContext(FakePartnersContext)
     const { fakeTestimonials } = useContext(FakeTestimonialsContext)
-    
+
     const fakePartnersArray = fakePartners || []
     const fakeTestimonialsArray = fakeTestimonials || []
 

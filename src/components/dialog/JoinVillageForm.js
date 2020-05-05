@@ -9,7 +9,7 @@ import ModalHeader from 'react-bootstrap/ModalHeader'
 import { TimePledgesContext } from "../providers/TimePledgeProvider"
 import { TreasurePledgesContext } from "../providers/TreasurePledgeProvider"
 import { VillageUsersContext } from "../providers/VillageUsersProvider"
-import "./Village.css"
+import "./Dialog.css"
 
 export const JoinVillageForm = props => {
     const { addTimePledge } = useContext(TimePledgesContext)
@@ -47,7 +47,7 @@ export const JoinVillageForm = props => {
         const treasurePromiseArray = promiseState.filter(p => p.promiseType === "Treasure")
         const numberOfTimePromises = timePromiseArray.length
         const numberOfTreasurePromises = treasurePromiseArray.length
-        
+
         for (var i = 0; i < numberOfTimePromises; i++) {
             const presentTimeObject = timePromiseArray[i]
             let timeObject = {

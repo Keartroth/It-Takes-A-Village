@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react"
 import Button from "react-bootstrap/Button"
 import Container from 'react-bootstrap/Container'
-import { AddEventForm } from "./AddEventForm"
+import { AddEventForm } from "../dialog/AddEventForm"
 import { VillageEventsContext } from "../providers/VillageEventsProvider"
 import { UserVillageEventsContext } from "../providers/UserVillageEventsProvider"
 import "./Village.css"

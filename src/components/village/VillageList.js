@@ -4,7 +4,7 @@ import { VillagesContext } from "../providers/VillagesProvider"
 import { VillagePreview } from "./VillagePreview"
 import { VillageUsersContext } from "../providers/VillageUsersProvider"
 import { UserContext } from "../providers/UsersProvider"
-import { CreateVillageForm } from "./CreateVillageForm"
+import { CreateVillageForm } from "../dialog/CreateVillageForm"
 import "./Village.css"
 
 export const VillageList = props => {
