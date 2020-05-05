@@ -1,22 +1,48 @@
 body {
+    height: 100%;
     margin: 0;
+    width: 100%;
+}
+
+.footer {
+    background-color: #ffc107;
+    bottom: 0;
+    height: 38px;
+    width: 100%;
 }
   
 .home__imgContainer {
-    background-image: url("https://image.freepik.com/free-photo/poor-homeless-man_88356-53.jpg");
     background-color: #cccccc;
-    height: 500px;
+    background-image: url("https://image.freepik.com/free-photo/poor-homeless-man_88356-53.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    height: 700px;
     position: relative;
+    width: auto;
+}
+
+.home--logo {
+    color: #F65058FF;
+    font-family: 'Yeseva One', cursive;
+    font-size: 4.5rem;
+}
+
+.home--quote {
+    color: black;
+    font-family: 'EB Garamond', serif;
+    padding: 0rem 6rem;
+}
+
+.home--quoteAuthor {
+    color: rgb(85, 85, 85);
+    margin-left: 10rem;
 }
   
 .home__textContainer {
-    text-align: center;
+    left: 49%;
     position: absolute;
+    text-align: center;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
+    transform: translate(-50%, -75%);
 }

@@ -19,6 +19,8 @@ export const Home = () => {
                     <h5 className="home--quoteAuthor">-{quoteObject.author}</h5>
                 </div>
             </div>
+            <div className="footer">
+            </div>
         </div>
     )
 }

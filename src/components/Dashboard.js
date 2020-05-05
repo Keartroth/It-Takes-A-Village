@@ -16,6 +16,7 @@ import { VillageEventsProvider } from "./providers/VillageEventsProvider"
 import { VillageList } from "./village/VillageList"
 import { VillagesProvider } from "./providers/VillagesProvider"
 import { VillageUsersContext, VillageUsersProvider } from "./providers/VillageUsersProvider"
+import './ItTakesAVillage.css'
 
 export const Dashboard = ({ toggle }) => {
     const { villageUsers } = useContext(VillageUsersContext)
@@ -125,7 +126,7 @@ export const Dashboard = ({ toggle }) => {
     }
 
     return (
-        <div className="mainContainer">
+        <section className="mainContainer">
             <Navbar bg="warning" variant="light" expand="lg">
                 <Navbar.Brand onClick={() => setActiveList("home")} >It Takes a Village</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -143,6 +144,6 @@ export const Dashboard = ({ toggle }) => {
             <div className="listDisplay">
                 {components}
             </div>
-        </div >
+        </section >
     )
 }

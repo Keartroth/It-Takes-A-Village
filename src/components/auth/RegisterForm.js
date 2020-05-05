@@ -111,7 +111,7 @@ export const RegisterForm = ({ toggle }) => {
 
                     <Form.Group as={Col} controlId="zip">
                         <Form.Label>Zip</Form.Label>
-                        <Form.Control onChange={handleRegisterChange} />
+                        <Form.Control type="number" onChange={handleRegisterChange} />
                     </Form.Group>
                 </Form.Row>
 
