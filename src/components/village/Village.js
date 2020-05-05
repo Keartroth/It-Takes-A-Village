@@ -5,7 +5,7 @@ import { VillagesContext } from "../providers/VillagesProvider"
 import { VillageUsersContext } from "../providers/VillageUsersProvider"
 import { Budget } from "./Budget"
 import { Calendar } from "./Calendar"
-import { JoinVillageForm } from "./JoinVillageForm"
+import { JoinVillageForm } from "../dialog/JoinVillageForm"
 import "./Village.css"
 
 export const Village = props => {

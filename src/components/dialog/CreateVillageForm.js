@@ -11,7 +11,7 @@ import { VillageUsersContext } from "../providers/VillageUsersProvider"
 import { UserContext } from "../providers/UsersProvider"
 import { BudgetTypesContext } from "../providers/BudgetTypesProvider"
 import { BudgetsContext } from "../providers/BudgetsProvider"
-import "./Village.css"
+import "./Dialog.css"
 
 export const CreateVillageForm = props => {
     const { users } = useContext(UserContext)
