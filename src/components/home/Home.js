@@ -14,12 +14,10 @@ export const Home = () => {
         <div className="mainContainer__home">
             <div className="home__imgContainer">
                 <div className="home__textContainer">
-                    <h1 className="home--logo">It Takes a Village</h1>
+                    <h1 className="home--logo bold">It Takes a Village</h1>
                     <h3 className="home--quote">"{quoteObject.quote}"</h3>
                     <h5 className="home--quoteAuthor">-{quoteObject.author}</h5>
                 </div>
-            </div>
-            <div className="footer">
             </div>
         </div>
     )

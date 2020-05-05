@@ -6,6 +6,7 @@ export const VillagePreview = (props) => {
     const villageLink = props.villageLink
     const village = props.villageObject
     const protege = props.protege
+    
     return (
         <>
             <section className="village">

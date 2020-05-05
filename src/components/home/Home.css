@@ -4,6 +4,10 @@ body {
     width: 100%;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .footer {
     background-color: #ffc107;
     bottom: 0;
@@ -13,7 +17,7 @@ body {
   
 .home__imgContainer {
     background-color: #cccccc;
-    background-image: url("https://image.freepik.com/free-photo/poor-homeless-man_88356-53.jpg");
+    background-image: url("https://i.imgur.com/D43tQ13.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
