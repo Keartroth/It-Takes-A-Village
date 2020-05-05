@@ -9,14 +9,16 @@ import { JoinVillageForm } from "./JoinVillageForm"
 import "./Village.css"
 
 export const Village = props => {
+    const currentUserId = props.userId
+    const villageId = props.villageId
+
+    const { users } = useContext(UserContext)
     const { villages } = useContext(VillagesContext)
     const { villageUsers } = useContext(VillageUsersContext)
-    const { users } = useContext(UserContext)
-    const villageId = props.villageId
+
     const foundVillage = villages.find(v => v.id = villageId) || {}
     const foundRelation = villageUsers.find(vu => vu.villageId === villageId && vu.protege === true) || {}
     const villageProtege = users.find(u => foundRelation.userId === u.id) || {}
-    const currentUserId = parseInt(localStorage.getItem("villager"))
     const currentUserIsPatronCheck = villageUsers.find(vu => vu.villageId === villageId && vu.userId === currentUserId && vu.protege === false) || undefined
     const currentUserIsProtegeCheck = villageUsers.find(vu => vu.villageId === villageId && vu.userId === currentUserId && vu.protege === true) || undefined
 

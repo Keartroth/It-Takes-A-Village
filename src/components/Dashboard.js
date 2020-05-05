@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react"
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { About } from "./home/About"
+import { Account } from "./account/Account"
 import { BudgetsProvider } from "./providers/BudgetsProvider"
 import { BudgetTypesProvider } from "./providers/BudgetTypesProvider"
 import { FakePartnersProvider } from "./providers/FakePartnersProvider"
@@ -9,12 +10,12 @@ import { FakeTestimonialsProvider } from "./providers/FakeTestimonialsProvider"
 import { TimePledgesProvider } from "./providers/TimePledgeProvider"
 import { TreasurePledgesProvider } from "./providers/TreasurePledgeProvider"
 import { UserProvider } from "./providers/UsersProvider"
+import { UserVillageEventsProvider } from "./providers/UserVillageEventsProvider"
 import { Village } from "./village/Village"
+import { VillageEventsProvider } from "./providers/VillageEventsProvider"
 import { VillageList } from "./village/VillageList"
 import { VillagesProvider } from "./providers/VillagesProvider"
 import { VillageUsersContext, VillageUsersProvider } from "./providers/VillageUsersProvider"
-import { UserVillageEventsProvider } from "./providers/UserVillageEventsProvider"
-import { VillageEventsProvider } from "./providers/VillageEventsProvider"
 
 export const Dashboard = ({ toggle }) => {
     const { villageUsers } = useContext(VillageUsersContext)
@@ -46,7 +47,7 @@ export const Dashboard = ({ toggle }) => {
                 <UserProvider>
                     <VillageUsersProvider>
                         <VillagesProvider>
-                            <VillageList home={true} villageLink={villageLink} />
+                            <VillageList home={true} villageLink={villageLink} userId={userId} />
                         </VillagesProvider>
                     </VillageUsersProvider>
                 </UserProvider>
@@ -60,7 +61,7 @@ export const Dashboard = ({ toggle }) => {
                 <UserProvider>
                     <VillageUsersProvider>
                         <VillagesProvider>
-                            <VillageList home={false} villageLink={villageLink} />
+                            <VillageList home={false} villageLink={villageLink} userId={userId} />
                         </VillagesProvider>
                     </VillageUsersProvider>
                 </UserProvider>
@@ -78,7 +79,7 @@ export const Dashboard = ({ toggle }) => {
                                 <UserProvider>
                                     <VillagesProvider>
                                         <VillageUsersProvider>
-                                            <Village villageId={visitVillageId} />
+                                            <Village villageId={visitVillageId} userId={userId} />
                                         </VillageUsersProvider>
                                     </VillagesProvider>
                                 </UserProvider>
@@ -88,6 +89,12 @@ export const Dashboard = ({ toggle }) => {
                 </TimePledgesProvider>
             </UserVillageEventsProvider>
         </VillageEventsProvider>
+    )
+
+    const showAccount = () => (
+        <UserProvider>
+            <Account userId={userId} />
+        </UserProvider>
     )
 
     /*
@@ -106,6 +113,9 @@ export const Dashboard = ({ toggle }) => {
         }
         else if (activeList === "visitVillage") {
             setComponents(showVisitVillage)
+        }
+        else if (activeList === "account") {
+            setComponents(showAccount)
         }
     }, [activeList])
 

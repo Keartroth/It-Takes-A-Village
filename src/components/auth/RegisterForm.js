@@ -1,24 +1,20 @@
-import React, { useRef } from "react"
+import React, { useState } from "react"
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import "./Auth.css"
 
 export const RegisterForm = ({ toggle }) => {
-    const firstName = useRef()
-    const lastName = useRef()
-    const email = useRef()
-    const password = useRef()
-    const verifyPassword = useRef()
-    const address = useRef()
-    const city = useRef()
-    const state = useRef()
-    const zip = useRef()
-    const phone = useRef()
-    const avatar = useRef()
+
+    const [registerState, setRegisterState] = useState({})
+    const handleRegisterChange = (e) => {
+        const updatedState = { ...registerState }
+        updatedState[e.target.id] = e.target.value
+        setRegisterState(updatedState)
+    }
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
+        return fetch(`http://localhost:8088/users?email=${registerState.email}`)
             .then(_ => _.json())
             .then(user => {
                 if (user.length) {
@@ -31,24 +27,21 @@ export const RegisterForm = ({ toggle }) => {
     const handleRegister = (e) => {
         e.preventDefault()
 
-        if (password.current.value === verifyPassword.current.value) {
+        if (registerState.password === registerState.verifyPassword) {
             existingUserCheck()
                 .then((result) => {
                     if (!result) {
+                        registerState.address = registerState.address + ", " + registerState.city + ", " + registerState.state + ", " + registerState.zip
+                        delete registerState.city
+                        delete registerState.state
+                        delete registerState.zip
+                        delete registerState.verifyPassword
                         fetch("http://localhost:8088/users", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json"
                             },
-                            body: JSON.stringify({
-                                email: email.current.value,
-                                password: password.current.value,
-                                firstName: firstName.current.value,
-                                lastName: lastName.current.value,
-                                phone: phone.current.value,
-                                address: address.current.value + ", " + city.current.value + ", " + state.current.value + ", " + zip.current.value,
-                                image: avatar.current.value
-                            })
+                            body: JSON.stringify(registerState)
                         })
                             .then(_ => _.json())
                             .then(createdUser => {
@@ -70,67 +63,67 @@ export const RegisterForm = ({ toggle }) => {
         <section className="registration__container">
             <Form onSubmit={handleRegister}>
                 <Form.Row>
-                    <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Group as={Col} controlId="email">
                         <Form.Label>Email *</Form.Label>
-                        <Form.Control ref={email} type="email" placeholder="Enter email" required />
+                        <Form.Control type="email" placeholder="Enter email" onChange={handleRegisterChange} required />
                     </Form.Group>
                 </Form.Row>
 
                 <Form.Row>
-                    <Form.Group as={Col} controlId="formGridPassword">
+                    <Form.Group as={Col} controlId="password">
                         <Form.Label>Password *</Form.Label>
-                        <Form.Control ref={password} type="password" placeholder="Password" required />
+                        <Form.Control type="password" placeholder="Password" onChange={handleRegisterChange} required />
                     </Form.Group>
 
-                    <Form.Group as={Col} controlId="formGridVerifyPassword">
+                    <Form.Group as={Col} controlId="verifyPassword">
                         <Form.Label>Verify Password *</Form.Label>
-                        <Form.Control ref={verifyPassword} type="password" placeholder="Verify Password" required />
+                        <Form.Control type="password" placeholder="Verify Password" onChange={handleRegisterChange} required />
                     </Form.Group>
                 </Form.Row>
 
                 <Form.Row>
-                    <Form.Group as={Col} controlId="formGridFirstName">
+                    <Form.Group as={Col} controlId="firstName">
                         <Form.Label>First Name *</Form.Label>
-                        <Form.Control ref={firstName} placeholder="Enter First Name" required />
+                        <Form.Control placeholder="Enter First Name" onChange={handleRegisterChange} required />
                     </Form.Group>
 
-                    <Form.Group as={Col} controlId="formGridLastName">
+                    <Form.Group as={Col} controlId="lastName">
                         <Form.Label>Last Name *</Form.Label>
-                        <Form.Control ref={lastName} placeholder="Enter Last Name" required />
+                        <Form.Control placeholder="Enter Last Name" onChange={handleRegisterChange} required />
                     </Form.Group>
                 </Form.Row>
 
-                <Form.Group controlId="formGridAddress1">
+                <Form.Group controlId="address">
                     <Form.Label>Address</Form.Label>
-                    <Form.Control ref={address} placeholder="1234 Main St" />
+                    <Form.Control placeholder="1234 Main St" onChange={handleRegisterChange} />
                 </Form.Group>
 
                 <Form.Row>
-                    <Form.Group as={Col} controlId="formGridCity">
+                    <Form.Group as={Col} controlId="city">
                         <Form.Label>City</Form.Label>
-                        <Form.Control ref={city} />
+                        <Form.Control onChange={handleRegisterChange} />
                     </Form.Group>
 
-                    <Form.Group as={Col} controlId="formGridState">
+                    <Form.Group as={Col} controlId="state">
                         <Form.Label>State</Form.Label>
-                        <Form.Control ref={state} />
+                        <Form.Control onChange={handleRegisterChange} />
                     </Form.Group>
 
-                    <Form.Group as={Col} controlId="formGridZip">
+                    <Form.Group as={Col} controlId="zip">
                         <Form.Label>Zip</Form.Label>
-                        <Form.Control ref={zip} />
+                        <Form.Control onChange={handleRegisterChange} />
                     </Form.Group>
                 </Form.Row>
 
                 <Form.Row>
-                    <Form.Group as={Col} controlId="formGridAvatar">
+                    <Form.Group as={Col} controlId="image">
                         <Form.Label>Avatar</Form.Label>
-                        <Form.Control ref={avatar} placeholder="Enter Image Link" />
+                        <Form.Control placeholder="Enter Image Link" onChange={handleRegisterChange} />
                     </Form.Group>
 
-                    <Form.Group as={Col} controlId="formGridNumber">
+                    <Form.Group as={Col} controlId="phone">
                         <Form.Label>Phone Number</Form.Label>
-                        <Form.Control ref={phone} />
+                        <Form.Control onChange={handleRegisterChange} />
                     </Form.Group>
                 </Form.Row>
 

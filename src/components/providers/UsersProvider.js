@@ -29,6 +29,17 @@ export const UserProvider = (props) => {
             .then(getUsers)
     }
 
+    const updateUser = user => {
+        return fetch(`http://localhost:8088/users/${user.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then(getUsers)
+    }
+
     /*
         Load all users when the component is initialized. Ensure that
         an empty array is the second argument to avoid infinite loop.
@@ -39,7 +50,8 @@ export const UserProvider = (props) => {
 
     return (
         <UserContext.Provider value={{
-            users, addUser
+            users, addUser, 
+            updateUser
         }}>
             {props.children}
         </UserContext.Provider>
