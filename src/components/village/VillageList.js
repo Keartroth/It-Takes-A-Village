@@ -12,9 +12,10 @@ export const VillageList = props => {
     const { villages } = useContext(VillagesContext)
     const { villageUsers } = useContext(VillageUsersContext)
 
+    const currentUser = props.userId
     const home = props.home
     const villageLink = props.villageLink
-    const currentUser = parseInt(localStorage.getItem("villager"))
+
     const villagesArrayCopy = villages.slice()
     villagesArrayCopy.map(v => {
         let villageRelationship = villageUsers.find(vu => vu.userId === currentUser && vu.protege === false) || {}

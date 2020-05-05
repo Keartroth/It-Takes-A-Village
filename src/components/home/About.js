@@ -5,6 +5,7 @@ import { FakeTestimonialsContext } from "../providers/FakeTestimonialsProvider"
 export const About = () => {
     const { fakePartners } = useContext(FakePartnersContext)
     const { fakeTestimonials } = useContext(FakeTestimonialsContext)
+    
     const fakePartnersArray = fakePartners || []
     const fakeTestimonialsArray = fakeTestimonials || []
 

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import { Login } from "./Login"
 import { About } from "../home/About"
+import { FakePartnersProvider } from "../providers/FakePartnersProvider"
+import { FakeTestimonialsProvider } from "../providers/FakeTestimonialsProvider"
 import { Home } from "../home/Home"
+import { Login } from "./Login"
 import { RegisterForm } from "./RegisterForm"
 import { QuotesProvider } from "../providers/QuotesProvider"
-import { FakeTestimonialsProvider } from "../providers/FakeTestimonialsProvider"
-import { FakePartnersProvider } from "../providers/FakePartnersProvider"
+import { UserProvider } from "../providers/UsersProvider"
 
 export const Auth = ({ toggle }) => {
     const [activeList, setActiveList] = useState("home")
@@ -33,7 +34,9 @@ export const Auth = ({ toggle }) => {
     )
 
     const showRegister = () => (
-        <RegisterForm toggle={toggle} />
+        <UserProvider>
+            <RegisterForm toggle={toggle} />
+        </UserProvider>
     )
 
     /*
