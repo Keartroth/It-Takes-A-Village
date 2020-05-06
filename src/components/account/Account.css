@@ -1,0 +1,13 @@
+.accountContainer {
+    margin-top: 100px;
+}
+
+#account--button {
+    display: block;
+    margin: auto;
+}
+
+#account--header {
+    margin-bottom: 2rem;
+    text-align: center;
+}

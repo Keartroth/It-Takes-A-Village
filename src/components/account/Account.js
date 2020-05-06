@@ -62,7 +62,7 @@ export const Account = props => {
         <>
             <section className="accountContainer">
                 <Container>
-                    <h1>Your Account</h1>
+                    <h1 id="account--header">Your Account</h1>
 
                     <Form onSubmit={updateAccountInfo}>
                         <Form.Row>
@@ -128,7 +128,7 @@ export const Account = props => {
                         </Form.Text>
                         <br />
 
-                        <Button variant="primary" type="submit">
+                        <Button id="account--button" variant="primary" type="submit">
                             Update Account Information
                         </Button>
                     </Form>
