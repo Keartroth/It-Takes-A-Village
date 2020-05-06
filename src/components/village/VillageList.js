@@ -18,7 +18,7 @@ export const VillageList = props => {
 
     const villagesArrayCopy = villages.slice()
     villagesArrayCopy.map(v => {
-        let villageRelationship = villageUsers.find(vu => vu.userId === currentUser && vu.protege === false) || {}
+        let villageRelationship = villageUsers.find(vu => vu.userId === currentUser && vu.protege === false && v.id === vu.villageId) || {}
         if (villageRelationship.protege === false) {
             v.patron = true
         } else {
@@ -47,6 +47,7 @@ export const VillageList = props => {
                             villageLink={villageLink}
                             villageObject={v}
                             protege={protege}
+                            villageUsers={villageUsers}
                         />
                     })
                 }
@@ -59,7 +60,7 @@ export const VillageList = props => {
             <section className="villageListContainer">
                 <div className="villageListContainer__header">
                     {home ? <h1>Visit a village to volunteer!</h1> : ""}
-                    {home ? <Button variant="primary" onClick={toggle}>Create a village</Button> : ""}
+                    {home ? <Button id="villageList--button" variant="primary" onClick={toggle}>Create a village</Button> : ""}
                 </div>
                 <section className="villageList">
                     {home ? List(villages) : List(patronedVillageArray)}
