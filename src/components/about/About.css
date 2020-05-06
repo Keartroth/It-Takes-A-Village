@@ -1,0 +1,50 @@
+.about__colorGradient {
+    background-color: black;
+    background-image: linear-gradient(black, white);
+    height: 150px;
+}
+
+#about__fakePartnersHeader {
+    flex: 0 0 100%;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.about__partner {
+    height: 150px;
+    margin:5px;
+    width: auto;
+}
+
+.about__fakePartnersList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 4rem 0rem;
+    padding:5px;
+}
+
+.about__imgContainer {
+    background-color: black;
+    background-size: 30rem;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 320px;
+}
+
+.about__img {
+    height: 320px;
+    width: auto;
+}
+
+.about__missionStatement {
+    color: blanchedalmond;
+    text-align: center;
+    padding: 0rem 3rem;
+}
+
+.about__missionStatement > h1 {
+    color: #F65058FF;
+    padding-bottom: 2rem;
+    padding-top: 5rem;
+}

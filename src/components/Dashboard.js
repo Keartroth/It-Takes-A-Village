@@ -6,7 +6,6 @@ import { Account } from "./account/Account"
 import { BudgetsProvider } from "./providers/BudgetsProvider"
 import { BudgetTypesProvider } from "./providers/BudgetTypesProvider"
 import { FakePartnersProvider } from "./providers/FakePartnersProvider"
-import { FakeTestimonialsProvider } from "./providers/FakeTestimonialsProvider"
 import { TimePledgesProvider } from "./providers/TimePledgeProvider"
 import { TreasurePledgesProvider } from "./providers/TreasurePledgeProvider"
 import { UserProvider } from "./providers/UsersProvider"
@@ -35,11 +34,9 @@ export const Dashboard = ({ toggle }) => {
 
     // HIGHER ORDER FUNCTION. IT RETURNS OTHER FUNCTION (i.e. COMPONENTS)
     const showAbout = () => (
-        <FakeTestimonialsProvider>
             <FakePartnersProvider>
                 <About />
             </FakePartnersProvider>
-        </FakeTestimonialsProvider>
     )
 
     const showHome = () => (
@@ -135,7 +132,7 @@ export const Dashboard = ({ toggle }) => {
                         <Nav.Link onClick={() => setActiveList("home")} >Home</Nav.Link>
                         {protegeCheck ? <Nav.Link onClick={() => villageLink(protegeCheck.villageId)} >My Village</Nav.Link> : ""}
                         {patronCheck ? <Nav.Link onClick={() => setActiveList("patronedVillageList")} >Patroned Villages</Nav.Link> : ""}
-                        <Nav.Link onClick={() => setActiveList("account")} >Account</Nav.Link>
+                        <Nav.Link onClick={() => setActiveList("account")} >My Account</Nav.Link>
                         <Nav.Link onClick={() => setActiveList("about")} >About</Nav.Link>
                         <Nav.Link onClick={() => logout()} >Logout</Nav.Link>
                     </Nav>

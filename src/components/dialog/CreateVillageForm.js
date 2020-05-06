@@ -119,7 +119,7 @@ export const CreateVillageForm = props => {
                             <Form.Group as={Col} id="formGridUser">
                                 <Form.Label>Select User:</Form.Label>
                                 <Form.Control as="select" defaultValue="0" id="protegeId" onChange={handleVillageChange} required>
-                                    <option value="0">Choose...</option>
+                                    <option value="">Choose...</option>
                                     {
                                         userArrayCopy.filter(u => u.protege === false).map(fu => {
                                             return <option key={fu.id} value={fu.id}>{fu.firstName} {fu.lastName}</option>
