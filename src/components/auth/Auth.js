@@ -3,7 +3,6 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { About } from "../about/About"
 import { FakePartnersProvider } from "../providers/FakePartnersProvider"
-import { FakeTestimonialsProvider } from "../providers/FakeTestimonialsProvider"
 import { Home } from "../home/Home"
 import { Login } from "./Login"
 import { RegisterForm } from "./RegisterForm"
@@ -22,11 +21,9 @@ export const Auth = ({ toggle }) => {
     )
 
     const showAbout = () => (
-        <FakeTestimonialsProvider>
             <FakePartnersProvider>
                 <About />
             </FakePartnersProvider>
-        </FakeTestimonialsProvider>
     )
 
     const showLogin = () => (
@@ -59,8 +56,8 @@ export const Auth = ({ toggle }) => {
     }, [activeList])
 
     return (
-        <main className="mainContainer">
-            <Navbar bg="warning" variant="light" expand="lg">
+        <main id="bootstrap-overrides" className="mainContainer">
+            <Navbar id="navbar" bg="warning" variant="light" expand="lg">
                 <Navbar.Brand onClick={() => setActiveList("home")} >It Takes a Village</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

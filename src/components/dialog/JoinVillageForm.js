@@ -98,14 +98,14 @@ export const JoinVillageForm = props => {
                                     const promiseTypeId = `promiseType-${idx}`
                                     return <Form.Row key={`promise-${idx}`}>
                                         <Col className="col-5">
-                                            <Form.Label>Expected Monthly Contribution:</Form.Label>
+                                            <Form.Label>Your Monthly Pledge:</Form.Label>
                                             <Form.Control className="promiseValue" value={promiseState[idx].promiseValue} id={promiseValueId} type="number" min="0" data-idx={idx} onChange={handlePromiseChange} required />
                                         </Col>
                                         <Col className="col-6">
                                             <Form.Group as={Col} id="formGridBudget">
-                                                <Form.Label>Budget Type:</Form.Label>
+                                                <Form.Label>Type of Pledge:</Form.Label>
                                                 <Form.Control className="promiseType" as="select" value={promiseState[idx].promiseType} id={promiseTypeId} data-idx={idx} onChange={handlePromiseChange} required>
-                                                    <option>Choose...</option>
+                                                    <option value="">Choose...</option>
                                                     <option value="Time">Time</option>
                                                     <option value="Treasure">Treasure</option>
                                                 </Form.Control>
