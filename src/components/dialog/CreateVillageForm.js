@@ -19,7 +19,7 @@ export const CreateVillageForm = props => {
     const { villageUsers, addVillageUser } = useContext(VillageUsersContext)
     const { budgetTypes } = useContext(BudgetTypesContext)
     const { addBudget } = useContext(BudgetsContext)
-    
+
     const toggle = props.toggle
     const budgetState = props.budgetState
     const setBudgetState = props.setBudgetState
@@ -92,7 +92,7 @@ export const CreateVillageForm = props => {
             villageId: villageId,
             protege: true
         }
-        
+
         const promise = Promise.all([
             addVillage(villageObect),
             addVillageUser(villageUserObject)

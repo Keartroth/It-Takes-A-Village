@@ -20,6 +20,10 @@
     top: 1rem;
 }
 
+#createVillageModal {
+    margin-top: 5rem;
+}
+
 #joinVillageForm {
     padding: 3rem;
 }

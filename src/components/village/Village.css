@@ -1,3 +1,64 @@
+#bootstrap-overrides [id^='previewButton--'] {
+    display: block;
+    margin: auto;
+}
+
 .calendar__event {
     border: 1px solid black;
+}
+.previewCard__Container {
+    background-color: lightgoldenrodyellow;
+    border-radius: 2.5%;
+}
+[id^='previewCard--'] {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 2rem 1rem;
+    padding: 2rem;
+    width: 85%;
+}
+
+[id^='previewImg--'] {
+    height: auto;
+    margin-right: 3rem;
+    width: 300px;
+}
+
+[id^='previewList--'] {
+    list-style-type: none;
+    display: block;
+    margin: 2rem 33%;
+    text-align: center;
+    width: 210px;
+}
+
+[id^='previewList--'] > li:first-child {
+    border-bottom: 1px darkgray double;
+}
+
+[id^='previewText--'] {
+    text-indent: 3em;
+}
+
+[id^='previewTitle--'] {
+    font-size: xx-large;
+    text-align: center;
+}
+
+.villageList {
+    padding: 5rem;
+}
+
+.villageListContainer {
+    margin-top: 100px;
+}
+
+.villageListContainer__header {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.villageListContainer__header > * {
+    margin-top: 30px;
+    text-align: center;
 }
