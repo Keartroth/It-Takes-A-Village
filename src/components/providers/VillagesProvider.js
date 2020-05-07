@@ -27,7 +27,12 @@ export const VillagesProvider = (props) => {
             },
             body: JSON.stringify(village)
         })
-            .then(getVillages)
+            .then(res => res.json())
+            .then((res) => {
+                const createdVillage = res
+                getVillages()
+                return createdVillage
+            })
     }
 
     const deleteVillage = villageId => {
@@ -58,7 +63,7 @@ export const VillagesProvider = (props) => {
 
     return (
         <VillagesContext.Provider value={{
-            villages, addVillage, 
+            villages, addVillage,
             searchTerm, setSearchTerm,
             deleteVillage, updateVillage
         }}>

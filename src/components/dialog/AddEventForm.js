@@ -15,7 +15,7 @@ export const AddEventForm = props => {
     const addVillageEvent = props.addVillageEvent
     const villageEvents = props.villageEvents
     const addUserVillageEvent = props.addUserVillageEvent
-    const toggleCalendar = props.toggleCalendar
+    const toggleAddEvent = props.toggleAddEvent
     const eventState = props.eventState
     const setEventState = props.setEventState
     const currentUserId = parseInt(localStorage.getItem("villager"))
@@ -26,8 +26,8 @@ export const AddEventForm = props => {
         setEventState(updatedEvent)
     }
 
-    const addEvent = () => {
-        const userEventId = villageEvents.length + 1
+    const addEvent = (e) => {
+        e.preventDefault()
         
         let eventObject = {
             villageId: villageId,
@@ -38,17 +38,15 @@ export const AddEventForm = props => {
             location: eventState.location,
             cost: parseInt(eventState.cost)
         }
-
-        let userEventObject = {
-            villageEventsId: userEventId,
-            userId: currentUserId
-        }
-
-        const promise = Promise.all([
-            addUserVillageEvent(userEventObject),
-            addVillageEvent(eventObject)
-        ])
-        promise.then(toggleCalendar)
+        addVillageEvent(eventObject)
+            .then((res) => {
+                let userEventObject = {
+                    villageEventsId: res.id,
+                    userId: currentUserId
+                }
+                addUserVillageEvent(userEventObject)
+            })
+            .then(toggleAddEvent)
     }
 
     return (
@@ -57,7 +55,7 @@ export const AddEventForm = props => {
                 <Modal.Title id="contained-modal-title-vcenter">
                     Add an event to {villageProtege.firstName}'s village!
                 </Modal.Title>
-                <button type="button" id="closeButton" className="close" data-dismiss="modal" aria-label="Close" onClick={toggleCalendar}>
+                <button type="button" id="closeButton" className="close" data-dismiss="modal" aria-label="Close" onClick={toggleAddEvent}>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </ModalHeader>

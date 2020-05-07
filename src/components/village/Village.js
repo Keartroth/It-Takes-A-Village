@@ -46,6 +46,7 @@ export const Village = props => {
                 <Budget
                     villageId={villageId}
                     villageProtege={villageProtege}
+                    currentUserIsProtegeCheck={currentUserIsProtegeCheck}
                 />
 
                 <div>Village Description: {foundVillage.description}</div>
