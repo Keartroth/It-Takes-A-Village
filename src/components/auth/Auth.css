@@ -20,16 +20,18 @@ input[type=number] {
 
 .login__column--left {
     background-color: #cccccc;
-    background-image: url("https://lh3.googleusercontent.com/proxy/_-Ux3hpUYDRuQ-abzpwtE38doZlq5AEPw7-MkcYfox2lsnqWIDBmO2smCUtqmUbBU7-fx8xCTC1XcIt_mLEq-M9oTed03gwUmchToIDJIlrUeaycIin1uQHGMTcF3JnVbNv_5Mm3RkH7jvAodMLD_oO0xjmECBytPXAxuqBt6Vs");
+    background-image: url("https://justimagine-ddoc.com/wp-content/gallery/25-astonishing-black-and-white-portraits-of-the-homeless-by-lee-jeffries/homeless-black-and-white-portraits-lee-jeffries-10.jpg");
     background-repeat: no-repeat;
+    background-position: 50%;
     background-size: cover;
     flex: 1;
 }
 
 .login__column--right {
     background-color: #cccccc;
-    background-image: url("https://justimagine-ddoc.com/wp-content/gallery/25-astonishing-black-and-white-portraits-of-the-homeless-by-lee-jeffries/homeless-black-and-white-portraits-lee-jeffries-10.jpg");
+    background-image: url("https://justimagine-ddoc.com/wp-content/gallery/25-astonishing-black-and-white-portraits-of-the-homeless-by-lee-jeffries/homeless-black-and-white-portraits-lee-jeffries-34.jpg");
     background-repeat: no-repeat;
+    background-position: 48%;
     background-size: cover;
     flex: 1;
 }
@@ -65,8 +67,9 @@ input[type=number] {
 
 .registration__column--right {
     background-color: #cccccc;
-    background-image: url("https://justimagine-ddoc.com/wp-content/gallery/25-astonishing-black-and-white-portraits-of-the-homeless-by-lee-jeffries/homeless-black-and-white-portraits-lee-jeffries-10.jpg");
+    background-image: url("https://justimagine-ddoc.com/wp-content/gallery/25-astonishing-black-and-white-portraits-of-the-homeless-by-lee-jeffries/homeless-black-and-white-portraits-lee-jeffries-37.jpg");
     background-repeat: no-repeat;
+    background-position: 40%;
     background-size: cover;
     flex: 1;
 }

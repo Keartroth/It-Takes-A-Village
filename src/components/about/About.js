@@ -12,7 +12,7 @@ export const About = () => {
             <div className="about__imgContainer">
                 <div className="about__missionStatement">
                     <h1>It Takes a Village</h1>
-                    <p>The mission of It Takes a Village, is to provide an opportunity for communities to further a sense of fellowhip within their citizenry.<br></br>
+                    <p>The mission of It Takes a Village is to provide an opportunity for communities to further a sense of fellowhip within their citizenry.<br></br>
                     To that end, we will strive to encourage fellowship where there is a desire, but the path to association is obstructed by custom or the guardedness we feel towards those who are unfamiliar.</p>
                 </div>
                 <img className="about__img" src="https://www.unitedwaycares.org/sites/unitedwaycares.org/files/pictures/EFSP1.png" alt="unity" />

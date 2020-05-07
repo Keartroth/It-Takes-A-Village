@@ -1,5 +1,9 @@
+#addEventForm {
+    margin-top: 5rem;
+}
+
 #addVillageForm {
-    padding: 3rem;
+    padding: 5rem;
 }
 
 .addVillageHeader {
@@ -24,8 +28,16 @@
     margin-top: 5rem;
 }
 
+#editBudgetModal {
+    margin-top: 5rem;
+}
+
 #joinVillageForm {
     padding: 3rem;
+}
+
+#joinVillageModal {
+    margin-top: 5rem;
 }
 
 #modal-header {

@@ -31,38 +31,42 @@ export const Village = props => {
     const [promiseState, setPromiseState] = useState([])
 
     return (
-        <>
-            <section className="villageContainer">
-                <h1>{villageProtege.firstName} {villageProtege.lastName}'s Village</h1>
+        <section className="villageContainer">
+            <div id="heroImageContainer">
+                <div>
+                    <img id="heroImage__image" src={villageProtege.image} alt={`${villageProtege.firstName} ${villageProtege.lastName} smiling`} />
+                </div>
+                <div>
+                    <h1>{villageProtege.firstName} {villageProtege.lastName}'s Village</h1>
+                    <div id="heroImage__description">{foundVillage.description}</div>
+                </div>
+            </div>
 
-                {currentUserIsPatronCheck || currentUserIsProtegeCheck ? <Calendar
-                    users={users}
-                    villageId={villageId}
-                    currentUserId={currentUserId}
-                    villageProtege={villageProtege}
-                    currentUserIsProtegeCheck={currentUserIsProtegeCheck}
-                /> : ""}
+            {currentUserIsPatronCheck || currentUserIsProtegeCheck ? <Calendar
+                users={users}
+                villageId={villageId}
+                currentUserId={currentUserId}
+                villageProtege={villageProtege}
+                currentUserIsProtegeCheck={currentUserIsProtegeCheck}
+            /> : ""}
 
-                <Budget
-                    villageId={villageId}
-                    villageProtege={villageProtege}
-                    currentUserIsProtegeCheck={currentUserIsProtegeCheck}
-                />
+            <Budget
+                villageId={villageId}
+                villageProtege={villageProtege}
+                currentUserIsProtegeCheck={currentUserIsProtegeCheck}
+            />
 
-                <div>Village Description: {foundVillage.description}</div>
+            {currentUserIsPatronCheck || currentUserIsProtegeCheck ? "" : <Button onClick={toggle}>Join this village!</Button>}
 
-                {currentUserIsPatronCheck || currentUserIsProtegeCheck ? "" : <Button onClick={toggle}>Join this village!</Button>}
-
-                {currentUserIsPatronCheck || currentUserIsProtegeCheck ? "" : <JoinVillageForm
-                    villageId={villageId}
-                    villageProtege={villageProtege}
-                    currentUserId={currentUserId}
-                    modal={modal}
-                    toggle={toggle}
-                    setPromiseState={setPromiseState}
-                    promiseState={promiseState}
-                />}
-            </section>
-        </>
+            {currentUserIsPatronCheck || currentUserIsProtegeCheck ? "" : <JoinVillageForm
+                villageId={villageId}
+                villageProtege={villageProtege}
+                currentUserId={currentUserId}
+                modal={modal}
+                toggle={toggle}
+                setPromiseState={setPromiseState}
+                promiseState={promiseState}
+            />}
+        </section>
     )
 }

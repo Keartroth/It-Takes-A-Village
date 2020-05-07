@@ -56,23 +56,21 @@ export const VillageList = props => {
     }
 
     return (
-        <>
-            <section className="villageListContainer">
-                <div className="villageListContainer__header">
-                    {home ? <h1>Visit a village to volunteer!</h1> : ""}
-                    {home ? <Button id="villageList--button" variant="primary" onClick={toggle}>Create a village</Button> : ""}
-                </div>
-                <section className="villageList">
-                    {home ? List(villages) : List(patronedVillageArray)}
-                </section>
-
-                <CreateVillageForm
-                    toggle={toggle}
-                    budgetState={budgetState}
-                    setBudgetState={setBudgetState}
-                    modal={modal}
-                />
+        <section className="villageListContainer">
+            <div className="villageListContainer__header">
+                {home ? <h1>Visit a village to volunteer!</h1> : ""}
+                {home ? <Button id="villageList--button" variant="primary" onClick={toggle}>Create a village</Button> : ""}
+            </div>
+            <section className="villageList">
+                {home ? List(villages) : List(patronedVillageArray)}
             </section>
-        </>
+
+            <CreateVillageForm
+                toggle={toggle}
+                budgetState={budgetState}
+                setBudgetState={setBudgetState}
+                modal={modal}
+            />
+        </section>
     )
 }

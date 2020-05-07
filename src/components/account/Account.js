@@ -59,81 +59,79 @@ export const Account = props => {
     }
 
     return (
-        <>
-            <section className="accountContainer">
-                <Container>
-                    <h1 id="account--header">Your Account</h1>
+        <section className="accountContainer">
+            <Container>
+                <h1 id="account--header">Your Account</h1>
 
-                    <Form onSubmit={updateAccountInfo}>
-                        <Form.Row>
-                            <Form.Group as={Col} controlId="email">
-                                <Form.Label>Email *</Form.Label>
-                                <Form.Control type="email" defaultValue={currentUser.email} ref={email} required />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="password">
-                                <Form.Label>Password *</Form.Label>
-                                <Form.Control type="password" ref={password} required />
-                            </Form.Group>
-                        </Form.Row>
-
-                        <Form.Row>
-                            <Form.Group as={Col} controlId="firstName">
-                                <Form.Label>First Name *</Form.Label>
-                                <Form.Control defaultValue={currentUser.firstName} ref={firstName} required />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="lastName">
-                                <Form.Label>Last Name *</Form.Label>
-                                <Form.Control defaultValue={currentUser.lastName} ref={lastName} required />
-                            </Form.Group>
-                        </Form.Row>
-
-                        <Form.Group controlId="address">
-                            <Form.Label>Address</Form.Label>
-                            <Form.Control defaultValue={currentStreet} ref={address} />
+                <Form onSubmit={updateAccountInfo}>
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="email">
+                            <Form.Label>Email *</Form.Label>
+                            <Form.Control type="email" defaultValue={currentUser.email} ref={email} required />
                         </Form.Group>
 
-                        <Form.Row>
-                            <Form.Group as={Col} controlId="city">
-                                <Form.Label>City</Form.Label>
-                                <Form.Control defaultValue={currentCity} ref={city} />
-                            </Form.Group>
+                        <Form.Group as={Col} controlId="password">
+                            <Form.Label>Password *</Form.Label>
+                            <Form.Control type="password" ref={password} required />
+                        </Form.Group>
+                    </Form.Row>
 
-                            <Form.Group as={Col} controlId="state">
-                                <Form.Label>State</Form.Label>
-                                <Form.Control defaultValue={currentState} ref={state} />
-                            </Form.Group>
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="firstName">
+                            <Form.Label>First Name *</Form.Label>
+                            <Form.Control defaultValue={currentUser.firstName} ref={firstName} required />
+                        </Form.Group>
 
-                            <Form.Group as={Col} controlId="zip">
-                                <Form.Label>Zip</Form.Label>
-                                <Form.Control defaultValue={currentZip} ref={zip} />
-                            </Form.Group>
-                        </Form.Row>
+                        <Form.Group as={Col} controlId="lastName">
+                            <Form.Label>Last Name *</Form.Label>
+                            <Form.Control defaultValue={currentUser.lastName} ref={lastName} required />
+                        </Form.Group>
+                    </Form.Row>
 
-                        <Form.Row>
-                            <Form.Group as={Col} controlId="avatar">
-                                <Form.Label>Avatar</Form.Label>
-                                <Form.Control defaultValue={currentUser.image} ref={avatar} />
-                            </Form.Group>
+                    <Form.Group controlId="address">
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control defaultValue={currentStreet} ref={address} />
+                    </Form.Group>
 
-                            <Form.Group as={Col} controlId="number">
-                                <Form.Label>Phone Number</Form.Label>
-                                <Form.Control defaultValue={currentUser.phone} ref={phone} />
-                            </Form.Group>
-                        </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="city">
+                            <Form.Label>City</Form.Label>
+                            <Form.Control defaultValue={currentCity} ref={city} />
+                        </Form.Group>
 
-                        <Form.Text className="text-muted">
-                            * Required field
+                        <Form.Group as={Col} controlId="state">
+                            <Form.Label>State</Form.Label>
+                            <Form.Control defaultValue={currentState} ref={state} />
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="zip">
+                            <Form.Label>Zip</Form.Label>
+                            <Form.Control defaultValue={currentZip} ref={zip} />
+                        </Form.Group>
+                    </Form.Row>
+
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="avatar">
+                            <Form.Label>Avatar</Form.Label>
+                            <Form.Control defaultValue={currentUser.image} ref={avatar} />
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="number">
+                            <Form.Label>Phone Number</Form.Label>
+                            <Form.Control defaultValue={currentUser.phone} ref={phone} />
+                        </Form.Group>
+                    </Form.Row>
+
+                    <Form.Text className="text-muted">
+                        * Required field
                         </Form.Text>
-                        <br />
+                    <br />
 
-                        <Button id="account--button" variant="primary" type="submit">
-                            Update Account Information
+                    <Button id="account--button" variant="primary" type="submit">
+                        Update Account Information
                         </Button>
-                    </Form>
-                </Container>
-            </section>
-        </>
+                </Form>
+            </Container>
+        </section>
     )
 }
