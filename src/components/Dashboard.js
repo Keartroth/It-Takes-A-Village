@@ -22,14 +22,18 @@ export const Dashboard = ({ toggle }) => {
     const [activeList, setActiveList] = useState("home")
     const [components, setComponents] = useState()
     const userId = parseInt(localStorage.getItem("villager"))
-    const protegeCheck = villageUsers.find(vu => vu.userId === userId && vu.protege === true)
+    const protegeCheck = villageUsers.find(vu => vu.userId === userId && vu.protege === true) || {}
     const patronCheck = villageUsers.find(vu => vu.userId === userId && vu.protege === false)
 
     const [visitVillageId, setVisitVillageId] = useState(null)
 
     const villageLink = (id) => {
         setVisitVillageId(id)
-        setActiveList("visitVillage")
+        if (visitVillageId === protegeCheck.villageId) {
+            setActiveList("visitMyVillage")
+        } else {
+            setActiveList("visitVillage")
+        }
     }
 
     // HIGHER ORDER FUNCTION. IT RETURNS OTHER FUNCTION (i.e. COMPONENTS)
@@ -93,6 +97,28 @@ export const Dashboard = ({ toggle }) => {
         </VillageEventsProvider>
     )
 
+    const showVisitMyVillage = () => (
+        <VillageEventsProvider>
+            <UserVillageEventsProvider>
+                <TimePledgesProvider>
+                    <TreasurePledgesProvider>
+                        <BudgetTypesProvider>
+                            <BudgetsProvider>
+                                <UserProvider>
+                                    <VillagesProvider>
+                                        <VillageUsersProvider>
+                                            <Village villageId={visitVillageId} userId={userId} />
+                                        </VillageUsersProvider>
+                                    </VillagesProvider>
+                                </UserProvider>
+                            </BudgetsProvider>
+                        </BudgetTypesProvider>
+                    </TreasurePledgesProvider>
+                </TimePledgesProvider>
+            </UserVillageEventsProvider>
+        </VillageEventsProvider>
+    )
+
     const showAccount = () => (
         <UserProvider>
             <Account userId={userId} />
@@ -115,6 +141,9 @@ export const Dashboard = ({ toggle }) => {
         }
         else if (activeList === "visitVillage") {
             setComponents(showVisitVillage)
+        }
+        else if (activeList === "visitMyVillage") {
+            setComponents(showVisitMyVillage)
         }
         else if (activeList === "account") {
             setComponents(showAccount)
