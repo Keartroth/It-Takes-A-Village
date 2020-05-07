@@ -18,7 +18,7 @@ export const Calendar = props => {
 
     const [modal, setModal] = useState(false)
 
-    const toggleCalendar = () => {
+    const toggleAddEvent = () => {
         setEventState({})
         setModal(!modal)
     }
@@ -74,14 +74,14 @@ export const Calendar = props => {
                     villageId={villageId}
                     eventState={eventState}
                     setEventState={setEventState}
-                    toggleCalendar={toggleCalendar}
+                    toggleAddEvent={toggleAddEvent}
                     villageEvents={villageEvents}
                     villageProtege={villageProtege}
                     addVillageEvent={addVillageEvent}
                     addUserVillageEvent={addUserVillageEvent}
                 />
 
-                <Button onClick={toggleCalendar}>Add an event!</Button>
+                <Button onClick={toggleAddEvent}>Add an event!</Button>
             </Container>
         </>
     )

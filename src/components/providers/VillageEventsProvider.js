@@ -27,7 +27,12 @@ export const VillageEventsProvider = (props) => {
             },
             body: JSON.stringify(villageEvent)
         })
-            .then(getVillageEvents)
+            .then(res => res.json())
+            .then((res) => {
+                const createdVillageEvent = res
+                getVillageEvents()
+                return createdVillageEvent
+            })
     }
 
     const deleteVillageEvent = villageEventId => {

@@ -73,31 +73,28 @@ export const CreateVillageForm = props => {
         setBudgetState(updatedBudget)
     }
 
-    const constructVillage = () => {
-        const villageId = villages.length + 1
-        const numberOfBudgetItems = budgetState.length
-
-        for (var i = 0; i < numberOfBudgetItems; i++) {
-            let budgetObject = budgetState[i]
-            budgetObject.villageId = villageId
-            addBudget(budgetObject)
-        }
+    const constructVillage = (e) => {
+        e.preventDefault()
 
         let villageObect = {
             description: villageStateChange.description,
         }
 
-        let villageUserObject = {
-            userId: parseInt(villageStateChange.protegeId),
-            villageId: villageId,
-            protege: true
-        }
-
-        const promise = Promise.all([
-            addVillage(villageObect),
-            addVillageUser(villageUserObject)
-        ])
-        promise.then(toggle)
+        addVillage(villageObect)
+            .then((res) => {
+                for (const budgetObject of budgetState) {
+                    budgetObject.villageId = res.id
+                    addBudget(budgetObject)
+                }
+                
+                let villageUserObject = {
+                    userId: parseInt(villageStateChange.protegeId),
+                    villageId: res.id,
+                    protege: true
+                }
+                addVillageUser(villageUserObject)
+            })
+            .then(toggle)
     }
 
     return (

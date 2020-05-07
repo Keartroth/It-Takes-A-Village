@@ -10,7 +10,6 @@ export const Login = ({ toggle, setActiveList }) => {
         const updatedState = { ...loginState }
         updatedState[e.target.id] = e.target.value
         setlLginState(updatedState)
-        console.log(updatedState)
     }
 
     const existingUserCheck = () => {

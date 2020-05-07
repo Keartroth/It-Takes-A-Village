@@ -45,25 +45,21 @@ export const JoinVillageForm = props => {
     const joinVillage = () => {
         const timePromiseArray = promiseState.filter(p => p.promiseType === "Time")
         const treasurePromiseArray = promiseState.filter(p => p.promiseType === "Treasure")
-        const numberOfTimePromises = timePromiseArray.length
-        const numberOfTreasurePromises = treasurePromiseArray.length
 
-        for (var i = 0; i < numberOfTimePromises; i++) {
-            const presentTimeObject = timePromiseArray[i]
+        for (const timePromise of timePromiseArray) {
             let timeObject = {
                 userId: currentUserId,
                 villageId: villageId,
-                hours: parseInt(presentTimeObject.promiseValue),
+                hours: parseInt(timePromise.promiseValue),
             }
             addTimePledge(timeObject)
         }
 
-        for (var i = 0; i < numberOfTreasurePromises; i++) {
-            const currentTreasureObject = treasurePromiseArray[i]
+        for (const treasurePromise of treasurePromiseArray) {
             let timeObject = {
                 userId: currentUserId,
                 villageId: villageId,
-                amount: parseInt(currentTreasureObject.promiseValue),
+                amount: parseInt(treasurePromise.promiseValue),
             }
             addTreasurePledge(timeObject)
         }
