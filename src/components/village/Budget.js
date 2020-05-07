@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react"
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
+import ListGroup from 'react-bootstrap/ListGroup'
 import { BudgetsContext } from "../providers/BudgetsProvider"
 import { BudgetTypesContext } from "../providers/BudgetTypesProvider"
 import { EditBudgetForm } from "../dialog/EditBudgetForm"
@@ -26,13 +28,12 @@ export const Budget = props => {
     useEffect(() => {
         const filteredVillageBudgets = budgets.filter(b => b.villageId === villageId)
         setBudgetState(filteredVillageBudgets)
-    }, [budgets])
+    }, [budgets, villageId])
 
     useEffect(() => {
-        debugger
         const filteredVillageBudgets = budgets.filter(b => b.villageId === villageId)
         setBudgetState(filteredVillageBudgets)
-    }, [modal])
+    }, [modal, villageId, budgets])
 
     let budgetTotal = 0
     let pledgeTotal = 0
@@ -40,46 +41,37 @@ export const Budget = props => {
     budgetState.map(vb => budgetTotal = budgetTotal + vb.budgetValue)
     filteredTreasurePledges.map(tp => pledgeTotal = pledgeTotal + tp.amount)
 
-    console.log(budgetState, "budgetState")
-
     return (
-        <>
-            <Container>
-                <h5>{villageProtege.firstName}'s Monthly Services Needs</h5>
-                <div>
-                    <ul>
+        <Container>
+            <Card id="budgetCard" style={{ width: '50%' }}>
+                <Card.Header id="budgetCard__title">{villageProtege.firstName} {villageProtege.lastName}'s Monthly Budget</Card.Header>
+                <Card.Body>
+                    <Card.Subtitle className="mb-2 text-muted">List of monthly expenses</Card.Subtitle>
+                    <ListGroup variant="flush">
                         {
                             budgetState.map(vb => {
                                 let fbt = budgetTypes.find(bt => bt.id === vb.budgetTypesId) || {}
-                                return <li key={vb.id}>{fbt.type}: ${vb.budgetValue}</li>
+                                return <ListGroup.Item key={vb.id}>{fbt.type}: ${vb.budgetValue}</ListGroup.Item>
                             })
                         }
-                    </ul>
-                </div>
-                <h5>{villageProtege.firstName}'s Village Treasure Promises</h5>
-                <div>
-                    <ul>
-                        {
-                            filteredTreasurePledges.map(tp => {
-                                return <li key={tp.id}>${tp.amount}</li>
-                            })
-                        }
-                    </ul>
-                </div>
-                <div>
-                    {budgetTotal - pledgeTotal === 0 ? "" : <h5>Present Monthly Need: ${budgetTotal - pledgeTotal}</h5>}
-                    {currentUserIsProtegeCheck ? <Button onClick={toggleEditBudget}>Edit your monthly budget</Button> : ""}
-                </div>
+                    </ListGroup>
+                    <br></br>
+                    <Card.Subtitle className="mb-2 text-muted">Village Monthly Pledge Total</Card.Subtitle>
+                    <ListGroup variant="flush">
+                        <ListGroup.Item>${pledgeTotal}</ListGroup.Item>
+                    </ListGroup>
+                    {currentUserIsProtegeCheck ? <Card.Footer className="text-muted"><Button onClick={toggleEditBudget}>Edit your monthly budget</Button></Card.Footer> : ""}
+                </Card.Body>
+            </Card>
 
-                <EditBudgetForm
-                    toggleEditBudget={toggleEditBudget}
-                    budgets={budgets}
-                    budgetState={budgetState}
-                    setBudgetState={setBudgetState}
-                    villageId={villageId}
-                    modal={modal}
-                />
-            </Container>
-        </>
+            <EditBudgetForm
+                toggleEditBudget={toggleEditBudget}
+                budgets={budgets}
+                budgetState={budgetState}
+                setBudgetState={setBudgetState}
+                villageId={villageId}
+                modal={modal}
+            />
+        </Container>
     )
 }

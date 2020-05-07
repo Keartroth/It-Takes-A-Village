@@ -15,7 +15,7 @@ import "./Dialog.css"
 
 export const CreateVillageForm = props => {
     const { users } = useContext(UserContext)
-    const { villages, addVillage } = useContext(VillagesContext)
+    const { addVillage } = useContext(VillagesContext)
     const { villageUsers, addVillageUser } = useContext(VillageUsersContext)
     const { budgetTypes } = useContext(BudgetTypesContext)
     const { addBudget } = useContext(BudgetsContext)

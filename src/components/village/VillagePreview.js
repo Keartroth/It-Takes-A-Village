@@ -1,5 +1,7 @@
-import React from "react"
+import React, { useContext } from "react"
 import Button from 'react-bootstrap/Button'
+import { BudgetsContext } from "../providers/BudgetsProvider"
+import { TreasurePledgesContext } from "../providers/TreasurePledgeProvider"
 import "./Village.css"
 
 export const VillagePreview = (props) => {
@@ -8,6 +10,18 @@ export const VillagePreview = (props) => {
     const village = props.villageObject
     const protege = props.protege
     const population = villageUsers.filter(vu => vu.villageId === village.id).length
+
+    const { budgets } = useContext(BudgetsContext)
+    const { treasurePledges } = useContext(TreasurePledgesContext)
+
+    const filteredVillageBudgets = budgets.filter(b => b.villageId === village.id) || []
+    const filteredTreasurePledges = treasurePledges.filter(tp => tp.villageId === village.id) || []
+
+    let budgetTotal = 0
+    let pledgeTotal = 0
+
+    filteredVillageBudgets.map(vb => budgetTotal = budgetTotal + vb.budgetValue)
+    filteredTreasurePledges.map(tp => pledgeTotal = pledgeTotal + tp.amount)
 
     return (
         <div className="previewCard__Container">
@@ -20,7 +34,7 @@ export const VillagePreview = (props) => {
                     <p id={`previewText--${protege.id}`}>{village.description}</p>
                     <ul id={`previewList--${protege.id}`}>
                         <li>Population: {population} {population > 1 ? "villagers" : "villager"}</li>
-                        <li>Village Need: Unknown</li>
+                        <li>Village Monetary Need: ${budgetTotal - pledgeTotal}</li>
                     </ul>
                     <Button id={`previewButton--${protege.id}`} onClick={() => { villageLink(village.id) }}>Visit this village!</Button>
                 </div>

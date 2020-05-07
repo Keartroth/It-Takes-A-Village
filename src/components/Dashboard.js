@@ -34,37 +34,41 @@ export const Dashboard = ({ toggle }) => {
 
     // HIGHER ORDER FUNCTION. IT RETURNS OTHER FUNCTION (i.e. COMPONENTS)
     const showAbout = () => (
-            <FakePartnersProvider>
-                <About />
-            </FakePartnersProvider>
+        <FakePartnersProvider>
+            <About />
+        </FakePartnersProvider>
     )
 
     const showHome = () => (
-        <BudgetsProvider>
-            <BudgetTypesProvider>
-                <UserProvider>
-                    <VillageUsersProvider>
-                        <VillagesProvider>
-                            <VillageList home={true} villageLink={villageLink} userId={userId} />
-                        </VillagesProvider>
-                    </VillageUsersProvider>
-                </UserProvider>
-            </BudgetTypesProvider>
-        </BudgetsProvider>
+        <TreasurePledgesProvider>
+            <BudgetsProvider>
+                <BudgetTypesProvider>
+                    <UserProvider>
+                        <VillageUsersProvider>
+                            <VillagesProvider>
+                                <VillageList home={true} villageLink={villageLink} userId={userId} />
+                            </VillagesProvider>
+                        </VillageUsersProvider>
+                    </UserProvider>
+                </BudgetTypesProvider>
+            </BudgetsProvider>
+        </TreasurePledgesProvider>
     )
 
     const showPatronedVillageList = () => (
-        <BudgetsProvider>
-            <BudgetTypesProvider>
-                <UserProvider>
-                    <VillageUsersProvider>
-                        <VillagesProvider>
-                            <VillageList home={false} villageLink={villageLink} userId={userId} />
-                        </VillagesProvider>
-                    </VillageUsersProvider>
-                </UserProvider>
-            </BudgetTypesProvider>
-        </BudgetsProvider>
+        <TreasurePledgesProvider>
+            <BudgetsProvider>
+                <BudgetTypesProvider>
+                    <UserProvider>
+                        <VillageUsersProvider>
+                            <VillagesProvider>
+                                <VillageList home={false} villageLink={villageLink} userId={userId} />
+                            </VillagesProvider>
+                        </VillageUsersProvider>
+                    </UserProvider>
+                </BudgetTypesProvider>
+            </BudgetsProvider>
+        </TreasurePledgesProvider>
     )
 
     const showVisitVillage = () => (

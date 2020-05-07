@@ -13,12 +13,16 @@ export const AddEventForm = props => {
     const villageId = props.villageId
     const villageProtege = props.villageProtege
     const addVillageEvent = props.addVillageEvent
-    const villageEvents = props.villageEvents
     const addUserVillageEvent = props.addUserVillageEvent
     const toggleAddEvent = props.toggleAddEvent
     const eventState = props.eventState
     const setEventState = props.setEventState
     const currentUserId = parseInt(localStorage.getItem("villager"))
+    const today = new Date()
+    const dd = String(today.getDate()).padStart(2, '0')
+    const mm = String(today.getMonth() + 1).padStart(2, '0')
+    const yyyy = today.getFullYear()
+    const todayDate = yyyy + '-' + mm + '-' + dd
 
     const handleEventChange = (e) => {
         const updatedEvent = { ...eventState }
@@ -28,7 +32,7 @@ export const AddEventForm = props => {
 
     const addEvent = (e) => {
         e.preventDefault()
-        
+
         let eventObject = {
             villageId: villageId,
             date: eventState.date,
@@ -50,7 +54,7 @@ export const AddEventForm = props => {
     }
 
     return (
-        <Modal show={modal} onSubmit={addEvent}>
+        <Modal id="addEventForm" show={modal} onSubmit={addEvent}>
             <ModalHeader id="modal-header">
                 <Modal.Title id="contained-modal-title-vcenter">
                     Add an event to {villageProtege.firstName}'s village!
@@ -65,7 +69,7 @@ export const AddEventForm = props => {
                         <Form.Row>
                             <Col>
                                 <Form.Label>Date:</Form.Label>
-                                <Form.Control id="date" type="date" onChange={handleEventChange} required />
+                                <Form.Control id="date" type="date" min={todayDate} onChange={handleEventChange} required />
                             </Col>
                             <Col>
                                 <Form.Label>Time:</Form.Label>

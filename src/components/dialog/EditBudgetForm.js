@@ -52,7 +52,7 @@ export const EditBudgetForm = props => {
     }
 
     const removeBudgetExpense = (index) => {
-        debugger
+        
         if (editBudgetState[index].id) {
             const updatedBudget = [...deleteBudgetState]
             updatedBudget.unshift(editBudgetState[index])
@@ -61,7 +61,6 @@ export const EditBudgetForm = props => {
         const updatedBudget = [...editBudgetState]
         updatedBudget.splice(index, 1)
         setEditBudgetState(updatedBudget)
-        console.log(deleteBudgetState)
     }
 
     const editVillageBudget = () => {

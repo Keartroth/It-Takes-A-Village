@@ -73,56 +73,54 @@ export const JoinVillageForm = props => {
     }
 
     return (
-        <>
-            <Modal size="lg" show={modal} onSubmit={joinVillage}>
-                <ModalHeader id="modal-header">
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Volunteer to join {villageProtege.firstName} {villageProtege.lastName}'s village!
+        <Modal id="joinVillageModal" size="lg" show={modal} onSubmit={joinVillage}>
+            <ModalHeader id="modal-header">
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Volunteer to join {villageProtege.firstName} {villageProtege.lastName}'s village!
                     </Modal.Title>
-                    <button type="button" id="closeButton" className="close" data-dismiss="modal" aria-label="Close" onClick={toggle}>
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </ModalHeader>
+                <button type="button" id="closeButton" className="close" data-dismiss="modal" aria-label="Close" onClick={toggle}>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </ModalHeader>
 
-                <ModalBody>
-                    <Container>
-                        <h5>Would you like to make a monthly promise when joining?</h5>
-                        <Form id="joinVillageForm">
-                            {
-                                promiseState.map((ps, idx) => {
-                                    const promiseValueId = `promiseValue-${idx}`
-                                    const promiseTypeId = `promiseType-${idx}`
-                                    return <Form.Row key={`promise-${idx}`}>
-                                        <Col className="col-5">
-                                            <Form.Label>Your Monthly Pledge:</Form.Label>
-                                            <Form.Control className="promiseValue" value={promiseState[idx].promiseValue} id={promiseValueId} type="number" min="0" data-idx={idx} onChange={handlePromiseChange} required />
-                                        </Col>
-                                        <Col className="col-6">
-                                            <Form.Group as={Col} id="formGridBudget">
-                                                <Form.Label>Type of Pledge:</Form.Label>
-                                                <Form.Control className="promiseType" as="select" value={promiseState[idx].promiseType} id={promiseTypeId} data-idx={idx} onChange={handlePromiseChange} required>
-                                                    <option value="">Choose...</option>
-                                                    <option value="Time">Time</option>
-                                                    <option value="Treasure">Treasure</option>
-                                                </Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="col-1">
-                                            <button type="button" id="closeButton" className="close" data-dismiss="modal" aria-label="Close" onClick={(e) => { removePromise(idx) }}>
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </Col>
-                                    </Form.Row>
-                                })
-                            }
-                            <Form.Group id="buttonContainer">
-                                {promiseState.length === 0 ? <Button onClick={(e) => { addPromise(e) }}>Add a monthly promise</Button> : <Button onClick={(e) => { addPromise(e) }}>Add another monthly promise</Button>}
-                                <Button type="submit">Join village</Button>
-                            </Form.Group>
-                        </Form>
-                    </Container>
-                </ModalBody>
-            </Modal>
-        </>
+            <ModalBody>
+                <Container>
+                    <h5>Would you like to make a monthly promise when joining?</h5>
+                    <Form id="joinVillageForm">
+                        {
+                            promiseState.map((ps, idx) => {
+                                const promiseValueId = `promiseValue-${idx}`
+                                const promiseTypeId = `promiseType-${idx}`
+                                return <Form.Row key={`promise-${idx}`}>
+                                    <Col className="col-5">
+                                        <Form.Label>Your Monthly Pledge:</Form.Label>
+                                        <Form.Control className="promiseValue" value={promiseState[idx].promiseValue} id={promiseValueId} type="number" min="0" data-idx={idx} onChange={handlePromiseChange} required />
+                                    </Col>
+                                    <Col className="col-6">
+                                        <Form.Group as={Col} id="formGridBudget">
+                                            <Form.Label>Type of Pledge:</Form.Label>
+                                            <Form.Control className="promiseType" as="select" value={promiseState[idx].promiseType} id={promiseTypeId} data-idx={idx} onChange={handlePromiseChange} required>
+                                                <option value="">Choose...</option>
+                                                <option value="Time">Time</option>
+                                                <option value="Treasure">Treasure</option>
+                                            </Form.Control>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col className="col-1">
+                                        <button type="button" id="closeButton" className="close" data-dismiss="modal" aria-label="Close" onClick={(e) => { removePromise(idx) }}>
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </Col>
+                                </Form.Row>
+                            })
+                        }
+                        <Form.Group id="buttonContainer">
+                            {promiseState.length === 0 ? <Button onClick={(e) => { addPromise(e) }}>Add a monthly promise</Button> : <Button onClick={(e) => { addPromise(e) }}>Add another monthly promise</Button>}
+                            <Button type="submit">Join village</Button>
+                        </Form.Group>
+                    </Form>
+                </Container>
+            </ModalBody>
+        </Modal>
     )
 }

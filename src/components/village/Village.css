@@ -3,13 +3,34 @@
     margin: auto;
 }
 
+#budgetCard {
+    display: block;
+    margin: auto;
+}
+
 .calendar__event {
     border: 1px solid black;
 }
+
+#heroImageContainer {
+    background-image: linear-gradient(to bottom right, #2980B9, #6DD5FA, #FFFFFF);
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#heroImage__description {
+    text-indent: 2rem;
+}
+
+#heroImage__image {
+    height: 250px;
+}
+
 .previewCard__Container {
     background-color: lightgoldenrodyellow;
     border-radius: 2.5%;
 }
+
 [id^='previewCard--'] {
     display: flex;
     flex-wrap: nowrap;
@@ -53,6 +74,11 @@
     margin-top: 100px;
 }
 
+.villageContainer h1 {
+    margin-top: 2rem;
+    text-align: center;
+}
+
 .villageListContainer__header {
     margin-top: 30px;
     text-align: center;
@@ -61,4 +87,33 @@
 .villageListContainer__header > * {
     margin-top: 30px;
     text-align: center;
+}
+
+.green {
+    background-color: lightgreen;
+}
+
+.red {
+    background-color: lightcoral;
+}
+
+.color-key {
+    margin-right: 2rem;
+    position: relative;
+}
+.color-key p {
+    padding-left: 20px;
+}
+.color-key .color-box {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+}
+
+.color-keyContainer {
+    display: flex;
+    flex-wrap: nowrap;
 }
