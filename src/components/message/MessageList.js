@@ -11,13 +11,16 @@ export const MessageList = props => {
     const { users } = useContext(UserContext)
     const { addMessage, messages, deleteMessage, updateMessage } = useContext(MessagesContext)
 
-    const currentUser = props.currentUserId
-    const villageId = props.villageId
+    const currentUserId = props.currentUserId
     const currentUserIsProtegeCheck = props.currentUserIsProtegeCheck
+    const messageBoardId = props.messageBoardId
+    const setActiveList = props.setActiveList
+    const villageId = props.villageId
     const date = new Date()
     const timestamp = date.getTime()
 
-    const villageMessages = messages.filter(m => m.villageId === villageId) || []
+    const threadMessages = messages.filter(m => m.villageId === villageId && m.messageBoardId === messageBoardId) || []
+    const sortedThreadMessages = threadMessages.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp))
 
     const [editState, setEditState] = useState({
         message: " "
@@ -40,9 +43,10 @@ export const MessageList = props => {
 
     const sendMessage = (e) => {
         e.preventDefault()
-        messageState.userId = currentUser
+        messageState.userId = currentUserId
         messageState.villageId = villageId
         messageState.timestamp = timestamp
+        messageState.messageBoardId = messageBoardId
         addMessage(messageState)
         setMessageState({
             message: "Your Message Here"
@@ -56,6 +60,7 @@ export const MessageList = props => {
 
     return (
         <section className="messageListContainer">
+            <Button onClick={() => {setActiveList("messageBoard")}}>Return to Message Board</Button>
             <div className="messageList__formContainer">
                 <Form className="messageList__form" onSubmit={sendMessage}>
                     <Form.Group>
@@ -68,15 +73,15 @@ export const MessageList = props => {
             </div>
             <section className="messageList__board">
                 {
-                    villageMessages.map(vm => {
+                    sortedThreadMessages.map(vm => {
                         const mu = users.find(u => u.id === vm.userId)
-                        return <Card key={vm.id} className={`message ${currentUser === vm.userId ? 'right blue' : 'left gray'}`}>
+                        return <Card key={vm.id} className={`message ${currentUserId === vm.userId ? 'right blue' : 'left gray'}`}>
                             <Card.Title className="mb-2 text-muted message__userName">{mu.firstName} {mu.lastName}</Card.Title>
                             <Card.Body>{vm.message}</Card.Body>
                             <Card.Body className="message__buttonContainer">
-                                {vm.userId === currentUser ? <Button size="sm" variant="warning" className="messageButton" onClick={() => {toggleEditForm(vm)}}>Edit</Button> : ""}
-                                {vm.userId === currentUser ? <Button size="sm" variant="danger" className="messageButton" onClick={() => {nukeMessage(vm.id)}}>Delete</Button> : ""}
-                                {currentUserIsProtegeCheck && currentUser !== vm.userId ? <Button size="sm" variant="danger" className="messageButton" onClick={() => {nukeMessage(vm.id)}}>Delete</Button> : ""}
+                                {vm.userId === currentUserId ? <Button size="sm" variant="warning" className="messageButton" onClick={() => {toggleEditForm(vm)}}>Edit</Button> : ""}
+                                {vm.userId === currentUserId ? <Button size="sm" variant="danger" className="messageButton" onClick={() => {nukeMessage(vm.id)}}>Delete</Button> : ""}
+                                {currentUserIsProtegeCheck && currentUserId !== vm.userId ? <Button size="sm" variant="danger" className="messageButton" onClick={() => {nukeMessage(vm.id)}}>Delete</Button> : ""}
                             </Card.Body>
                         </Card>
                     })

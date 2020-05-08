@@ -6,8 +6,8 @@ import { VillageUsersContext } from "../providers/VillageUsersProvider"
 import { Budget } from "./Budget"
 import { Calendar } from "./Calendar"
 import { JoinVillageForm } from "../dialog/JoinVillageForm"
+import { MessagDashboard } from "../message/MessageDashboard"
 import "./Village.css"
-import { MessageList } from "../message/MessageList"
 
 export const Village = props => {
     const currentUserId = props.userId
@@ -15,7 +15,7 @@ export const Village = props => {
     const { users } = useContext(UserContext)
     const { villages } = useContext(VillagesContext)
     const { villageUsers } = useContext(VillageUsersContext)
-    
+
     const foundVillage = villages.find(v => v.id === villageId) || {}
     const foundRelation = villageUsers.find(vu => vu.villageId === villageId && vu.protege === true) || {}
     const villageProtege = users.find(u => foundRelation.userId === u.id) || {}
@@ -56,11 +56,14 @@ export const Village = props => {
                 currentUserIsProtegeCheck={currentUserIsProtegeCheck}
             />
 
-            {currentUserIsPatronCheck || currentUserIsProtegeCheck ? <MessageList 
-                villageId={villageId}
-                currentUserId={currentUserId}
-                currentUserIsProtegeCheck={currentUserIsProtegeCheck}
-            /> : ""}
+            {currentUserIsPatronCheck || currentUserIsProtegeCheck ?
+                <MessagDashboard
+                    villageId={villageId}
+                    villageProtege={villageProtege}
+                    currentUserId={currentUserId}
+                    currentUserIsProtegeCheck={currentUserIsProtegeCheck}
+                /> : ""}
+
 
             {currentUserIsPatronCheck || currentUserIsProtegeCheck ? "" : <Button onClick={toggle}>Join this village!</Button>}
 

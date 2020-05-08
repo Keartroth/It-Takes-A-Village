@@ -7,11 +7,11 @@ import { UserVillageEventsContext } from "../providers/UserVillageEventsProvider
 import "./Village.css"
 
 export const Calendar = props => {
+    const currentUserId = props.currentUserId
+    const currentUserIsProtegeCheck = props.currentUserIsProtegeCheck
     const users = props.users
     const villageId = props.villageId
     const villageProtege = props.villageProtege
-    const currentUserId = props.currentUserId
-    const currentUserIsProtegeCheck = props.currentUserIsProtegeCheck
     const { villageEvents, addVillageEvent, deleteVillageEvent } = useContext(VillageEventsContext)
     const { userVillageEvents, addUserVillageEvent, deleteUserVillageEvent } = useContext(UserVillageEventsContext)
     const currentVillageEvents = villageEvents.filter(ve => ve.villageId === villageId) || []
@@ -61,10 +61,15 @@ export const Calendar = props => {
                     const currentEventUsers = userVillageEvents.filter(uve => uve.villageEventsId === cve.id) || []
                     const rsvpCheck = currentEventUsers.find(ceu => ceu.userId === currentUserId)
                     const protegeAttendingEventCheck = currentEventUsers.find(ceu => ceu.userId === villageProtege.id)
+                    const [hours, minutes] = cve.time.split(":")
+                    const twelveHoursInADay = (hours % 12) || 12
+                    let AmOrPm = ""
+                    {hours >= 12 ? AmOrPm = 'pm' : AmOrPm = 'am'}
+                    const twelveHourFormat = twelveHoursInADay + ":" + minutes + AmOrPm
 
                     return <div key={cve.id} className={`calendar__event ${protegeAttendingEventCheck ? 'green' : 'red'}`}>
                         <h5>{cve.name}</h5>
-                        <p>Date: {cve.date} Time: {cve.time}<br></br>Estimated Cost: ${cve.cost}<br></br>Event description: {cve.description}</p>
+                        <p>Date: {cve.date} Time: {twelveHourFormat}<br></br>Estimated Cost: ${cve.cost}<br></br>Event description: {cve.description}</p>
                         <h5>Attending Villagers</h5>
                         <ul>
                             {
