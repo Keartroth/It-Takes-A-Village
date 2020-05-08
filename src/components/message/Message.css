@@ -27,7 +27,7 @@
 }
 
 .messageListContainer {
-    background-image: linear-gradient(to bottom right, #bdc3c7, #2c3e50);
+    background-image: linear-gradient(to bottom left, #bdc3c7, #2c3e50);
     border: 1px solid black;
     height: 45rem;
     margin: 5rem;

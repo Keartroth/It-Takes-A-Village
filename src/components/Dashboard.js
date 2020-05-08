@@ -182,8 +182,8 @@ export const Dashboard = ({ toggle }) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link onClick={() => setActiveList("home")} >Home</Nav.Link>
-                        {protegeState ? <Nav.Link onClick={() => villageLink(protegeCheck.villageId)} >My Village</Nav.Link> : ""}
                         {patronState ? <Nav.Link onClick={() => setActiveList("patronedVillageList")} >Patroned Villages</Nav.Link> : ""}
+                        {protegeState ? <Nav.Link onClick={() => villageLink(protegeCheck.villageId)} >My Village</Nav.Link> : ""}
                         <Nav.Link onClick={() => setActiveList("account")} >My Account</Nav.Link>
                         <Nav.Link onClick={() => setActiveList("about")} >About</Nav.Link>
                         <Nav.Link onClick={() => logout()} >Logout</Nav.Link>
