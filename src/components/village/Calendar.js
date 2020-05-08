@@ -61,10 +61,8 @@ export const Calendar = props => {
                     const currentEventUsers = userVillageEvents.filter(uve => uve.villageEventsId === cve.id) || []
                     const rsvpCheck = currentEventUsers.find(ceu => ceu.userId === currentUserId)
                     const protegeAttendingEventCheck = currentEventUsers.find(ceu => ceu.userId === villageProtege.id)
-                    let color = ""
-                    { protegeAttendingEventCheck ? color = "green" : color = "red" }
 
-                    return <div key={cve.id} className={`calendar__event ${color}`}>
+                    return <div key={cve.id} className={`calendar__event ${protegeAttendingEventCheck ? 'green' : 'red'}`}>
                         <h5>{cve.name}</h5>
                         <p>Date: {cve.date} Time: {cve.time}<br></br>Estimated Cost: ${cve.cost}<br></br>Event description: {cve.description}</p>
                         <h5>Attending Villagers</h5>

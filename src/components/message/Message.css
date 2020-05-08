@@ -1,0 +1,69 @@
+#bootstrap-overrides .blue {
+    background-color: dodgerblue;
+}
+
+#bootstrap-overrides .gray {
+    background-color: lightgray;
+}
+
+#bootstrap-overrides .message {
+    border-radius: 15px;
+    margin:5px;
+    width: 45%;
+}
+
+.message__buttonContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.message__userName {
+    text-align: center;
+}
+
+.messageButton {
+    width: 10rem;
+}
+
+.messageListContainer {
+    background-image: linear-gradient(to bottom right, #bdc3c7, #2c3e50);
+    border: 1px solid black;
+    height: 45rem;
+    margin: 5rem;
+    overflow: hidden;
+}
+
+.messageList__board {
+    align-items: center;
+    max-height: 475px;
+    overflow-y: scroll;
+    padding:5px;
+    width: inherit;
+}
+
+.messageList__form {
+    display: block;
+    margin: auto;
+    width: 75%;
+}
+
+.messageList__formContainer {
+    margin: 2rem;
+    width: inherit;
+}
+
+.messageList__formContainer Button {
+    display: block;
+    margin: auto;
+}
+
+.left {
+    clear:both;
+    float: left;
+}
+
+.right {
+    clear:both;
+    float: right;
+}
