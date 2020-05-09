@@ -18,7 +18,6 @@ export const MessagDashboard = (props) => {
         setMessageBoardId(id)
     }
 
-
     // HIGHER ORDER FUNCTION. IT RETURNS OTHER FUNCTION (i.e. COMPONENTS)
     const showMessageBoard = () => (
         <MessageBoardsProvider>
@@ -41,7 +40,6 @@ export const MessagDashboard = (props) => {
         />
     )
 
-
     /*
         This effect hook determines which list is shown
         based on the state of the `activeList` variable.
@@ -53,7 +51,7 @@ export const MessagDashboard = (props) => {
         else if (activeList === "messageBoardThread") {
             setComponents(showMessageBoardThread)
         }
-    }, [activeList])
+    }, [activeList, villageId])
 
     return (
         <section className="messageBoardMasterContainer">
