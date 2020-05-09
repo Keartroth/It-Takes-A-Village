@@ -14,18 +14,17 @@ export const AddMessageBoardThread = props => {
     const { addMessage } = useContext(MessagesContext)
     const modal = props.modal
     const villageId = props.villageId
-    const villageProtege= props.villageProtege || {}
     const toggleAddThread = props.toggleAddThread
     const currentUserId = props.currentUserId
     const today = new Date()
     const timestamp = today.getTime()
 
-    const blankForm = {
-        topic: "Your thread topic here",
-        message: "Your Message Here"
+    const deafultForm = {
+        topic: "",
+        message: ""
     }
 
-    const [formState, setFormState] = useState(blankForm)
+    const [formState, setFormState] = useState(deafultForm)
 
     const handleFormChange = (e) => {
         const update = { ...formState }
@@ -34,7 +33,6 @@ export const AddMessageBoardThread = props => {
     }
 
     const addThread = (e) => {
-        debugger
         e.preventDefault()
         let threadObject = {
             topic: formState.topic,
@@ -59,10 +57,10 @@ export const AddMessageBoardThread = props => {
         <Modal id="addThreadModal" show={modal} onSubmit={addThread}>
             <ModalHeader id="modal-header">
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Add a thread to {villageProtege.firstName}'s message board!
+                    Add a thread to the message board
                 </Modal.Title>
                 <button type="button" id="closeButton" className="close" data-dismiss="modal" aria-label="Close" onClick={() => {
-                    setFormState(blankForm)
+                    setFormState(deafultForm)
                     toggleAddThread()
                 }}>
                     <span aria-hidden="true">&times;</span>
@@ -72,9 +70,11 @@ export const AddMessageBoardThread = props => {
                 <Container>
                     <Form id="addThreadForm">
                         <Form.Group>
+                            <Form.Label>Thread Topic</Form.Label>
                             <Form.Control id="topic" value={formState.topic} onChange={handleFormChange} required></Form.Control>
                         </Form.Group>
                         <Form.Group>
+                            <Form.Label>Your Message</Form.Label>
                             <Form.Control id="message" as="textarea" value={formState.message} onChange={handleFormChange} required></Form.Control>
                         </Form.Group>
                         <Form.Group id="buttonContainer">
