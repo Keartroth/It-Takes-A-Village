@@ -9,7 +9,6 @@ export const MessageBoard = props => {
     const currentUserId = props.currentUserId
     const threadLink = props.threadLink
     const villageId = props.villageId
-    const villageProtege = props.villageProtege
     const { messageBoards } = useContext(MessageBoardsContext)
 
     const villageThreads = messageBoards.filter(mb => mb.villageId === villageId) || []
@@ -22,13 +21,13 @@ export const MessageBoard = props => {
 
     return (
         <section className="messageBoardContainer">
-            <Button onClick={toggleAddThread}>Create Thread</Button>
+            <Button size="lg" id="button--createThread" onClick={toggleAddThread}>Start a Conversation</Button>
             <section className="messageBoard__listContainer">
                 {
                     sortedThreads.map(st => {
                         return <Card key={st.id} onClick={() => {
                             threadLink(st.id)
-                        }} body>Thread Topic: {st.topic}</Card>
+                        }} body>Conversation Topic: {st.topic}</Card>
                     })
                 }
             </section>
@@ -37,7 +36,6 @@ export const MessageBoard = props => {
                 modal={modal}
                 villageId={villageId}
                 currentUserId={currentUserId}
-                villageProtege={villageProtege}
                 toggleAddThread={toggleAddThread}
             />
         </section>

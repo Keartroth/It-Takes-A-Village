@@ -2,6 +2,11 @@
     margin-top: 5rem;
 }
 
+#addThreadModal {
+    margin-top: 5rem;
+    width: 200rem;
+}
+
 #addVillageForm {
     padding: 5rem;
 }
@@ -9,6 +14,16 @@
 .addVillageHeader {
     margin-top: 2rem;
     text-align: center;
+}
+
+#button--createThread {
+    display: block;
+    margin: 2rem auto;
+}
+
+#button--returnToBoard {
+    display: block;
+    margin: 1rem auto;
 }
 
 #buttonContainer {
