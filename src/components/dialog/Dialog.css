@@ -62,3 +62,7 @@
 #modal-header {
     justify-content: center;
 }
+
+#rsvpEventForm {
+    margin-top: 5rem;
+}

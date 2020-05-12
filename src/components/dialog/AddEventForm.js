@@ -8,16 +8,18 @@ import ModalBody from 'react-bootstrap/ModalBody'
 import ModalHeader from 'react-bootstrap/ModalHeader'
 import "./Dialog.css"
 
-export const AddEventForm = props => {
+export const AddEventForm = (props) => {
     const modal = props.modal
     const villageId = props.villageId
     const villageProtege = props.villageProtege
     const addVillageEvent = props.addVillageEvent
     const addUserVillageEvent = props.addUserVillageEvent
     const toggleAddEvent = props.toggleAddEvent
+    const dateSelectedState = props.dateSelectedState
     const eventState = props.eventState
     const setEventState = props.setEventState
     const currentUserId = parseInt(localStorage.getItem("villager"))
+
     const today = new Date()
     const dd = String(today.getDate()).padStart(2, '0')
     const mm = String(today.getMonth() + 1).padStart(2, '0')
@@ -33,11 +35,14 @@ export const AddEventForm = props => {
     const addEvent = (e) => {
         e.preventDefault()
 
+        const startFormat = eventState.startDate + " " + eventState.startTime + ":00"
+        const endFormat = eventState.endDate + " " + eventState.endTime + ":00"
+
         let eventObject = {
             villageId: villageId,
-            date: eventState.date,
-            time: eventState.time,
-            name: eventState.name,
+            startDate: startFormat,
+            endDate: endFormat,
+            title: eventState.title,
             description: eventState.description,
             location: eventState.location,
             cost: parseInt(eventState.cost)
@@ -68,18 +73,28 @@ export const AddEventForm = props => {
                     <Form id="addEventForm">
                         <Form.Row>
                             <Col>
-                                <Form.Label>Date:</Form.Label>
-                                <Form.Control id="date" type="date" min={todayDate} onChange={handleEventChange} required />
+                                <Form.Label>Start Date:</Form.Label>
+                                <Form.Control id="startDate" type="date" min={todayDate} defaultValue={dateSelectedState} onChange={handleEventChange} required />
                             </Col>
                             <Col>
-                                <Form.Label>Time:</Form.Label>
-                                <Form.Control id="time" step="300" type="time" onChange={handleEventChange} required />
+                                <Form.Label>Start Time:</Form.Label>
+                                <Form.Control id="startTime" step="300" type="time" onChange={handleEventChange} required />
+                            </Col>
+                        </Form.Row>
+                        <Form.Row>
+                            <Col>
+                                <Form.Label>End Date:</Form.Label>
+                                <Form.Control id="endDate" type="date" min={todayDate} defaultValue={dateSelectedState} onChange={handleEventChange} required />
+                            </Col>
+                            <Col>
+                                <Form.Label>End Time:</Form.Label>
+                                <Form.Control id="endTime" step="300" type="time" onChange={handleEventChange} required />
                             </Col>
                         </Form.Row>
                         <Form.Row>
                             <Col>
                                 <Form.Label>Event Name:</Form.Label>
-                                <Form.Control id="name" onChange={handleEventChange} required />
+                                <Form.Control id="title" onChange={handleEventChange} required />
                             </Col>
                             <Col>
                                 <Form.Label>Estimated Cost:</Form.Label>
