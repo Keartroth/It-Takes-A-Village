@@ -15,7 +15,7 @@ export const AddMessageBoardThread = props => {
     const modal = props.modal
     const villageId = props.villageId
     const toggleAddThread = props.toggleAddThread
-    const currentUserId = props.currentUserId
+    const currentUserId = props.userId
     const today = new Date()
     const timestamp = today.getTime()
 

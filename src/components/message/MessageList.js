@@ -11,7 +11,7 @@ export const MessageList = props => {
     const { users } = useContext(UserContext)
     const { addMessage, messages, deleteMessage, updateMessage } = useContext(MessagesContext)
 
-    const currentUserId = props.currentUserId
+    const currentUserId = props.userId
     const currentUserIsProtegeCheck = props.currentUserIsProtegeCheck
     const messageBoardId = props.messageBoardId
     const setActiveList = props.setActiveList

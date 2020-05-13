@@ -8,6 +8,27 @@
     margin: auto;
 }
 
+#budgetContainer {
+    height: 45rem;
+    margin: auto;
+    position: relative;
+    width: auto;
+}
+
+#budgetDirections {
+    font-weight: lighter;
+    margin-left: 75%;
+    margin-top: 0px;
+}
+
+#budgetOverlay {
+    height: 200px;
+    position: absolute;
+    right: 36.5%;
+    top: 33.3%;
+    width: 300px;
+}
+
 .calendar__event {
     border: 1px solid black;
 }
@@ -91,10 +112,12 @@
 
 .green {
     background-color: lightgreen;
+    color: black;
 }
 
 .red {
     background-color: lightcoral;
+    color: black;
 }
 
 .color-key {

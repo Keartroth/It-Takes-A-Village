@@ -20,7 +20,7 @@ export const VillagePreview = (props) => {
     let budgetTotal = 0
     let pledgeTotal = 0
 
-    filteredVillageBudgets.map(vb => budgetTotal = budgetTotal + vb.budgetValue)
+    filteredVillageBudgets.map(vb => budgetTotal = budgetTotal + vb.value)
     filteredTreasurePledges.map(tp => pledgeTotal = pledgeTotal + tp.amount)
 
     return (

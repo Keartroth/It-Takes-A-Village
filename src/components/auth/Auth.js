@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react"
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { About } from "../about/About"
-import { FakePartnersProvider } from "../providers/FakePartnersProvider"
 import { Home } from "../home/Home"
 import { Login } from "./Login"
 import { RegisterForm } from "./RegisterForm"
+import { FakePartnersProvider } from "../providers/FakePartnersProvider"
 import { QuotesProvider } from "../providers/QuotesProvider"
 import { UserProvider } from "../providers/UsersProvider"
 
@@ -21,9 +21,9 @@ export const Auth = ({ toggle }) => {
     )
 
     const showAbout = () => (
-            <FakePartnersProvider>
-                <About />
-            </FakePartnersProvider>
+        <FakePartnersProvider>
+            <About />
+        </FakePartnersProvider>
     )
 
     const showLogin = () => (

@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import ModalBody from 'react-bootstrap/ModalBody'
 import ModalHeader from 'react-bootstrap/ModalHeader'
+import format from 'date-fns/format'
 import "./Dialog.css"
 
 export const AddEventForm = (props) => {
@@ -18,13 +19,11 @@ export const AddEventForm = (props) => {
     const dateSelectedState = props.dateSelectedState
     const eventState = props.eventState
     const setEventState = props.setEventState
-    const currentUserId = parseInt(localStorage.getItem("villager"))
+    const currentUserId = props.userId
+    const timeSelectedState = props.timeSelectedState
 
-    const today = new Date()
-    const dd = String(today.getDate()).padStart(2, '0')
-    const mm = String(today.getMonth() + 1).padStart(2, '0')
-    const yyyy = today.getFullYear()
-    const todayDate = yyyy + '-' + mm + '-' + dd
+    const now = new Date()
+    const today = format(now, 'yyyy-MM-dd')
 
     const handleEventChange = (e) => {
         const updatedEvent = { ...eventState }
@@ -74,17 +73,17 @@ export const AddEventForm = (props) => {
                         <Form.Row>
                             <Col>
                                 <Form.Label>Start Date:</Form.Label>
-                                <Form.Control id="startDate" type="date" min={todayDate} defaultValue={dateSelectedState} onChange={handleEventChange} required />
+                                <Form.Control id="startDate" type="date" min={today} defaultValue={dateSelectedState} onChange={handleEventChange} required />
                             </Col>
                             <Col>
                                 <Form.Label>Start Time:</Form.Label>
-                                <Form.Control id="startTime" step="300" type="time" onChange={handleEventChange} required />
+                                <Form.Control id="startTime" step="300" type="time" defaultValue={timeSelectedState} onChange={handleEventChange} required />
                             </Col>
                         </Form.Row>
                         <Form.Row>
                             <Col>
                                 <Form.Label>End Date:</Form.Label>
-                                <Form.Control id="endDate" type="date" min={todayDate} defaultValue={dateSelectedState} onChange={handleEventChange} required />
+                                <Form.Control id="endDate" type="date" min={today} defaultValue={dateSelectedState} onChange={handleEventChange} required />
                             </Col>
                             <Col>
                                 <Form.Label>End Time:</Form.Label>

@@ -39,12 +39,17 @@ export const EditBudgetForm = props => {
         setEditBudgetState(budgetState)
     }, [budgetState])
 
-    const blankBudget = { budgetValue: "", budgetTypesId: "" }
+    const blankBudget = { value: "", budgetTypesId: "" }
 
     const handleBudgetChange = (e) => {
         const updatedBudget = [...editBudgetState]
-        updatedBudget[parseInt(e.target.dataset.idx)][e.target.className.split(" ")[0]] = parseInt(e.target.value)
-        setEditBudgetState(updatedBudget)
+        if (e.target.value !== "") {
+            updatedBudget[parseInt(e.target.dataset.idx)][e.target.className.split(" ")[0]] = parseInt(e.target.value)
+            setEditBudgetState(updatedBudget)
+        } else {
+            updatedBudget[parseInt(e.target.dataset.idx)][e.target.className.split(" ")[0]] = e.target.value
+            setEditBudgetState(updatedBudget)
+        }
     }
 
     const addBudgetExpense = () => {
@@ -52,7 +57,7 @@ export const EditBudgetForm = props => {
     }
 
     const removeBudgetExpense = (index) => {
-        
+
         if (editBudgetState[index].id) {
             const updatedBudget = [...deleteBudgetState]
             updatedBudget.unshift(editBudgetState[index])
@@ -64,7 +69,7 @@ export const EditBudgetForm = props => {
     }
 
     const editVillageBudget = () => {
-
+        
         const deleteBudgetObjects = () => {
             for (const budgetObject of deleteBudgetState) {
                 deleteBudget(budgetObject.id)
@@ -77,6 +82,7 @@ export const EditBudgetForm = props => {
                     updateBudget(budgetObject)
                 } else {
                     budgetObject.villageId = villageId
+                    budgetObject.label = "Nivo requires a label"
                     addBudget(budgetObject)
                 }
             }
@@ -104,12 +110,12 @@ export const EditBudgetForm = props => {
                     <Form id="editBudgetForm">
                         {
                             editBudgetState.map((bs, idx) => {
-                                const budgetValueId = `budgetValue-${idx}`
+                                const valueId = `value-${idx}`
                                 const budgetTypesId = `budgetTypesId-${idx}`
                                 return <Form.Row key={`budget-${idx}`}>
                                     <Col className="col-5">
                                         <Form.Label>Expected Monthly Expense:</Form.Label>
-                                        <Form.Control className="budgetValue" value={editBudgetState[idx].budgetValue} id={budgetValueId} type="number" min="0" data-idx={idx} onChange={handleBudgetChange} required />
+                                        <Form.Control className="value" value={editBudgetState[idx].value} id={valueId} type="number" min="0" data-idx={idx} onChange={handleBudgetChange} required />
                                     </Col>
                                     <Col className="col-6">
                                         <Form.Group as={Col} id="formGridBudget">
