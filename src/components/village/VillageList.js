@@ -44,7 +44,7 @@ export const VillageList = props => {
                         const protege = users.find(u => u.id === foundRelationship.userId) || {}
 
                         return <VillagePreview key={v.id}
-                            villageLink={villageLink}
+                            {...props}
                             villageObject={v}
                             protege={protege}
                             villageUsers={villageUsers}

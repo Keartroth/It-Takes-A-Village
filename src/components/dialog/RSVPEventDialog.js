@@ -11,7 +11,7 @@ import "./Dialog.css"
 export const RSVPEventForm = props => {
     const toggleRSVPEvent = props.toggleRSVPEvent
     const users = props.users
-    const currentUserId = props.currentUserId
+    const currentUserId = props.userId
     const currentUserIsProtegeCheck = props.currentUserIsProtegeCheck
     const rsvpModal = props.rsvpModal
     const rsvpState = props.rsvpState || { startDate: " ", endDate: " " }
@@ -43,6 +43,7 @@ export const RSVPEventForm = props => {
     }
 
     const leaveEvent = (currentEventUsers) => {
+
         const foundEventUser = currentEventUsers.find(ceu => ceu.userId === currentUserId)
         deleteUserVillageEvent(foundEventUser.id).then(() => { toggleRSVPEvent({}) })
     }
@@ -54,7 +55,7 @@ export const RSVPEventForm = props => {
     return (
         <Modal id="rsvpEventForm" show={rsvpModal}>
             <ModalHeader id="modal-header">
-                {rsvpCheck ? <h5>You are currently RSVP'd for this event.<br></br>Click the button below to change your status.</h5> : <h5>You are currently not attending this event. <br></br>Click the button below to RSVP.</h5>}
+                {rsvpCheck ? <h5>You are currently RSVP'd for this event.</h5> : <h5>You are not currently attending this event.</h5>}
                 <button type="button" id="closeButton" className="close" data-dismiss="modal" aria-label="Close" onClick={toggleRSVPEvent}>
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -10,6 +10,7 @@ import { MessagDashboard } from "../message/MessageDashboard"
 import "./Village.css"
 
 export const Village = props => {
+
     const currentUserId = props.userId
     const villageId = props.villageId
     const { users } = useContext(UserContext)
@@ -43,24 +44,22 @@ export const Village = props => {
             </div>
 
             {currentUserIsPatronCheck || currentUserIsProtegeCheck ? <VillageCalendar
+                {...props}
                 users={users}
-                villageId={villageId}
-                currentUserId={currentUserId}
                 villageProtege={villageProtege}
                 currentUserIsProtegeCheck={currentUserIsProtegeCheck}
             /> : ""}
 
             <Budget
-                villageId={villageId}
+                {...props}
                 villageProtege={villageProtege}
                 currentUserIsProtegeCheck={currentUserIsProtegeCheck}
             />
 
             {currentUserIsPatronCheck || currentUserIsProtegeCheck ?
                 <MessagDashboard
-                    villageId={villageId}
+                    {...props}
                     villageProtege={villageProtege}
-                    currentUserId={currentUserId}
                     currentUserIsProtegeCheck={currentUserIsProtegeCheck}
                 /> : ""}
 
@@ -68,13 +67,12 @@ export const Village = props => {
             {currentUserIsPatronCheck || currentUserIsProtegeCheck ? "" : <Button onClick={toggle}>Join this village!</Button>}
 
             {currentUserIsPatronCheck || currentUserIsProtegeCheck ? "" : <JoinVillageForm
-                villageId={villageId}
+                {...props}
                 villageProtege={villageProtege}
-                currentUserId={currentUserId}
                 modal={modal}
                 toggle={toggle}
-                setPromiseState={setPromiseState}
                 promiseState={promiseState}
+                setPromiseState={setPromiseState}
             />}
         </section>
     )

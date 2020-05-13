@@ -6,7 +6,6 @@ import { MessageBoardsContext } from "../providers/MessageBoardsProvider"
 import "./Message.css"
 
 export const MessageBoard = props => {
-    const currentUserId = props.currentUserId
     const threadLink = props.threadLink
     const villageId = props.villageId
     const { messageBoards } = useContext(MessageBoardsContext)
@@ -33,9 +32,8 @@ export const MessageBoard = props => {
             </section>
 
             <AddMessageBoardThread
+                {...props}
                 modal={modal}
-                villageId={villageId}
-                currentUserId={currentUserId}
                 toggleAddThread={toggleAddThread}
             />
         </section>

@@ -11,7 +11,6 @@ export const VillageEventsContext = React.createContext()
  */
 export const VillageEventsProvider = (props) => {
     const [villageEvents, setVillageEvents] = useState([])
-    const [searchTerm, setSearchTerm] = useState("")
 
     const getVillageEvents = () => {
         return fetch("http://localhost:8088/villageEvents")
@@ -64,7 +63,6 @@ export const VillageEventsProvider = (props) => {
     return (
         <VillageEventsContext.Provider value={{
             villageEvents, addVillageEvent, 
-            searchTerm, setSearchTerm,
             deleteVillageEvent, updateVillageEvent
         }}>
             {props.children}

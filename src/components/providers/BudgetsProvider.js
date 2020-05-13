@@ -11,7 +11,6 @@ export const BudgetsContext = React.createContext()
  */
 export const BudgetsProvider = (props) => {
     const [budgets, setBudgets] = useState([])
-    const [searchTerm, setSearchTerm] = useState("")
 
     const getBudgets = () => {
         return fetch("http://localhost:8088/budgets")
@@ -59,7 +58,6 @@ export const BudgetsProvider = (props) => {
     return (
         <BudgetsContext.Provider value={{
             budgets, addBudget, 
-            searchTerm, setSearchTerm,
             deleteBudget, updateBudget
         }}>
             {props.children}

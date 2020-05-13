@@ -10,12 +10,6 @@
     text-align: center;
 }
 
-.about__partner {
-    height: 150px;
-    margin:5px;
-    width: auto;
-}
-
 .about__fakePartnersList {
     display: flex;
     flex-wrap: wrap;
@@ -24,17 +18,17 @@
     padding:5px;
 }
 
+.about__img {
+    height: 320px;
+    width: auto;
+}
+
 .about__imgContainer {
     background-color: black;
     background-size: 30rem;
     display: flex;
     flex-wrap: nowrap;
     height: 320px;
-}
-
-.about__img {
-    height: 320px;
-    width: auto;
 }
 
 .about__missionStatement {
@@ -48,4 +42,10 @@
     font-family: 'Yeseva One', cursive;
     padding-bottom: 2rem;
     padding-top: 5rem;
+}
+
+.about__partner {
+    height: 150px;
+    margin:5px;
+    width: auto;
 }

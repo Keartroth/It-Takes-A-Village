@@ -18,7 +18,7 @@ export const JoinVillageForm = props => {
 
     const villageId = props.villageId
     const villageProtege = props.villageProtege
-    const currentUserId = props.currentUserId
+    const currentUserId = props.userId
     const modal = props.modal
     const toggle = props.toggle
     const setPromiseState = props.setPromiseState

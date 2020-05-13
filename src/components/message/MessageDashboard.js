@@ -5,9 +5,6 @@ import { MessageBoardsProvider } from "../providers/MessageBoardsProvider"
 
 export const MessagDashboard = (props) => {
     const villageId = props.villageId
-    const currentUserId = props.currentUserId
-    const currentUserIsProtegeCheck = props.currentUserIsProtegeCheck
-    const villageProtege = props.villageProtege
 
     const [activeList, setActiveList] = useState("messageBoard")
     const [messageBoardId, setMessageBoardId] = useState(null)
@@ -22,21 +19,17 @@ export const MessagDashboard = (props) => {
     const showMessageBoard = () => (
         <MessageBoardsProvider>
             <MessageBoard
-                currentUserId={currentUserId}
-                villageId={villageId}
+                {...props}
                 threadLink={threadLink}
-                villageProtege={villageProtege}
             />
         </MessageBoardsProvider>
     )
 
     const showMessageBoardThread = () => (
         <MessageList
-            villageId={villageId}
-            currentUserId={currentUserId}
+            {...props}
             messageBoardId={messageBoardId}
             setActiveList={setActiveList}
-            currentUserIsProtegeCheck={currentUserIsProtegeCheck}
         />
     )
 
@@ -44,19 +37,19 @@ export const MessagDashboard = (props) => {
         This effect hook determines which list is shown
         based on the state of the `activeList` variable.
     */
-   useEffect(() => {
-       if (activeList === "messageBoard") {
-           setComponents(showMessageBoard)
-       }
-       else if (activeList === "messageBoardThread") {
-           setComponents(showMessageBoardThread)
-       }
-   }, [activeList, villageId])
+    useEffect(() => {
+        if (activeList === "messageBoard") {
+            setComponents(showMessageBoard)
+        }
+        else if (activeList === "messageBoardThread") {
+            setComponents(showMessageBoardThread)
+        }
+    }, [activeList, villageId])
 
-   useEffect(() => {
-    setActiveList("messageBoard")
-   }, [villageId])
-   
+    useEffect(() => {
+        setActiveList("messageBoard")
+    }, [villageId])
+
     return (
         <section className="messageBoardMasterContainer">
             <div className="listDisplay">

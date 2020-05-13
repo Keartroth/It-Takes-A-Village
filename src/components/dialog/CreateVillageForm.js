@@ -55,7 +55,7 @@ export const CreateVillageForm = props => {
         })
     }
 
-    const blankBudget = { budgetValue: "", budgetTypesId: "" }
+    const blankBudget = { value: "", budgetTypesId: "" }
     const addBudgetExpense = (e) => {
         e.preventDefault()
         setBudgetState([...budgetState, { ...blankBudget }])
@@ -84,6 +84,7 @@ export const CreateVillageForm = props => {
             .then((res) => {
                 for (const budgetObject of budgetState) {
                     budgetObject.villageId = res.id
+                    budgetObject.label = "Nivo requires a label"
                     addBudget(budgetObject)
                 }
                 
@@ -135,12 +136,12 @@ export const CreateVillageForm = props => {
                         </Form.Row>
                         {
                             budgetState.map((bs, idx) => {
-                                const budgetValueId = `budgetValue-${idx}`
+                                const valueId = `value-${idx}`
                                 const budgetTypesId = `budgetTypesId-${idx}`
                                 return <Form.Row key={`budget-${idx}`}>
                                     <Col className="col-5">
                                         <Form.Label>Expected Monthly Expense:</Form.Label>
-                                        <Form.Control className="budgetValue" value={budgetState[idx].budgetValue} id={budgetValueId} type="number" min="0" data-idx={idx} onChange={handleBudgetChange} required />
+                                        <Form.Control className="value" value={budgetState[idx].value} id={valueId} type="number" min="0" data-idx={idx} onChange={handleBudgetChange} required />
                                     </Col>
                                     <Col className="col-6">
                                         <Form.Group as={Col} id="formGridBudget">

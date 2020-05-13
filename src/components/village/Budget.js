@@ -1,8 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
-import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
+import { ResponsivePie } from '@nivo/pie'
 import Container from 'react-bootstrap/Container'
-import ListGroup from 'react-bootstrap/ListGroup'
 import { BudgetsContext } from "../providers/BudgetsProvider"
 import { BudgetTypesContext } from "../providers/BudgetTypesProvider"
 import { EditBudgetForm } from "../dialog/EditBudgetForm"
@@ -38,39 +36,107 @@ export const Budget = props => {
     let budgetTotal = 0
     let pledgeTotal = 0
 
-    budgetState.map(vb => budgetTotal = budgetTotal + vb.budgetValue)
+    budgetState.map(vb => budgetTotal = budgetTotal + vb.value)
     filteredTreasurePledges.map(tp => pledgeTotal = pledgeTotal + tp.amount)
+
+    let budgetOverview = [
+        {
+            id: "Monthly Pledges",
+            label: "Monthly Pledges",
+            value: pledgeTotal,
+            color: "rgb(125, 255, 38)"
+        },
+        {
+            id: "Unmet Budget Needs",
+            label: "Unmet Budget Needs",
+            value: budgetTotal - pledgeTotal,
+            color: "rgb(255, 239, 0)"
+        }
+    ]
 
     return (
         <Container>
-            <Card id="budgetCard" style={{ width: '50%' }}>
-                <Card.Header id="budgetCard__title">{villageProtege.firstName} {villageProtege.lastName}'s Monthly Budget</Card.Header>
-                <Card.Body>
-                    <Card.Subtitle className="mb-2 text-muted">List of monthly expenses</Card.Subtitle>
-                    <ListGroup variant="flush">
-                        {
-                            budgetState.map(vb => {
-                                let fbt = budgetTypes.find(bt => bt.id === vb.budgetTypesId) || {}
-                                return <ListGroup.Item key={vb.id}>{fbt.type}: ${vb.budgetValue}</ListGroup.Item>
-                            })
+            <div id="budgetContainer">
+                <ResponsivePie
+                    data={budgetState}
+                    animate={true}
+                    borderColor={{ from: 'color', modifiers: [['darker', '0.3']] }}
+                    borderWidth={1}
+                    colors={{ scheme: 'pastel1' }}
+                    cornerRadius={3}
+                    innerRadius={0.4}
+                    isInteractive={false}
+                    margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+                    motionDamping={15}
+                    motionStiffness={90}
+                    onClick={() => {
+                        if (currentUserIsProtegeCheck) {
+                            toggleEditBudget()
                         }
-                    </ListGroup>
-                    <br></br>
-                    <Card.Subtitle className="mb-2 text-muted">Village Monthly Pledge Total</Card.Subtitle>
-                    <ListGroup variant="flush">
-                        <ListGroup.Item>${pledgeTotal}</ListGroup.Item>
-                    </ListGroup>
-                    {currentUserIsProtegeCheck ? <Card.Footer className="text-muted"><Button onClick={toggleEditBudget}>Edit your monthly budget</Button></Card.Footer> : ""}
-                </Card.Body>
-            </Card>
+                    }}
+                    padAngle={0.7}
+                    radialLabel={(e) => {
+                        let fbt = budgetTypes.find(bt => bt.id === e.budgetTypesId) || {}
+                        return fbt.type
+                    }}
+                    radialLabelsLinkColor="black"
+                    radialLabelsLinkDiagonalLength={16}
+                    radialLabelsLinkHorizontalLength={24}
+                    radialLabelsLinkOffset={-1}
+                    radialLabelsLinkStrokeWidth={1}
+                    radialLabelsSkipAngle={0}
+                    radialLabelsTextColor="#333333"
+                    radialLabelsTextXOffset={6}
+                    sliceLabel={(e) => { return `$${e.value}` }}
+                    slicesLabelsSkipAngle={0}
+                    slicesLabelFontSize={2}
+                    slicesLabelsTextColor="#333333"
+                    sortByValue={true}
+                    theme={{
+                        labels: {
+                            text: {
+                                fontSize: 20,
+                            }
+                        }
+                    }}
+                />
+
+                <div id="budgetOverlay">
+                    <ResponsivePie
+                        data={budgetOverview}
+                        animate={true}
+                        borderColor={{ from: 'color', modifiers: [['darker', '0.3']] }}
+                        borderWidth={1}
+                        colors={d => d.color}
+                        enableRadialLabels={false}
+                        margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+                        motionDamping={15}
+                        motionStiffness={90}
+                        padAngle={1}
+                        sliceLabel={(e) => { return `$${e.value}` }}
+                        slicesLabelsSkipAngle={0}
+                        slicesLabelsTextColor="#333333"
+                        theme={{
+                            labels: {
+                                text: {
+                                    fontSize: 20,
+                                }
+                            }
+                        }}
+                        tooltip={(e) => { return e.label }}
+                    />
+                </div>
+
+                {currentUserIsProtegeCheck ? <h6 id="budgetDirections">*Click the chart to edit your budget</h6> : ""}
+            </div>
 
             <EditBudgetForm
-                toggleEditBudget={toggleEditBudget}
                 budgets={budgets}
                 budgetState={budgetState}
-                setBudgetState={setBudgetState}
-                villageId={villageId}
                 modal={modal}
+                setBudgetState={setBudgetState}
+                toggleEditBudget={toggleEditBudget}
+                {...props}
             />
         </Container>
     )

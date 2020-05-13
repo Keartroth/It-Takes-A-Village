@@ -1,16 +1,17 @@
 import React, { useContext, useState } from "react"
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
+import Container from 'react-bootstrap/Container'
 import format from 'date-fns/format'
+import getDay from 'date-fns/getDay'
 import parse from 'date-fns/parse'
 import startOfWeek from 'date-fns/startOfWeek'
-import getDay from 'date-fns/getDay'
-import Container from 'react-bootstrap/Container'
 import { AddEventForm } from "../dialog/AddEventForm"
-import { VillageEventsContext } from "../providers/VillageEventsProvider"
+import { RSVPEventForm } from "../dialog/RSVPEventDialog"
 import { UserVillageEventsContext } from "../providers/UserVillageEventsProvider"
+import { VillageEventsContext } from "../providers/VillageEventsProvider"
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import "./Village.css"
-import { RSVPEventForm } from "../dialog/RSVPEventDialog"
+
 const locales = {
     'en-US': require('date-fns/locale/en-US'),
 }
@@ -23,18 +24,12 @@ const localizer = dateFnsLocalizer({
 })
 
 export const VillageCalendar = props => {
-    const currentUserId = props.currentUserId
+    const currentUserId = props.userId
     const villageId = props.villageId
     const villageProtege = props.villageProtege
     const { villageEvents, addVillageEvent } = useContext(VillageEventsContext)
     const { userVillageEvents, addUserVillageEvent } = useContext(UserVillageEventsContext)
     const currentVillageEvents = villageEvents.filter(ve => ve.villageId === villageId) || []
-    const t = new Date()
-    const year = t.getFullYear()
-    const month = t.getMonth()
-    const date = t.getDate()
-    const day = t.getDay()
-    const currentTime = format(new Date(year, month, date, day), 'ddd MMM dd yyyy')
 
     const mapToRBCFormat = e => Object.assign({}, e, {
         startDate: new Date(e.startDate),
@@ -44,22 +39,37 @@ export const VillageCalendar = props => {
     const [modal, setModal] = useState(false)
     const [eventState, setEventState] = useState({})
     const [dateSelectedState, setDateSelectedState] = useState(" ")
+    const [timeSelectedState, setTimeSelectedState] = useState(" ")
 
     const toggleAddEvent = (selection) => {
-        if (typeof selection === "string") {
-            const [trash, month, day, year] = selection.split(" ")
-            const dateReconstruction = month + " " + day + " " + year
-            const selectedDate = format(new Date(dateReconstruction), 'yyyy-MM-dd')
-
-            const protoEvent = {
-                startDate: selectedDate,
-                endDate: selectedDate
+        if (selection instanceof Date) {
+            if (selection.toLocaleTimeString() === "12:00:00 AM") {
+                const formatedSelection = format(selection, 'yyyy-MM-dd')
+                const protoEvent = {
+                    startDate: formatedSelection,
+                    endDate: formatedSelection
+                }
+                setEventState(protoEvent)
+                setDateSelectedState(formatedSelection)
+                setModal(!modal)
+            } else {
+                const formatedSelection = format(selection, 'yyyy-MM-dd')
+                const formatedTime = format(selection, 'HH:mm')
+                const protoEvent = {
+                    startDate: formatedSelection,
+                    endDate: formatedSelection,
+                    startTime: formatedTime
+                }
+                setEventState(protoEvent)
+                setDateSelectedState(formatedSelection)
+                setTimeSelectedState(formatedTime)
+                setModal(!modal)
             }
-            setEventState(protoEvent)
-            setDateSelectedState(selectedDate)
-            setModal(!modal)
+
         } else {
             setEventState({})
+            setDateSelectedState(" ")
+            setTimeSelectedState(" ")
             setModal(!modal)
         }
     }
@@ -109,8 +119,12 @@ export const VillageCalendar = props => {
                     toggleRSVPEvent(selected)
                 }}
                 onSelectSlot={(e) => {
-                    const selection = format(new Date(e.start), 'ddd MMM dd yyyy')
-                    if (selection >= currentTime) {
+                    const selection = new Date(e.start)
+                    const now = new Date()
+                    const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()))
+
+                    if (selection.getTime() >= today.getTime()) {
+                        const formatedSelection = format(selection, 'yyyy-MM-dd')
                         toggleAddEvent(selection)
                     } else {
                         window.alert("Please select a future date. Events cannot be scheduled for past dates.")
@@ -126,6 +140,7 @@ export const VillageCalendar = props => {
                 eventState={eventState}
                 setEventState={setEventState}
                 dateSelectedState={dateSelectedState}
+                timeSelectedState={timeSelectedState}
                 toggleAddEvent={toggleAddEvent}
                 addVillageEvent={addVillageEvent}
                 addUserVillageEvent={addUserVillageEvent}
