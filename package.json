@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.4.1",
     "date-fns": "^2.13.0",
+    "emailjs-com": "^2.4.1",
     "nivo": "^0.31.0",
     "react": "^16.13.1",
     "react-big-calendar": "^0.24.6",
