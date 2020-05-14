@@ -12,7 +12,6 @@ export const Budget = props => {
     const { budgetTypes } = useContext(BudgetTypesContext)
     const { treasurePledges } = useContext(TreasurePledgesContext)
     const villageId = props.villageId
-    const villageProtege = props.villageProtege
     const currentUserIsProtegeCheck = props.currentUserIsProtegeCheck
 
     const filteredTreasurePledges = treasurePledges.filter(tp => tp.villageId === villageId) || []

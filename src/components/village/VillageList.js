@@ -14,7 +14,6 @@ export const VillageList = props => {
 
     const currentUser = props.userId
     const home = props.home
-    const villageLink = props.villageLink
 
     const villagesArrayCopy = villages.slice()
     villagesArrayCopy.map(v => {

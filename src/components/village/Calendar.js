@@ -24,7 +24,6 @@ const localizer = dateFnsLocalizer({
 })
 
 export const VillageCalendar = props => {
-    const currentUserId = props.userId
     const villageId = props.villageId
     const villageProtege = props.villageProtege
     const { villageEvents, addVillageEvent } = useContext(VillageEventsContext)
@@ -84,7 +83,6 @@ export const VillageCalendar = props => {
 
     const EventComponent = (event) => {
         const currentEventUsers = userVillageEvents.filter(uve => uve.villageEventsId === event.event.id) || []
-        const rsvpCheck = currentEventUsers.find(ceu => ceu.userId === currentUserId)
         const protegeAttendingEventCheck = currentEventUsers.find(ceu => ceu.userId === villageProtege.id)
         return <div className={`calendar__event ${protegeAttendingEventCheck ? 'green' : 'red'}`}>{event.title}</div>
     }
@@ -124,7 +122,6 @@ export const VillageCalendar = props => {
                     const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()))
 
                     if (selection.getTime() >= today.getTime()) {
-                        const formatedSelection = format(selection, 'yyyy-MM-dd')
                         toggleAddEvent(selection)
                     } else {
                         window.alert("Please select a future date. Events cannot be scheduled for past dates.")
