@@ -10,7 +10,6 @@ import { MessagDashboard } from "../message/MessageDashboard"
 import "./Village.css"
 
 export const Village = props => {
-
     const currentUserId = props.userId
     const villageId = props.villageId
     const { users } = useContext(UserContext)
