@@ -70,7 +70,6 @@ export const EditBudgetForm = props => {
     }
 
     const editVillageBudget = () => {
-        
         const deleteBudgetObjects = () => {
             for (const budgetObject of deleteBudgetState) {
                 deleteBudget(budgetObject.id)

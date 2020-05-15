@@ -15,16 +15,49 @@ export const VillageList = props => {
     const currentUser = props.userId
     const home = props.home
 
-    const villagesArrayCopy = villages.slice()
-    villagesArrayCopy.map(v => {
-        let villageRelationship = villageUsers.find(vu => vu.userId === currentUser && vu.protege === false && v.id === vu.villageId) || {}
+    villages.map(v => {
+        const villageRelationship = villageUsers.find(vu => vu.userId === currentUser && v.id === vu.villageId) || {}
         if (villageRelationship.protege === false) {
             v.patron = true
+        } else if (villageRelationship.protege) {
+            v.protege = true
         } else {
             v.protege = false
         }
     })
-    const patronedVillageArray = villagesArrayCopy.filter(v => v.patron === true)
+
+    const patronedVillageArray = villages.filter(v => v.patron === true)
+
+    const nonMemberVillages = villages.filter((v) => !v.patron && !v.protege)
+
+    const randomIndex = Math.floor(Math.random() * nonMemberVillages.length)
+
+    if (nonMemberVillages.length !== 0) {
+        for (const village of villages) {
+            delete village.featuredVillage
+        }
+
+        const feature = nonMemberVillages[randomIndex]
+        feature.featuredVillage = true
+
+        nonMemberVillages.sort((currentObject, nextObject) => {
+            const currentVillage = currentObject.lastName;
+            const nextVillage = nextObject.lastName;
+
+            if (currentVillage < nextVillage) {
+                return -1
+            }
+            if (currentVillage > nextVillage) {
+                return 1
+            }
+            return 0
+        })
+
+        if (randomIndex > 0) {
+            nonMemberVillages.splice(randomIndex, 1)
+            nonMemberVillages.unshift(feature)
+        }
+    }
 
     const [budgetState, setBudgetState] = useState([])
 
@@ -56,12 +89,15 @@ export const VillageList = props => {
 
     return (
         <section className="villageListContainer">
-            <div className="villageListContainer__header">
-                {home ? <h1>Visit a village to volunteer!</h1> : ""}
-                {home ? <Button id="villageList--button" variant="primary" onClick={toggle}>Create a village</Button> : ""}
-            </div>
-            <section className="villageList">
-                {home ? List(villages) : List(patronedVillageArray)}
+            {home ? <div className="villageList__header">
+                <div className="villageList__text">
+                    <h1>Click on a photo to see a user's description,<br /> and visit their village to volunteer<br /> OR<br /></h1>
+                    <Button id="villageList--button" variant="primary" size="lg" onClick={toggle}>Create a new village</Button>
+                </div>
+            </div> : ""}
+
+            <section className={home ? 'villageList homeList' : 'villageList'}>
+                {home ? List(nonMemberVillages) : List(patronedVillageArray)}
             </section>
 
             <CreateVillageForm
