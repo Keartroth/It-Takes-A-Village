@@ -5,9 +5,12 @@ import { About } from "../about/About"
 import { Home } from "../home/Home"
 import { Login } from "./Login"
 import { RegisterForm } from "./RegisterForm"
+import { BudgetsProvider } from "../providers/BudgetsProvider"
 import { FakePartnersProvider } from "../providers/FakePartnersProvider"
 import { QuotesProvider } from "../providers/QuotesProvider"
 import { UserProvider } from "../providers/UsersProvider"
+import { TreasurePledgesProvider } from "../providers/TreasurePledgeProvider"
+import { VillagesProvider} from "../providers/VillagesProvider"
 
 export const Auth = ({ toggle }) => {
     const [activeList, setActiveList] = useState("home")
@@ -22,7 +25,13 @@ export const Auth = ({ toggle }) => {
 
     const showAbout = () => (
         <FakePartnersProvider>
-            <About />
+            <BudgetsProvider>
+                <TreasurePledgesProvider>
+                    <VillagesProvider>
+                        <About />
+                    </VillagesProvider>
+                </TreasurePledgesProvider>
+            </BudgetsProvider>
         </FakePartnersProvider>
     )
 

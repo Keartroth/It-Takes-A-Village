@@ -51,10 +51,6 @@ export const RSVPEventForm = props => {
         setEditState(updatedState)
     }
 
-    useEffect(() => {
-        console.log(editState)
-    }, [editState])
-
     const toggleEditEvent = () => {
 
         if (Object.keys(editState).length === 0) {

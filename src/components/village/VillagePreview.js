@@ -25,11 +25,30 @@ export const VillagePreview = (props) => {
 
     return (
         <div className="previewCard__Container">
-            <div id={`previewCard--${protege.id}`}>
+            <div id={`previewCard--${protege.id}`} onClick={(e) => {
+                if (e.target.id) {
+                    if (e.target.id.includes("previewImg--")) {
+                        const grandparentElement = e.target.parentElement.parentElement
+                        const hiddenDivBoolean = grandparentElement.children[1].classList.contains("hidden")
+                        if (hiddenDivBoolean) {
+                            grandparentElement.children[1].classList.remove("hidden")
+                            grandparentElement.scrollIntoView({
+                                behavior: "smooth",
+                                block: "center"
+                            })
+                            grandparentElement.parentElement.classList.add("previewCard__containerUnhidden")
+                        } else {
+                            grandparentElement.children[1].classList.add("hidden")
+                            grandparentElement.parentElement.classList.remove("previewCard__containerUnhidden")
+                        }
+
+                    }
+                }
+            }}>
                 <div>
                     <img id={`previewImg--${protege.id}`} src={`${protege.image}`} alt="smiley face" />
                 </div>
-                <div>
+                <div id={`hiddenCard--${protege.id}`} className="hidden">
                     <p id={`previewTitle--${protege.id}`}>{protege.firstName} {protege.lastName}'s Village</p>
                     <p id={`previewText--${protege.id}`}>{village.description}</p>
                     <ul id={`previewList--${protege.id}`}>

@@ -63,6 +63,7 @@ export const EditBudgetForm = props => {
             updatedBudget.unshift(editBudgetState[index])
             setDeleteBudgetState(updatedBudget)
         }
+        
         const updatedBudget = [...editBudgetState]
         updatedBudget.splice(index, 1)
         setEditBudgetState(updatedBudget)

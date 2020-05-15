@@ -87,7 +87,7 @@ export const CreateVillageForm = props => {
                     budgetObject.label = "Nivo requires a label"
                     addBudget(budgetObject)
                 }
-                
+
                 let villageUserObject = {
                     userId: parseInt(villageStateChange.protegeId),
                     villageId: res.id,
@@ -165,7 +165,8 @@ export const CreateVillageForm = props => {
                             })
                         }
                         <Form.Group id="buttonContainer">
-                            {budgetState.length === 0 ? <Button onClick={(e) => { addBudgetExpense(e) }}>Add a monthly expense</Button> : <Button onClick={(e) => { addBudgetExpense(e) }}>Add another monthly expense</Button>}
+                            {budgetState.length === 0 ? <Button onClick={(e) => { addBudgetExpense(e) }}>Add a monthly pledge</Button> : ""}
+                            {budgetState.length === 1 ? <Button onClick={(e) => { addBudgetExpense(e) }}>Add another monthly pledge</Button> : ""}
                             <Button type="submit">Create village</Button>
                         </Form.Group>
                     </Form>

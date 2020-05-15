@@ -33,16 +33,16 @@
 }
 
 .messageBoardContainer {
-    background-image: linear-gradient(to bottom left, #bdc3c7, #2c3e50);
-    border: 1px solid black;
+    background-image: linear-gradient(to bottom, #f2fcfe, #1c92d2);
+    border: 3px solid black;
     height: 45rem;
     margin: 5rem;
     overflow: hidden;
 }
 
 .messageListContainer {
-    background-image: linear-gradient(to bottom left, #bdc3c7, #2c3e50);
-    border: 1px solid black;
+    background-image: linear-gradient(to bottom, #f2fcfe, #1c92d2);
+    border: 3px solid black;
     height: 45rem;
     margin: 5rem;
     overflow: hidden;

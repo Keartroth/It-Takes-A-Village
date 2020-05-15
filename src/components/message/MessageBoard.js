@@ -20,13 +20,13 @@ export const MessageBoard = props => {
 
     return (
         <section className="messageBoardContainer">
-            <Button size="lg" id="button--createThread" onClick={toggleAddThread}>Start a Conversation</Button>
+            <Button size="lg" id="button--createThread" variant="success" onClick={toggleAddThread}>Start a Conversation</Button>
             <section className="messageBoard__listContainer">
                 {
                     sortedThreads.map(st => {
                         return <Card key={st.id} onClick={() => {
                             threadLink(st.id)
-                        }} body>Conversation Topic: {st.topic}</Card>
+                        }} body>{st.topic}</Card>
                     })
                 }
             </section>
