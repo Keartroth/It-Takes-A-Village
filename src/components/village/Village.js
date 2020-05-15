@@ -54,6 +54,7 @@ export const Village = props => {
                 {...props}
                 villageProtege={villageProtege}
                 currentUserIsProtegeCheck={currentUserIsProtegeCheck}
+                currentUserIsPatronCheck={currentUserIsPatronCheck}
             />
 
             {currentUserIsPatronCheck || currentUserIsProtegeCheck ?

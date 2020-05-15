@@ -6,6 +6,7 @@ import { Account } from "./account/Account"
 import { BudgetsProvider } from "./providers/BudgetsProvider"
 import { BudgetTypesProvider } from "./providers/BudgetTypesProvider"
 import { FakePartnersProvider } from "./providers/FakePartnersProvider"
+import { MessagesProvider } from "./providers/MessagesProvider"
 import { TimePledgesProvider } from "./providers/TimePledgeProvider"
 import { TreasurePledgesProvider } from "./providers/TreasurePledgeProvider"
 import { UserProvider } from "./providers/UsersProvider"
@@ -16,7 +17,6 @@ import { VillageList } from "./village/VillageList"
 import { VillagesProvider } from "./providers/VillagesProvider"
 import { VillageUsersContext, VillageUsersProvider } from "./providers/VillageUsersProvider"
 import './ItTakesAVillage.css'
-import { MessagesProvider } from "./providers/MessagesProvider"
 
 export const Dashboard = ({ toggle }) => {
     const { villageUsers } = useContext(VillageUsersContext)
@@ -54,7 +54,13 @@ export const Dashboard = ({ toggle }) => {
     // HIGHER ORDER FUNCTION. IT RETURNS OTHER FUNCTION (i.e. COMPONENTS)
     const showAbout = () => (
         <FakePartnersProvider>
-            <About />
+            <BudgetsProvider>
+                <TreasurePledgesProvider>
+                    <VillagesProvider>
+                        <About />
+                    </VillagesProvider>
+                </TreasurePledgesProvider>
+            </BudgetsProvider>
         </FakePartnersProvider>
     )
 

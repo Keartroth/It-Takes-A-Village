@@ -34,9 +34,15 @@
 }
 
 #heroImageContainer {
-    background-image: linear-gradient(to bottom right, #2980B9, #6DD5FA, #FFFFFF);
+    background-image: linear-gradient(to bottom, #76b852, #8DC26F, #FFFFFF);
     display: flex;
     flex-wrap: nowrap;
+}
+
+#heroImageContainer > * {
+    filter: grayscale(100%);
+    padding: 1.5rem;
+    text-align: center;
 }
 
 #heroImage__description {
@@ -47,9 +53,17 @@
     height: 250px;
 }
 
-.previewCard__Container {
-    background-color: lightgoldenrodyellow;
+.hidden {
+    display: none;
+}
+
+.previewCard__containerUnhidden {
+    background-image: linear-gradient(to bottom, #76b852, #8DC26F, #FFFFFF);
     border-radius: 2.5%;
+}
+
+[id^='hiddenCard--'] {
+    margin-left: 3rem;
 }
 
 [id^='previewCard--'] {
@@ -57,13 +71,16 @@
     flex-wrap: nowrap;
     margin: 2rem 1rem;
     padding: 2rem;
-    width: 85%;
 }
 
 [id^='previewImg--'] {
+    filter: grayscale(100%);
     height: auto;
-    margin-right: 3rem;
-    width: 300px;
+    width: 210px;
+}
+
+[id^='previewList--'] > li:first-child {
+    border-bottom: 1px darkgray double;
 }
 
 [id^='previewList--'] {
@@ -72,10 +89,6 @@
     margin: 2rem 33%;
     text-align: center;
     width: 210px;
-}
-
-[id^='previewList--'] > li:first-child {
-    border-bottom: 1px darkgray double;
 }
 
 [id^='previewText--'] {
@@ -88,6 +101,9 @@
 }
 
 .villageList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     padding: 5rem;
 }
 
@@ -124,9 +140,11 @@
     margin-right: 2rem;
     position: relative;
 }
+
 .color-key p {
     padding-left: 20px;
 }
+
 .color-key .color-box {
     width: 10px;
     height: 10px;

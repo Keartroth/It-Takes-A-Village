@@ -4,6 +4,8 @@ import Container from 'react-bootstrap/Container'
 import { BudgetsContext } from "../providers/BudgetsProvider"
 import { BudgetTypesContext } from "../providers/BudgetTypesProvider"
 import { EditBudgetForm } from "../dialog/EditBudgetForm"
+import { EditPledgeForm } from "../dialog/EditPledgeForm"
+import { TimePledgesContext } from "../providers/TimePledgeProvider"
 import { TreasurePledgesContext } from "../providers/TreasurePledgeProvider"
 import "./Village.css"
 
@@ -11,8 +13,11 @@ export const Budget = props => {
     const { budgets } = useContext(BudgetsContext)
     const { budgetTypes } = useContext(BudgetTypesContext)
     const { treasurePledges } = useContext(TreasurePledgesContext)
+    const { timePledges } = useContext(TimePledgesContext)
     const villageId = props.villageId
+    const userId = props.userId
     const currentUserIsProtegeCheck = props.currentUserIsProtegeCheck
+    const currentUserIsPatronCheck = props.currentUserIsPatronCheck
 
     const filteredTreasurePledges = treasurePledges.filter(tp => tp.villageId === villageId) || []
 
@@ -20,6 +25,12 @@ export const Budget = props => {
     const [modal, setModal] = useState(false)
     const toggleEditBudget = () => {
         setModal(!modal)
+    }
+
+    const [pledgeState, setPledgeState] = useState([])
+    const [pledgeModal, setPledgeModal] = useState(false)
+    const toggleEditPledge = () => {
+        setPledgeModal(!pledgeModal)
     }
 
     useEffect(() => {
@@ -31,6 +42,13 @@ export const Budget = props => {
         const filteredVillageBudgets = budgets.filter(b => b.villageId === villageId)
         setBudgetState(filteredVillageBudgets)
     }, [modal, villageId, budgets])
+
+    useEffect(() => {
+        const currentUserTreasurePledges = treasurePledges.filter(tp => tp.villageId === villageId && tp.userId === userId)
+        const currentUserTimePledges = timePledges.filter(tp => tp.villageId === villageId && tp.userId === userId)
+        const pledgeArray = currentUserTimePledges.concat(currentUserTreasurePledges)
+        setPledgeState(pledgeArray)
+    }, [treasurePledges, timePledges, villageId, userId])
 
     let budgetTotal = 0
     let pledgeTotal = 0
@@ -111,6 +129,11 @@ export const Budget = props => {
                         margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
                         motionDamping={15}
                         motionStiffness={90}
+                        onClick={() => {
+                            if (currentUserIsPatronCheck) {
+                                toggleEditPledge()
+                            }
+                        }}
                         padAngle={1}
                         sliceLabel={(e) => { return `$${e.value}` }}
                         slicesLabelsSkipAngle={0}
@@ -126,16 +149,25 @@ export const Budget = props => {
                     />
                 </div>
 
-                {currentUserIsProtegeCheck ? <h6 id="budgetDirections">*Click the chart to edit your budget</h6> : ""}
+                {currentUserIsProtegeCheck ? <h6 id="budgetDirections">*Click the outer pie chart to edit your monthly budget</h6> : ""}
+                {currentUserIsPatronCheck ? <h6 id="budgetDirections">*Click the inner pie chart to edit your monthly pledge</h6> : ""}
             </div>
 
             <EditBudgetForm
+                {...props}
                 budgets={budgets}
                 budgetState={budgetState}
                 modal={modal}
                 setBudgetState={setBudgetState}
                 toggleEditBudget={toggleEditBudget}
+            />
+
+            <EditPledgeForm
                 {...props}
+                pledgeState={pledgeState}
+                pledgeModal={pledgeModal}
+                setPledgeState={setPledgeState}
+                toggleEditPledge={toggleEditPledge}
             />
         </Container>
     )

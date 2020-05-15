@@ -1,8 +1,3 @@
-.about__colorGradient {
-    background-color: black;
-    background-image: linear-gradient(black, white);
-    height: 150px;
-}
 
 #about__fakePartnersHeader {
     flex: 0 0 100%;
@@ -18,30 +13,25 @@
     padding:5px;
 }
 
-.about__img {
+.about__information {
+    background-color: goldenrod;
+    background-image: linear-gradient(goldenrod, white);
+    display: block;
     height: 320px;
-    width: auto;
-}
-
-.about__imgContainer {
-    background-color: black;
-    background-size: 30rem;
-    display: flex;
-    flex-wrap: nowrap;
-    height: 320px;
-}
-
-.about__missionStatement {
-    color: blanchedalmond;
-    text-align: center;
     padding: 0rem 3rem;
+    text-align: center;
 }
 
 .about__missionStatement > h1 {
     color: #F65058FF;
     font-family: 'Yeseva One', cursive;
+    font-size: 3rem;
     padding-bottom: 2rem;
     padding-top: 5rem;
+}
+
+.about__missionStatement {
+    font-size: 1.5rem;
 }
 
 .about__partner {
