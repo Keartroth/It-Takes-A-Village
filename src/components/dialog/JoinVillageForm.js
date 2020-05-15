@@ -114,7 +114,7 @@ export const JoinVillageForm = props => {
                                 </Form.Row>
                             })
                         }
-                        <Form.Group id="buttonContainer">
+                        <Form.Group className="buttonContainer">
                             {promiseState.length === 0 ? <Button onClick={(e) => { addPromise(e) }}>Add a monthly pledge</Button> : ""}
                             {promiseState.length === 1 ? <Button onClick={(e) => { addPromise(e) }}>Add another monthly pledge</Button> : ""}
                             <Button type="submit">Join village</Button>

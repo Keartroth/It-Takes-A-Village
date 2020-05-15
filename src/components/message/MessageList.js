@@ -95,7 +95,7 @@ export const MessageList = props => {
                     <Form.Group>
                         <Form.Control id="messageTextArea" as="textarea" onFocus={() => { setMessageState({ message: " " }) }} value={messageState.message} onChange={handleMessageInput} required></Form.Control>
                     </Form.Group>
-                    <Form.Group id="buttonContainer">
+                    <Form.Group className="buttonContainer">
                         <Button type="submit">Submit Message</Button>
                     </Form.Group>
                 </Form>

@@ -77,7 +77,7 @@ export const AddMessageBoardThread = props => {
                             <Form.Label>Your Message</Form.Label>
                             <Form.Control id="message" as="textarea" value={formState.message} onChange={handleFormChange} required></Form.Control>
                         </Form.Group>
-                        <Form.Group id="buttonContainer">
+                        <Form.Group className="buttonContainer">
                             <Button type="submit">Add Thread</Button>
                         </Form.Group>
                     </Form>

@@ -108,7 +108,7 @@ export const AddEventForm = (props) => {
                             <Form.Label>Description:</Form.Label>
                             <Form.Control id="description" as="textarea" onChange={handleEventChange} required />
                         </Form.Row>
-                        <Form.Group id="buttonContainer">
+                        <Form.Group className="buttonContainer">
                             <Button type="submit">Add and join event!</Button>
                         </Form.Group>
                     </Form>

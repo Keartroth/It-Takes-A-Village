@@ -156,7 +156,7 @@ export const RSVPEventForm = props => {
                                     }
                                 </ul>}
                         </div>
-                        <div>
+                        <div className="buttonContainer">
                             {rsvpCheck ? <Button onClick={() => { leaveEvent(currentEventUsers) }}>Leave event</Button> : <Button onClick={() => { joinEvent(rsvpState.id) }}>Join event</Button>}
                             {currentUserIsProtegeCheck ? <Button onClick={() => { cancelEvent(rsvpState.id) }}>Cancel event</Button> : ""}
                             {currentUserIsProtegeCheck && !editEvent ? <Button onClick={toggleEditEvent}>Edit event</Button> : ""}
@@ -204,7 +204,7 @@ export const RSVPEventForm = props => {
                             <Form.Label>Description:</Form.Label>
                             <Form.Control id="description" as="textarea" defaultValue={editState.description} onChange={handleEditChange} required />
                         </Form.Row>
-                        <Form.Group id="buttonContainer">
+                        <Form.Group className="buttonContainer">
                             <Button type="submit">Update event</Button>
                         </Form.Group>
                     </Form>}

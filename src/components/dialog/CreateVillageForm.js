@@ -164,7 +164,7 @@ export const CreateVillageForm = props => {
                                 </Form.Row>
                             })
                         }
-                        <Form.Group id="buttonContainer">
+                        <Form.Group className="buttonContainer">
                             {budgetState.length === 0 ? <Button onClick={(e) => { addBudgetExpense(e) }}>Add a monthly pledge</Button> : ""}
                             {budgetState.length !== 0 && budgetState.length < 9 ? <Button onClick={(e) => { addBudgetExpense(e) }}>Add another monthly pledge</Button> : ""}
                             <Button type="submit">Create village</Button>

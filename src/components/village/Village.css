@@ -40,9 +40,16 @@
 }
 
 #heroImageContainer > * {
-    filter: grayscale(100%);
     padding: 1.5rem;
     text-align: center;
+}
+
+#heroImageContainer img {
+    filter: grayscale(100%);
+}
+
+#heroImageContainer button {
+    margin: 1rem;
 }
 
 #heroImage__description {

@@ -26,11 +26,14 @@
     margin: 1rem auto;
 }
 
-#buttonContainer {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+.buttonContainer {
     margin-top: 1rem;
+    text-align: center;
+}
+
+.buttonContainer * {
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 #closeButton {

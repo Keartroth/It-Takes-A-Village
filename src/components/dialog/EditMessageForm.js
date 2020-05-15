@@ -33,7 +33,7 @@ export const EditMessageForm = props => {
                     <Form.Group id="editMessageTextArea">
                         <Form.Control as="textarea" value={editState.message} onChange={handleMessageChange}></Form.Control>
                     </Form.Group>
-                    <Form.Group id="buttonContainer">
+                    <Form.Group className="buttonContainer">
                         <Button type="submit">Save Updated Message</Button>
                     </Form.Group>
                 </Form>
