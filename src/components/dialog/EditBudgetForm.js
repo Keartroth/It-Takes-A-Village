@@ -138,7 +138,7 @@ export const EditBudgetForm = props => {
                                 </Form.Row>
                             })
                         }
-                        <Form.Group id="buttonContainer">
+                        <Form.Group className="buttonContainer">
                             {editBudgetState.length === 0 ? <Button onClick={(e) => { addBudgetExpense(e) }}>Add a monthly expense</Button> : <Button onClick={(e) => { addBudgetExpense(e) }}>Add another monthly expense</Button>}
                             <Button type="submit">Save Updated Budget</Button>
                         </Form.Group>

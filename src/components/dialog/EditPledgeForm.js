@@ -144,7 +144,7 @@ export const EditPledgeForm = props => {
                                 </Form.Row>
                             })
                         }
-                        <Form.Group id="buttonContainer">
+                        <Form.Group className="buttonContainer">
                             {editPledgetState.length === 0 ? <Button onClick={(e) => { addPledge(e) }}>Add a monthly pledge</Button> : ""}
                             {editPledgetState.length === 1 ? <Button onClick={(e) => { addPledge(e) }}>Add another monthly pledge</Button> : ""}
                             <Button type="submit">Save Updates</Button>

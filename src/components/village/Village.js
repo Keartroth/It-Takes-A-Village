@@ -40,6 +40,7 @@ export const Village = props => {
                 <div>
                     <h1>{villageProtege.firstName} {villageProtege.lastName}'s Village</h1>
                     <div id="heroImage__description">{foundVillage.description}</div>
+                    {currentUserIsPatronCheck || currentUserIsProtegeCheck ? "" : <Button variant="primary" size="lg" onClick={toggle}>Join this village!</Button>}
                 </div>
             </div>
 
@@ -63,9 +64,6 @@ export const Village = props => {
                     villageProtege={villageProtege}
                     currentUserIsProtegeCheck={currentUserIsProtegeCheck}
                 /> : ""}
-
-
-            {currentUserIsPatronCheck || currentUserIsProtegeCheck ? "" : <Button onClick={toggle}>Join this village!</Button>}
 
             {currentUserIsPatronCheck || currentUserIsProtegeCheck ? "" : <JoinVillageForm
                 {...props}
