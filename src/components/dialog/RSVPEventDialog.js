@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react"
+import React, { useContext, useState } from "react"
 import emailjs from 'emailjs-com'
 import Button from "react-bootstrap/Button"
 import Col from 'react-bootstrap/Col'
