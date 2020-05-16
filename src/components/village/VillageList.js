@@ -41,19 +41,6 @@ export const VillageList = props => {
         const feature = nonMemberVillages[randomIndex]
         feature.featuredVillage = true
 
-        nonMemberVillages.sort((currentObject, nextObject) => {
-            const currentVillage = currentObject.lastName;
-            const nextVillage = nextObject.lastName;
-
-            if (currentVillage < nextVillage) {
-                return -1
-            }
-            if (currentVillage > nextVillage) {
-                return 1
-            }
-            return 0
-        })
-
         if (randomIndex > 0) {
             nonMemberVillages.splice(randomIndex, 1)
             nonMemberVillages.unshift(feature)

@@ -6,8 +6,8 @@ import getDay from 'date-fns/getDay'
 import parse from 'date-fns/parse'
 import startOfWeek from 'date-fns/startOfWeek'
 import { RSVPEventForm } from "../dialog/RSVPEventDialog"
+import { UserVillageEventsContext } from "../providers/UserVillageEventsProvider"
 import { VillageEventsContext } from "../providers/VillageEventsProvider"
-import { VillageUsersContext } from "../providers/VillageUsersProvider"
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import "./Calendar.css"
 
@@ -27,13 +27,15 @@ export const GroupCalendar = props => {
     const users = props.users
     const villageUsers = props.villageUsers
     const { villageEvents } = useContext(VillageEventsContext)
+    const { userVillageEvents } = useContext(UserVillageEventsContext)
     const [rsvpModal, setRSVPModal] = useState(false)
     const [rsvpState, setRSVPState] = useState({})
 
     const [allTheCurrentUsersVillageRelationships, setAllTheCurrentUsersVillageRelationships] = useState([])
     const [allTheCurrentUsersVillagesEvents, setAllTheCurrentUsersVillagesEvents] = useState([])
+    const [allTheCurrentUsersEvents, setAllTheCurrentUsersEvents] = useState([])
 
-    const colorKey = ['mimosa', 'radiandOrchid', 'emerald', 'ultraViolet', 'greenery', 'marsala', 'serenity', 'livingCoral']
+    const colorKey = ['mimosa', 'radiandOrchid', 'serenity', 'emerald', 'ultraViolet', 'greenery', 'marsala', 'livingCoral']
     let colorKeyObjectArray = []
 
     useEffect(() => {
@@ -50,6 +52,11 @@ export const GroupCalendar = props => {
         }
         setAllTheCurrentUsersVillagesEvents(joinedArrays)
     }, [allTheCurrentUsersVillageRelationships])
+
+    useEffect(() => {
+        const currrentUserEvents = allTheCurrentUsersVillagesEvents.filter(atcuve => userVillageEvents.find(uve => uve.villageEventsId === atcuve.id && uve.userId === currentUserId))
+        setAllTheCurrentUsersEvents(currrentUserEvents)
+    }, [allTheCurrentUsersVillagesEvents])
 
     const mapToRBCFormat = e => Object.assign({}, e, {
         startDate: new Date(e.startDate),
@@ -91,7 +98,7 @@ export const GroupCalendar = props => {
                 selectable
                 localizer={localizer}
                 views={["month", "week", "day"]}
-                events={allTheCurrentUsersVillagesEvents.map(mapToRBCFormat)}
+                events={allTheCurrentUsersEvents.map(mapToRBCFormat)}
                 startAccessor="startDate"
                 endAccessor="endDate"
                 title="title"

@@ -39,7 +39,6 @@ export const EditPledgeForm = props => {
         const proptery = greatGrandparent.children[0].children[1].value
         const value = parseInt(greatGrandparent.children[1].children[1].value)
 
-        debugger
         if (proptery !== "") {
             if (Number.isNaN(value)) {
                 delete foundObject.amount

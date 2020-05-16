@@ -1,3 +1,7 @@
+.calendar {
+    margin-bottom: 3rem;
+}
+
 .calendar__event {
     border: 1px solid black;
 }
