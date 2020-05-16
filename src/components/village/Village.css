@@ -29,10 +29,6 @@
     width: 300px;
 }
 
-.calendar__event {
-    border: 1px solid black;
-}
-
 #heroImageContainer {
     background-image: linear-gradient(to bottom, #76b852, #8DC26F, #FFFFFF);
     display: flex;
@@ -149,38 +145,6 @@
     width: max-content;
 }
 
-.green {
-    background-color: lightgreen;
-    color: black;
-}
-
-.red {
-    background-color: lightcoral;
-    color: black;
-}
-
-.color-key {
-    margin-right: 2rem;
-    position: relative;
-}
-
-.color-key p {
-    padding-left: 20px;
-}
-
-.color-key .color-box {
-    width: 10px;
-    height: 10px;
-    display: inline-block;
-    position: absolute;
-    left: 5px;
-    top: 5px;
-}
-
-.color-keyContainer {
-    display: flex;
-    flex-wrap: nowrap;
-}
 #featuredVillage {
     background-image: linear-gradient(to bottom, goldenrod, gold, white);
     border-radius: 2.5%;
@@ -192,6 +156,7 @@
     transition: all 0.1s ease 0.5s;
     visibility: visible;
 }
+
 [data-title]:after {
     background-color: #1c92d2;
     border: 1px solid #111111;
@@ -208,6 +173,7 @@
     white-space: nowrap;
     z-index: 99999;
 }
+
 [data-title] {
     position: relative;
 }

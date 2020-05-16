@@ -5,6 +5,7 @@ import { VillagePreview } from "./VillagePreview"
 import { VillageUsersContext } from "../providers/VillageUsersProvider"
 import { UserContext } from "../providers/UsersProvider"
 import { CreateVillageForm } from "../dialog/CreateVillageForm"
+import { GroupCalendar } from "../calendar/GroupCalendar"
 import "./Village.css"
 
 export const VillageList = props => {
@@ -97,6 +98,7 @@ export const VillageList = props => {
             </div> : ""}
 
             <section className={home ? 'villageList homeList' : 'villageList'}>
+                {home ? null : <GroupCalendar />}
                 {home ? List(nonMemberVillages) : List(patronedVillageArray)}
             </section>
 

@@ -32,7 +32,6 @@ export const EditBudgetForm = props => {
         return 0
     }) || []
 
-    const [deleteBudgetState, setDeleteBudgetState] = useState([])
     const [editBudgetState, setEditBudgetState] = useState([])
 
     useEffect(() => {
@@ -57,39 +56,25 @@ export const EditBudgetForm = props => {
     }
 
     const removeBudgetExpense = (index) => {
-
         if (editBudgetState[index].id) {
-            const updatedBudget = [...deleteBudgetState]
-            updatedBudget.unshift(editBudgetState[index])
-            setDeleteBudgetState(updatedBudget)
+            deleteBudget(editBudgetState[index].id)
+        } else {
+            const updatedBudget = [...editBudgetState]
+            updatedBudget.splice(index, 1)
+            setEditBudgetState(updatedBudget)
         }
-        
-        const updatedBudget = [...editBudgetState]
-        updatedBudget.splice(index, 1)
-        setEditBudgetState(updatedBudget)
     }
 
     const editVillageBudget = () => {
-        const deleteBudgetObjects = () => {
-            for (const budgetObject of deleteBudgetState) {
-                deleteBudget(budgetObject.id)
+        for (const budgetObject of editBudgetState) {
+            if (budgetObject.id) {
+                updateBudget(budgetObject)
+            } else {
+                budgetObject.villageId = villageId
+                budgetObject.label = "Nivo requires a label"
+                addBudget(budgetObject)
             }
         }
-
-        const editBudgetObjects = () => {
-            for (const budgetObject of editBudgetState) {
-                if (budgetObject.id) {
-                    updateBudget(budgetObject)
-                } else {
-                    budgetObject.villageId = villageId
-                    budgetObject.label = "Nivo requires a label"
-                    addBudget(budgetObject)
-                }
-            }
-        }
-
-        editBudgetObjects()
-        deleteBudgetObjects()
         toggleEditBudget()
     }
 

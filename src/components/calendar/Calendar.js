@@ -10,7 +10,7 @@ import { RSVPEventForm } from "../dialog/RSVPEventDialog"
 import { UserVillageEventsContext } from "../providers/UserVillageEventsProvider"
 import { VillageEventsContext } from "../providers/VillageEventsProvider"
 import "react-big-calendar/lib/css/react-big-calendar.css"
-import "./Village.css"
+import "./Calendar.css"
 
 const locales = {
     'en-US': require('date-fns/locale/en-US'),

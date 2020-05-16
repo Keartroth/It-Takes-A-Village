@@ -19,7 +19,6 @@ export const EditPledgeForm = props => {
     const pledgeModal = props.pledgeModal
     const toggleEditPledge = props.toggleEditPledge
 
-    const [deletePledgeState, setDeletePledgeState] = useState([])
     const [editPledgetState, setEditPledgeState] = useState([])
 
     useEffect(() => {
@@ -60,47 +59,34 @@ export const EditPledgeForm = props => {
 
     const removePledge = (index) => {
         if (editPledgetState[index].id) {
-            const updatedDeletePledgeState = [...deletePledgeState]
-            updatedDeletePledgeState.unshift(editPledgetState[index])
-            setDeletePledgeState(updatedDeletePledgeState)
+            if (editPledgetState[index].amount) {
+                deleteTreasurePledge(editPledgetState[index].id)
+            } else {
+                deleteTimePledge(editPledgetState[index].id)
+            }
+        } else {
+            const updatedBudget = [...editPledgetState]
+            updatedBudget.splice(index, 1)
+            setEditPledgeState(updatedBudget)
         }
-
-        const updatedBudget = [...editPledgetState]
-        updatedBudget.splice(index, 1)
-        setEditPledgeState(updatedBudget)
     }
 
     const editUserPledge = () => {
-        const deletePledgeObjects = () => {
-            for (const pledgeObject of deletePledgeState) {
+        for (const pledgeObject of editPledgetState) {
+            if (pledgeObject.id) {
                 if (pledgeObject.amount) {
-                    deleteTreasurePledge(pledgeObject.id)
+                    updateTreasurePledge(pledgeObject)
                 } else {
-                    deleteTimePledge(pledgeObject.id)
+                    updateTimePledge(pledgeObject)
+                }
+            } else {
+                if (pledgeObject.amount) {
+                    addTreasurePledge(pledgeObject)
+                } else {
+                    addTimePledge(pledgeObject)
                 }
             }
         }
-
-        const editPledgeObjects = () => {
-            for (const pledgeObject of editPledgetState) {
-                if (pledgeObject.id) {
-                    if (pledgeObject.amount) {
-                        updateTreasurePledge(pledgeObject)
-                    } else {
-                        updateTimePledge(pledgeObject)
-                    }
-                } else {
-                    if (pledgeObject.amount) {
-                        addTreasurePledge(pledgeObject)
-                    } else {
-                        addTimePledge(pledgeObject)
-                    }
-                }
-            }
-        }
-
-        editPledgeObjects()
-        deletePledgeObjects()
         toggleEditPledge()
     }
 
