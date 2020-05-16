@@ -5,7 +5,7 @@ import { TreasurePledgesContext } from "../providers/TreasurePledgeProvider"
 import { VillagesContext } from "../providers/VillagesProvider"
 import './About.css'
 
-export const About = () => {
+export const About = (props) => {
     const { fakePartners } = useContext(FakePartnersContext)
     const { villages } = useContext(VillagesContext)
     const { budgets } = useContext(BudgetsContext)

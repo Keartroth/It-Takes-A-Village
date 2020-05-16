@@ -19,12 +19,12 @@ export const Account = props => {
     const zip = useRef()
     const phone = useRef()
     const avatar = useRef()
-
+    
     const currentUser = users.find(u => u.id === userId) || { address: "" }
     delete currentUser.password
-
+    
     const [currentStreet, currentCity, currentState, currentZip] = currentUser.address.split(", ")
-
+    
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${currentUser.email}`)
             .then(_ => _.json())

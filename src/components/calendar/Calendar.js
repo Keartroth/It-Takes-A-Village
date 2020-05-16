@@ -145,6 +145,7 @@ export const VillageCalendar = props => {
 
             <RSVPEventForm
                 {...props}
+                groupCalendar={false}
                 rsvpModal={rsvpModal}
                 rsvpState={rsvpState}
                 toggleRSVPEvent={toggleRSVPEvent}

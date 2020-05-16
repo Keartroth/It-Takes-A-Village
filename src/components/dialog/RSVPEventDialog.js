@@ -16,6 +16,7 @@ export const RSVPEventForm = props => {
     const toggleRSVPEvent = props.toggleRSVPEvent
     const users = props.users
     const currentUserId = props.userId
+    const groupCalendar = props.groupCalendar
     const villageProtege = props.villageProtege
     const currentUserIsProtegeCheck = props.currentUserIsProtegeCheck
     const rsvpModal = props.rsvpModal
@@ -177,11 +178,11 @@ export const RSVPEventForm = props => {
                                     }
                                 </ul>}
                         </div>
-                        <div className="buttonContainer">
+                        {groupCalendar ? null : <div className="buttonContainer">
                             {rsvpCheck ? <Button onClick={() => { leaveEvent(currentEventUsers) }}>Leave event</Button> : <Button onClick={() => { joinEvent(rsvpState.id) }}>Join event</Button>}
                             {currentUserIsProtegeCheck ? <Button onClick={() => { cancelEvent(rsvpState.id) }}>Cancel event</Button> : ""}
                             {currentUserIsProtegeCheck && !editEvent ? <Button onClick={toggleEditEvent}>Edit event</Button> : ""}
-                        </div>
+                        </div>}
                     </Container> :
                     <Form id="editEventForm" onSubmit={(e) => {
                         e.preventDefault()

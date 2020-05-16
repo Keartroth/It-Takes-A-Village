@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import Container from 'react-bootstrap/Container'
 import format from 'date-fns/format'
@@ -24,24 +24,37 @@ const localizer = dateFnsLocalizer({
 
 export const GroupCalendar = props => {
     const currentUserId = props.userId
+    const users = props.users
+    const villageUsers = props.villageUsers
     const { villageEvents } = useContext(VillageEventsContext)
-    const { villageUsers } = useContext(VillageUsersContext)
     const [rsvpModal, setRSVPModal] = useState(false)
     const [rsvpState, setRSVPState] = useState({})
 
-    let allTheCurrentUsersVillagesEvents = []
+    const [allTheCurrentUsersVillageRelationships, setAllTheCurrentUsersVillageRelationships] = useState([])
+    const [allTheCurrentUsersVillagesEvents, setAllTheCurrentUsersVillagesEvents] = useState([])
 
-    const allTheCurrentUsersVillageRelationships = villageUsers.filter(vu => vu.userId === currentUserId)
+    const colorKey = ['mimosa', 'radiandOrchid', 'emerald', 'ultraViolet', 'greenery', 'marsala', 'serenity', 'livingCoral']
+    let colorKeyObjectArray = []
 
-    for (const villageRelationship of allTheCurrentUsersVillageRelationships) {
-        allTheCurrentUsersVillagesEvents.push(villageEvents.includes(ve => ve.villageId === villageRelationship.villageId))
-    }
+    useEffect(() => {
+        if (villageUsers.length !== 0 && villageEvents.length !== 0) {
+            setAllTheCurrentUsersVillageRelationships(villageUsers.filter(vu => vu.userId === currentUserId && vu.protege === false))
+        }
+    }, [villageUsers, villageEvents])
+
+    useEffect(() => {
+        let joinedArrays = []
+        for (const villageRelationship of allTheCurrentUsersVillageRelationships) {
+            const ves = villageEvents.filter(ve => ve.villageId === villageRelationship.villageId)
+            joinedArrays = joinedArrays.concat(ves)
+        }
+        setAllTheCurrentUsersVillagesEvents(joinedArrays)
+    }, [allTheCurrentUsersVillageRelationships])
 
     const mapToRBCFormat = e => Object.assign({}, e, {
         startDate: new Date(e.startDate),
         endDate: new Date(e.endDate)
     })
-
 
     const toggleRSVPEvent = (e) => {
         setRSVPState(e)
@@ -49,27 +62,36 @@ export const GroupCalendar = props => {
     }
 
     const EventComponent = (event) => {
-        return <div className="calendar__event">{event.title}</div>
+        const color = colorKeyObjectArray.find(cko => cko.villageId === event.event.villageId)
+        return <div className={`calendar__event ${color.colorKey}`}>{event.title}</div>
     }
 
     return (
         <Container className="calendar">
             <div className="color-keyContainer">
-                <div className="color-key">
-                    <div className="color-box green"></div>
-                    <p>Approved Events</p>
-                </div>
-                <div className="color-key">
-                    <div className="color-box red"></div>
-                    <p>Events Awaiting Approval</p>
-                </div>
+                {
+                    allTheCurrentUsersVillageRelationships.map((atcuvr, idx) => {
+                        const protegeRelationship = villageUsers.find(vu => vu.villageId === atcuvr.villageId && vu.protege === true)
+                        const protege = users.find(u => u.id === protegeRelationship.userId)
+                        const colorKeyObject = {
+                            villageId: atcuvr.villageId,
+                            colorKey: colorKey[idx]
+                        }
+                        colorKeyObjectArray.push(colorKeyObject)
+
+                        return <div key={idx} className="color-key">
+                            <div className={`color-box ${colorKey[idx]}`}></div>
+                            <p>{protege.firstName} {protege.lastName}</p>
+                        </div>
+                    })
+                }
             </div>
 
             <Calendar
                 selectable
                 localizer={localizer}
                 views={["month", "week", "day"]}
-                events={allTheCurrentUsersVillageRelationships.map(mapToRBCFormat)}
+                events={allTheCurrentUsersVillagesEvents.map(mapToRBCFormat)}
                 startAccessor="startDate"
                 endAccessor="endDate"
                 title="title"
@@ -84,6 +106,7 @@ export const GroupCalendar = props => {
 
             <RSVPEventForm
                 {...props}
+                groupCalendar={true}
                 rsvpModal={rsvpModal}
                 rsvpState={rsvpState}
                 toggleRSVPEvent={toggleRSVPEvent}

@@ -98,8 +98,12 @@ export const VillageList = props => {
             </div> : ""}
 
             <section className={home ? 'villageList homeList' : 'villageList'}>
-                {home ? null : <GroupCalendar />}
                 {home ? List(nonMemberVillages) : List(patronedVillageArray)}
+                {home ? null : <GroupCalendar
+                    {...props}
+                    users={users}
+                    villageUsers={villageUsers}
+                />}
             </section>
 
             <CreateVillageForm
