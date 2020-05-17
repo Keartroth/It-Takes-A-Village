@@ -81,10 +81,20 @@ export const VillageCalendar = props => {
         setRSVPModal(!rsvpModal)
     }
 
-    const EventComponent = (event) => {
-        const currentEventUsers = userVillageEvents.filter(uve => uve.villageEventsId === event.event.id) || []
+    const eventStyleGetter = (event) => {
+        const currentEventUsers = userVillageEvents.filter(uve => uve.villageEventsId === event.id) || []
         const protegeAttendingEventCheck = currentEventUsers.find(ceu => ceu.userId === villageProtege.id)
-        return <div className={`calendar__event ${protegeAttendingEventCheck ? 'green' : 'red'}`}>{event.title}</div>
+        const style = {
+            backgroundColor: `${protegeAttendingEventCheck ? 'lightgreen' : 'lightcoral'}`,
+            borderRadius: '2.5px',
+            opacity: 0.8,
+            color: 'black',
+            border: '0px',
+            display: 'block'
+        }
+        return {
+            style: style
+        }
     }
 
     return (
@@ -110,9 +120,7 @@ export const VillageCalendar = props => {
                 startAccessor="startDate"
                 endAccessor="endDate"
                 title="title"
-                components={{
-                    event: EventComponent
-                }}
+                eventPropGetter={eventStyleGetter}
                 onSelectEvent={selected => {
                     toggleRSVPEvent(selected)
                 }}

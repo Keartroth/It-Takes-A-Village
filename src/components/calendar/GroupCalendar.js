@@ -35,7 +35,7 @@ export const GroupCalendar = props => {
     const [allTheCurrentUsersVillagesEvents, setAllTheCurrentUsersVillagesEvents] = useState([])
     const [allTheCurrentUsersEvents, setAllTheCurrentUsersEvents] = useState([])
 
-    const colorKey = ['mimosa', 'radiandOrchid', 'serenity', 'emerald', 'ultraViolet', 'greenery', 'marsala', 'livingCoral']
+    const colorKey = ['#EFC050', '#B565A7', '#92A8D1', '#009B77', '#6B5B95', '#88B04B', '#955251', '#FF6F61']
     let colorKeyObjectArray = []
 
     useEffect(() => {
@@ -68,9 +68,19 @@ export const GroupCalendar = props => {
         setRSVPModal(!rsvpModal)
     }
 
-    const EventComponent = (event) => {
-        const color = colorKeyObjectArray.find(cko => cko.villageId === event.event.villageId)
-        return <div className={`calendar__event ${color.colorKey}`}>{event.title}</div>
+    const eventStyleGetter = (event) => {
+        const color = colorKeyObjectArray.find(cko => cko.villageId === event.villageId)
+        const style = {
+            backgroundColor: color.colorKey,
+            borderRadius: '2.5px',
+            opacity: 0.8,
+            color: 'black',
+            border: '0px',
+            display: 'block'
+        }
+        return {
+            style: style
+        }
     }
 
     return (
@@ -85,9 +95,9 @@ export const GroupCalendar = props => {
                             colorKey: colorKey[idx]
                         }
                         colorKeyObjectArray.push(colorKeyObject)
-
+                        
                         return <div key={idx} className="color-key">
-                            <div className={`color-box ${colorKey[idx]}`}></div>
+                            <div className="color-box" style={{backgroundColor: `${colorKey[idx]}`}}></div>
                             <p>{protege.firstName} {protege.lastName}</p>
                         </div>
                     })
@@ -102,9 +112,7 @@ export const GroupCalendar = props => {
                 startAccessor="startDate"
                 endAccessor="endDate"
                 title="title"
-                components={{
-                    event: EventComponent
-                }}
+                eventPropGetter={eventStyleGetter}
                 onSelectEvent={selected => {
                     toggleRSVPEvent(selected)
                 }}
