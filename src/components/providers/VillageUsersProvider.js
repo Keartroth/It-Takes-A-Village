@@ -13,7 +13,11 @@ export const VillageUsersProvider = (props) => {
     const [villageUsers, setVillageUsers] = useState([])
 
     const getVillageUsers = () => {
-        return fetch("http://localhost:8088/villageUsers")
+        return fetch("http://localhost:8088/villageUsers",{
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setVillageUsers)
     }
@@ -22,7 +26,8 @@ export const VillageUsersProvider = (props) => {
         return fetch("http://localhost:8088/villageUsers", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(villageUser)
         })
@@ -31,7 +36,10 @@ export const VillageUsersProvider = (props) => {
 
     const deleteVillageUser = villageUserId => {
         return fetch(`http://localhost:8088/villageUsers/${villageUserId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "cache-control":"no-cache"
+            }
         })
             .then(getVillageUsers)
     }
@@ -40,7 +48,8 @@ export const VillageUsersProvider = (props) => {
         return fetch(`http://localhost:8088/villageUsers/${villageUser.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(villageUser)
         })

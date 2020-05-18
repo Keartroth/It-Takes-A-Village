@@ -13,7 +13,11 @@ export const TimePledgesProvider = (props) => {
     const [timePledges, setTimePledges] = useState([])
 
     const getTimePledges = () => {
-        return fetch("http://localhost:8088/timePledges")
+        return fetch("http://localhost:8088/timePledges", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setTimePledges)
     }
@@ -22,7 +26,8 @@ export const TimePledgesProvider = (props) => {
         return fetch("http://localhost:8088/timePledges", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(timePledge)
         })
@@ -31,7 +36,10 @@ export const TimePledgesProvider = (props) => {
 
     const deleteTimePledge = timePledgeId => {
         return fetch(`http://localhost:8088/timePledges/${timePledgeId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "cache-control":"no-cache"
+            }
         })
             .then(getTimePledges)
     }
@@ -40,7 +48,8 @@ export const TimePledgesProvider = (props) => {
         return fetch(`http://localhost:8088/timePledges/${timePledge.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(timePledge)
         })

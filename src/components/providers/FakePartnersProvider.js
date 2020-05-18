@@ -13,7 +13,11 @@ export const FakePartnersProvider = (props) => {
     const [fakePartners, setFakePartners] = useState([])
 
     const getFakePartners = () => {
-        return fetch("http://localhost:8088/fakePartners")
+        return fetch("http://localhost:8088/fakePartners", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setFakePartners)
     }
@@ -22,7 +26,8 @@ export const FakePartnersProvider = (props) => {
         return fetch("http://localhost:8088/fakePartners", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(fakePartners)
         })

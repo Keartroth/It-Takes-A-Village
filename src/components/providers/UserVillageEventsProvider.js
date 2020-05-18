@@ -13,7 +13,11 @@ export const UserVillageEventsProvider = (props) => {
     const [userVillageEvents, setUserVillageEvents] = useState([])
 
     const getUserVillageEvents = () => {
-        return fetch("http://localhost:8088/userVillageEvents")
+        return fetch("http://localhost:8088/userVillageEvents", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setUserVillageEvents)
     }
@@ -22,7 +26,8 @@ export const UserVillageEventsProvider = (props) => {
         return fetch("http://localhost:8088/userVillageEvents", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(userVillageEvent)
         })
@@ -31,7 +36,10 @@ export const UserVillageEventsProvider = (props) => {
 
     const deleteUserVillageEvent = userVillageEventId => {
         return fetch(`http://localhost:8088/userVillageEvents/${userVillageEventId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "cache-control":"no-cache"
+            }
         })
             .then(getUserVillageEvents)
     }
@@ -40,7 +48,8 @@ export const UserVillageEventsProvider = (props) => {
         return fetch(`http://localhost:8088/userVillageEvents/${userVillageEvent.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(userVillageEvent)
         })

@@ -14,7 +14,11 @@ export const UserProvider = (props) => {
     const [searchTerm, setSearchTerm] = useState("")
 
     const getUsers = () => {
-        return fetch("http://localhost:8088/users")
+        return fetch("http://localhost:8088/users", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setUsers)
     }
@@ -23,7 +27,8 @@ export const UserProvider = (props) => {
         return fetch("http://localhost:8088/users", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(user)
         })
@@ -34,7 +39,8 @@ export const UserProvider = (props) => {
         return fetch(`http://localhost:8088/users/${user.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(user)
         })

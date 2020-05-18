@@ -13,7 +13,11 @@ export const BudgetTypesProvider = (props) => {
     const [budgetTypes, setBudgetTypes] = useState([])
 
     const getBudgetTypes = () => {
-        return fetch("http://localhost:8088/budgetTypes")
+        return fetch("http://localhost:8088/budgetTypes", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setBudgetTypes)
     }
@@ -22,7 +26,8 @@ export const BudgetTypesProvider = (props) => {
         return fetch("http://localhost:8088/budgetTypes", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(budgetType)
         })
