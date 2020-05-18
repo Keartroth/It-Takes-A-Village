@@ -13,7 +13,11 @@ export const QuotesProvider = (props) => {
     const [quotes, setQuotes] = useState([])
 
     const getQuotes = () => {
-        return fetch("http://localhost:8088/quotes")
+        return fetch("http://localhost:8088/quotes", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setQuotes)
     }

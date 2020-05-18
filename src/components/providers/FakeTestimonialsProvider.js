@@ -13,7 +13,11 @@ export const FakeTestimonialsProvider = (props) => {
     const [fakeTestimonials, setFakeTestimonials] = useState([])
 
     const getFakeTestimonials = () => {
-        return fetch("http://localhost:8088/fakeTestimonials")
+        return fetch("http://localhost:8088/fakeTestimonials", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setFakeTestimonials)
     }
@@ -22,7 +26,8 @@ export const FakeTestimonialsProvider = (props) => {
         return fetch("http://localhost:8088/fakeTestimonials", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(fakeTestimonials)
         })

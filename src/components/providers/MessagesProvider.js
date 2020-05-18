@@ -14,7 +14,11 @@ export const MessagesProvider = (props) => {
     const [searchTerm, setSearchTerm] = useState("")
 
     const getMessages = () => {
-        return fetch("http://localhost:8088/messages")
+        return fetch("http://localhost:8088/messages", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setMessages)
     }
@@ -23,7 +27,8 @@ export const MessagesProvider = (props) => {
         return fetch("http://localhost:8088/messages", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(message)
         })
@@ -37,7 +42,10 @@ export const MessagesProvider = (props) => {
 
     const deleteMessage = messageId => {
         return fetch(`http://localhost:8088/messages/${messageId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "cache-control":"no-cache"
+            }
         })
             .then(getMessages)
     }
@@ -46,7 +54,8 @@ export const MessagesProvider = (props) => {
         return fetch(`http://localhost:8088/messages/${message.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(message)
         })

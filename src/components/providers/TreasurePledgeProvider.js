@@ -13,7 +13,11 @@ export const TreasurePledgesProvider = (props) => {
     const [treasurePledges, setTreasurePledges] = useState([])
 
     const getTreasurePledges = () => {
-        return fetch("http://localhost:8088/treasurePledges")
+        return fetch("http://localhost:8088/treasurePledges", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setTreasurePledges)
     }
@@ -22,7 +26,8 @@ export const TreasurePledgesProvider = (props) => {
         return fetch("http://localhost:8088/treasurePledges", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(treasurePledge)
         })
@@ -31,7 +36,11 @@ export const TreasurePledgesProvider = (props) => {
 
     const deleteTreasurePledge = treasurePledgeId => {
         return fetch(`http://localhost:8088/treasurePledges/${treasurePledgeId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "cache-control":"no-cache",
+                "cache-control":"no-cache"
+            }
         })
             .then(getTreasurePledges)
     }

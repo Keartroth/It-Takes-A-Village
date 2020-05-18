@@ -14,7 +14,11 @@ export const MessageBoardsProvider = (props) => {
     const [searchTerm, setSearchTerm] = useState("")
 
     const getMessageBoards = () => {
-        return fetch("http://localhost:8088/messageBoards")
+        return fetch("http://localhost:8088/messageBoards", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setMessageBoards)
     }
@@ -23,7 +27,8 @@ export const MessageBoardsProvider = (props) => {
         return fetch("http://localhost:8088/messageBoards", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(messageBoard)
         })
@@ -37,7 +42,10 @@ export const MessageBoardsProvider = (props) => {
 
     const deleteMessageBoard = messageBoardId => {
         return fetch(`http://localhost:8088/messageBoards/${messageBoardId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "cache-control":"no-cache"
+            }
         })
             .then(getMessageBoards)
     }
@@ -46,7 +54,8 @@ export const MessageBoardsProvider = (props) => {
         return fetch(`http://localhost:8088/messageBoards/${messageBoard.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(messageBoard)
         })

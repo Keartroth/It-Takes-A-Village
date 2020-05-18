@@ -13,7 +13,11 @@ export const VillageEventsProvider = (props) => {
     const [villageEvents, setVillageEvents] = useState([])
 
     const getVillageEvents = () => {
-        return fetch("http://localhost:8088/villageEvents")
+        return fetch("http://localhost:8088/villageEvents", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setVillageEvents)
     }
@@ -22,7 +26,8 @@ export const VillageEventsProvider = (props) => {
         return fetch("http://localhost:8088/villageEvents", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(villageEvent)
         })
@@ -36,7 +41,10 @@ export const VillageEventsProvider = (props) => {
 
     const deleteVillageEvent = villageEventId => {
         return fetch(`http://localhost:8088/villageEvents/${villageEventId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "cache-control":"no-cache"
+            }
         })
             .then(getVillageEvents)
     }
@@ -45,7 +53,8 @@ export const VillageEventsProvider = (props) => {
         return fetch(`http://localhost:8088/villageEvents/${villageEvent.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(villageEvent)
         })

@@ -14,7 +14,11 @@ export const VillagesProvider = (props) => {
     const [searchTerm, setSearchTerm] = useState("")
 
     const getVillages = () => {
-        return fetch("http://localhost:8088/villages")
+        return fetch("http://localhost:8088/villages", {
+            headers: {
+                "cache-control":"no-cache"
+            } 
+        })
             .then(res => res.json())
             .then(setVillages)
     }
@@ -23,7 +27,8 @@ export const VillagesProvider = (props) => {
         return fetch("http://localhost:8088/villages", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(village)
         })
@@ -37,7 +42,10 @@ export const VillagesProvider = (props) => {
 
     const deleteVillage = villageId => {
         return fetch(`http://localhost:8088/villages/${villageId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "cache-control":"no-cache"
+            }
         })
             .then(getVillages)
     }
@@ -46,7 +54,8 @@ export const VillagesProvider = (props) => {
         return fetch(`http://localhost:8088/villages/${village.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(village)
         })

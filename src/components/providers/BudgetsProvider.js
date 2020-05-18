@@ -13,7 +13,11 @@ export const BudgetsProvider = (props) => {
     const [budgets, setBudgets] = useState([])
 
     const getBudgets = () => {
-        return fetch("http://localhost:8088/budgets")
+        return fetch("http://localhost:8088/budgets", {
+            headers: {
+                "cache-control":"no-cache"
+            }
+        })
             .then(res => res.json())
             .then(setBudgets)
     }
@@ -22,7 +26,8 @@ export const BudgetsProvider = (props) => {
         return fetch("http://localhost:8088/budgets", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(budget)
         })
@@ -31,7 +36,10 @@ export const BudgetsProvider = (props) => {
 
     const deleteBudget = budgetId => {
         return fetch(`http://localhost:8088/budgets/${budgetId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "cache-control":"no-cache"
+            }
         })
             .then(getBudgets)
     }
@@ -40,7 +48,8 @@ export const BudgetsProvider = (props) => {
         return fetch(`http://localhost:8088/budgets/${budget.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "cache-control":"no-cache"
             },
             body: JSON.stringify(budget)
         })
