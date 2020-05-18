@@ -4,13 +4,12 @@ import { UserContext } from "../providers/UsersProvider"
 import { VillagesContext } from "../providers/VillagesProvider"
 import { VillageUsersContext } from "../providers/VillageUsersProvider"
 import { Budget } from "./Budget"
-import { VillageCalendar } from "./Calendar"
 import { JoinVillageForm } from "../dialog/JoinVillageForm"
 import { MessagDashboard } from "../message/MessageDashboard"
+import { VillageCalendar } from "../calendar/Calendar"
 import "./Village.css"
 
 export const Village = props => {
-
     const currentUserId = props.userId
     const villageId = props.villageId
     const { users } = useContext(UserContext)

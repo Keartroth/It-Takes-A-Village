@@ -9,6 +9,7 @@ export const VillagePreview = (props) => {
     const villageLink = props.villageLink
     const village = props.villageObject
     const protege = props.protege
+    const home = props.home
     const population = villageUsers.filter(vu => vu.villageId === village.id).length
 
     const { budgets } = useContext(BudgetsContext)
@@ -51,8 +52,8 @@ export const VillagePreview = (props) => {
                     }
                 }
             }}>
-                <div data-title={village.patron ? `${protege.firstName} ${protege.lastName}` : null}>
-                    <img id={`previewImg--${protege.id}`} src={`${protege.image}`} alt="smiley face" />
+                <div data-title={village.patron || (home && !village.featuredVillage) ? `${protege.firstName} ${protege.lastName}` : null}>
+                    <img id={`previewImg--${protege.id}`} src={`${protege.image}`} alt={`${protege.firstName} ${protege.lastName} smiling`} />
                 </div>
                 <div id={`hiddenCard--${protege.id}`} className={village.featuredVillage ? null : 'hidden'} data-title={village.featuredVillage ? null : `Click photo again to minimize`}>
                     <p id={`previewTitle--${protege.id}`}>{protege.firstName} {protege.lastName}'s Village</p>

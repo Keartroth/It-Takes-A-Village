@@ -77,7 +77,7 @@ export const MessageList = props => {
                     sortedThreadMessages.map(vm => {
                         const mu = users.find(u => u.id === vm.userId)
                         return <Card key={vm.id} className={`message ${currentUserId === vm.userId ? 'right blue' : 'left gray'}`}>
-                            <Card.Title className="mb-2 text-muted message__userName">{mu.firstName} {mu.lastName}</Card.Title>
+                            <Card.Title className="mb-2 message__userName">{mu.firstName} {mu.lastName}</Card.Title>
                             <Card.Body>{vm.message}</Card.Body>
                             <Card.Body className="message__buttonContainer">
                                 {vm.userId === currentUserId ? <Button size="sm" variant="warning" className="messageButton" onClick={() => { toggleEditForm(vm) }}>Edit</Button> : ""}

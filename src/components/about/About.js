@@ -5,7 +5,7 @@ import { TreasurePledgesContext } from "../providers/TreasurePledgeProvider"
 import { VillagesContext } from "../providers/VillagesProvider"
 import './About.css'
 
-export const About = () => {
+export const About = (props) => {
     const { fakePartners } = useContext(FakePartnersContext)
     const { villages } = useContext(VillagesContext)
     const { budgets } = useContext(BudgetsContext)
@@ -47,7 +47,7 @@ export const About = () => {
                 </div>
                 <div className="about__villageInfoTotal">
                     <p>Currently, our members are supporting {villages.length} underserved members of our community. For those {villages.length} people,
-                ${valueState.totalDonations} is being donated per month to help alleviate a total estimated monthly need of ${valueState.totalNeed}.</p>
+                {valueState.totalDonations ? ` $${valueState.totalDonations}` : " nothing"} is being donated per month to help alleviate a total estimated monthly need of ${valueState.totalNeed}.</p>
 
                 </div>
             </div>

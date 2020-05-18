@@ -39,7 +39,7 @@ export const EditPledgeForm = props => {
         const proptery = greatGrandparent.children[0].children[1].value
         const value = parseInt(greatGrandparent.children[1].children[1].value)
 
-        if (e.target.value !== "") {
+        if (proptery !== "") {
             if (Number.isNaN(value)) {
                 delete foundObject.amount
                 delete foundObject.hours
@@ -71,6 +71,7 @@ export const EditPledgeForm = props => {
     }
 
     const editUserPledge = () => {
+
         const deletePledgeObjects = () => {
             for (const pledgeObject of deletePledgeState) {
                 if (pledgeObject.amount) {
@@ -79,6 +80,7 @@ export const EditPledgeForm = props => {
                     deleteTimePledge(pledgeObject.id)
                 }
             }
+            setDeletePledgeState([])
         }
 
         const editPledgeObjects = () => {
@@ -99,9 +101,11 @@ export const EditPledgeForm = props => {
             }
         }
 
-        editPledgeObjects()
-        deletePledgeObjects()
-        toggleEditPledge()
+        const promise = Promise.all([
+            editPledgeObjects(),
+            deletePledgeObjects()
+        ])
+        promise.then(toggleEditPledge)
     }
 
     return (
@@ -126,7 +130,7 @@ export const EditPledgeForm = props => {
                                 return <Form.Row key={`promise-${idx}`}>
                                     <Col className="col-6">
                                         <Form.Label>Type of Pledge:</Form.Label>
-                                        <Form.Control className="promiseType" as="select" defaultValue={editPledgetState[idx].hours ? "hours" : "amount"} id={promiseTypeId} data-idx={idx} onChange={handlePledgeChange} required>
+                                        <Form.Control className="promiseType" as="select" value={editPledgetState[idx].hours ? "hours" : "amount"} id={promiseTypeId} data-idx={idx} onChange={handlePledgeChange} required>
                                             <option value="">Choose...</option>
                                             <option value="hours">Time</option>
                                             <option value="amount">Treasure</option>
@@ -134,7 +138,7 @@ export const EditPledgeForm = props => {
                                     </Col>
                                     <Col className="col-5">
                                         <Form.Label>Your Monthly Pledge:</Form.Label>
-                                        <Form.Control className="promiseValue" defaultValue={editPledgetState[idx].hours ? editPledgetState[idx].hours : editPledgetState[idx].amount} id={promiseValueId} type="number" min="0" data-idx={idx} onChange={handlePledgeChange} required />
+                                        <Form.Control className="promiseValue" value={editPledgetState[idx].hours ? editPledgetState[idx].hours : editPledgetState[idx].amount} id={promiseValueId} type="number" min="0" step="1" data-idx={idx} onChange={handlePledgeChange} required />
                                     </Col>
                                     <Col className="col-1">
                                         <button type="button" id="closeButton" className="close" data-dismiss="modal" aria-label="Close" onClick={(e) => { removePledge(idx) }}>

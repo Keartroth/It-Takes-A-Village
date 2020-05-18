@@ -29,10 +29,6 @@
     width: 300px;
 }
 
-.calendar__event {
-    border: 1px solid black;
-}
-
 #heroImageContainer {
     background-image: linear-gradient(to bottom, #76b852, #8DC26F, #FFFFFF);
     display: flex;
@@ -65,7 +61,7 @@
 }
 
 .homeList {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), #FFFFFF 35%);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), #FFFFFF 550px);
 }
 
 .previewCard__Container {
@@ -83,7 +79,7 @@
 .previewCard__containerUnhidden {
     background-image: linear-gradient(to bottom, #76b852, #8DC26F, #FFFFFF);
     border-radius: 2.5%;
-    width: 85%;
+    width: 80%;
 }
 
 [id^='hiddenCard--'] {
@@ -132,7 +128,7 @@
 }
 
 .villageList__header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://fulleryouthinstitute.org/assets/fyi-files/Effective_Homeless_Ministry.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/resources/seeking_human_kindness.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 25rem;
@@ -149,42 +145,10 @@
     width: max-content;
 }
 
-.green {
-    background-color: lightgreen;
-    color: black;
-}
-
-.red {
-    background-color: lightcoral;
-    color: black;
-}
-
-.color-key {
-    margin-right: 2rem;
-    position: relative;
-}
-
-.color-key p {
-    padding-left: 20px;
-}
-
-.color-key .color-box {
-    width: 10px;
-    height: 10px;
-    display: inline-block;
-    position: absolute;
-    left: 5px;
-    top: 5px;
-}
-
-.color-keyContainer {
-    display: flex;
-    flex-wrap: nowrap;
-}
 #featuredVillage {
     background-image: linear-gradient(to bottom, goldenrod, gold, white);
     border-radius: 2.5%;
-    width: 85%;
+    width: 80%;
 }
 
 [data-title]:hover:after {
@@ -192,6 +156,7 @@
     transition: all 0.1s ease 0.5s;
     visibility: visible;
 }
+
 [data-title]:after {
     background-color: #1c92d2;
     border: 1px solid #111111;
@@ -208,6 +173,7 @@
     white-space: nowrap;
     z-index: 99999;
 }
+
 [data-title] {
     position: relative;
 }

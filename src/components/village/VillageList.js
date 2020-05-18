@@ -5,6 +5,7 @@ import { VillagePreview } from "./VillagePreview"
 import { VillageUsersContext } from "../providers/VillageUsersProvider"
 import { UserContext } from "../providers/UsersProvider"
 import { CreateVillageForm } from "../dialog/CreateVillageForm"
+import { GroupCalendar } from "../calendar/GroupCalendar"
 import "./Village.css"
 
 export const VillageList = props => {
@@ -39,19 +40,6 @@ export const VillageList = props => {
 
         const feature = nonMemberVillages[randomIndex]
         feature.featuredVillage = true
-
-        nonMemberVillages.sort((currentObject, nextObject) => {
-            const currentVillage = currentObject.lastName;
-            const nextVillage = nextObject.lastName;
-
-            if (currentVillage < nextVillage) {
-                return -1
-            }
-            if (currentVillage > nextVillage) {
-                return 1
-            }
-            return 0
-        })
 
         if (randomIndex > 0) {
             nonMemberVillages.splice(randomIndex, 1)
@@ -98,6 +86,11 @@ export const VillageList = props => {
 
             <section className={home ? 'villageList homeList' : 'villageList'}>
                 {home ? List(nonMemberVillages) : List(patronedVillageArray)}
+                {home ? null : <GroupCalendar
+                    {...props}
+                    users={users}
+                    villageUsers={villageUsers}
+                />}
             </section>
 
             <CreateVillageForm

@@ -1,0 +1,38 @@
+.calendar {
+    margin-bottom: 3rem;
+}
+
+.calendar__event {
+    border: 1px solid black;
+}
+
+.color-key {
+    margin-right: 2rem;
+    position: relative;
+}
+
+.color-key p {
+    padding-left: 20px;
+}
+
+.color-key .color-box {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+}
+
+.color-keyContainer {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.green {
+    background-color: lightgreen;
+}
+
+.red {
+    background-color: lightcoral;
+}

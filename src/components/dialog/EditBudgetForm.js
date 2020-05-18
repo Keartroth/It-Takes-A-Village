@@ -63,17 +63,19 @@ export const EditBudgetForm = props => {
             updatedBudget.unshift(editBudgetState[index])
             setDeleteBudgetState(updatedBudget)
         }
-        
+
         const updatedBudget = [...editBudgetState]
         updatedBudget.splice(index, 1)
         setEditBudgetState(updatedBudget)
     }
 
     const editVillageBudget = () => {
+
         const deleteBudgetObjects = () => {
             for (const budgetObject of deleteBudgetState) {
                 deleteBudget(budgetObject.id)
             }
+            setDeleteBudgetState([])
         }
 
         const editBudgetObjects = () => {
@@ -88,9 +90,12 @@ export const EditBudgetForm = props => {
             }
         }
 
-        editBudgetObjects()
-        deleteBudgetObjects()
-        toggleEditBudget()
+        const promise = Promise.all([
+            editBudgetObjects(),
+            deleteBudgetObjects()
+
+        ])
+        promise.then(toggleEditBudget)
     }
 
     return (
@@ -115,7 +120,7 @@ export const EditBudgetForm = props => {
                                 return <Form.Row key={`budget-${idx}`}>
                                     <Col className="col-5">
                                         <Form.Label>Expected Monthly Expense:</Form.Label>
-                                        <Form.Control className="value" value={editBudgetState[idx].value} id={valueId} type="number" min="0" data-idx={idx} onChange={handleBudgetChange} required />
+                                        <Form.Control className="value" value={editBudgetState[idx].value} id={valueId} type="number" min="0" step="1" data-idx={idx} onChange={handleBudgetChange} required />
                                     </Col>
                                     <Col className="col-6">
                                         <Form.Group as={Col} id="formGridBudget">

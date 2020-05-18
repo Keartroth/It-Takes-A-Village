@@ -81,19 +81,23 @@ export const Dashboard = ({ toggle }) => {
     )
 
     const showPatronedVillageList = () => (
-        <TreasurePledgesProvider>
-            <BudgetsProvider>
-                <BudgetTypesProvider>
-                    <UserProvider>
-                        <VillageUsersProvider>
-                            <VillagesProvider>
-                                <VillageList home={false} villageLink={villageLink} userId={userId} />
-                            </VillagesProvider>
-                        </VillageUsersProvider>
-                    </UserProvider>
-                </BudgetTypesProvider>
-            </BudgetsProvider>
-        </TreasurePledgesProvider>
+        <UserVillageEventsProvider>
+            <VillageEventsProvider>
+                <TreasurePledgesProvider>
+                    <BudgetsProvider>
+                        <BudgetTypesProvider>
+                            <UserProvider>
+                                <VillageUsersProvider>
+                                    <VillagesProvider>
+                                        <VillageList home={false} villageLink={villageLink} userId={userId} />
+                                    </VillagesProvider>
+                                </VillageUsersProvider>
+                            </UserProvider>
+                        </BudgetTypesProvider>
+                    </BudgetsProvider>
+                </TreasurePledgesProvider>
+            </VillageEventsProvider>
+        </UserVillageEventsProvider>
     )
 
     const showVisitVillage = () => (

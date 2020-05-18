@@ -16,6 +16,7 @@ export const RSVPEventForm = props => {
     const toggleRSVPEvent = props.toggleRSVPEvent
     const users = props.users
     const currentUserId = props.userId
+    const groupCalendar = props.groupCalendar
     const villageProtege = props.villageProtege
     const currentUserIsProtegeCheck = props.currentUserIsProtegeCheck
     const rsvpModal = props.rsvpModal
@@ -83,6 +84,27 @@ export const RSVPEventForm = props => {
     }
 
     const cancelEvent = (eventId) => {
+        const messageParams = {
+            event_change_message: `The following event you have RSVP'd has been canceled, \n Title: ${rsvpState.title} \n Location: ${rsvpState.location} \n Expected Cost: $${rsvpState.cost} \n Description:  ${rsvpState.description},\n Start Time: ${rsvpState.startDate} \n End Time: ${rsvpState.endDate}`,
+            patron_email: "",
+            protege_email: `${villageProtege.email}`,
+            protege_name: `${villageProtege.firstName} ${villageProtege.lastName}`,
+            contact_number: Math.random() * 100000 | 0
+        }
+
+        const currentEventUsersMinusProtege = currentEventUsers.filter(ceu => ceu.userId !== villageProtege.id)
+
+        for (const eventUser of currentEventUsersMinusProtege) {
+            const userEmail = users.find(u => u.id === eventUser.userId).email
+            messageParams.patron_email = userEmail
+            emailjs.send('contact_service', 'event_change_contact_form', messageParams, 'user_1lhMcPcYLXSYYIlvQBGcC')
+                .then((response) => {
+                    console.log('SUCCESS!', response.status, response.text)
+                }, (error) => {
+                    console.log('FAILED...', error)
+                })
+        }
+
         deleteVillageEvent(eventId).then(() => { toggleRSVPEvent({}) })
     }
 
@@ -156,11 +178,11 @@ export const RSVPEventForm = props => {
                                     }
                                 </ul>}
                         </div>
-                        <div className="buttonContainer">
+                        {groupCalendar ? null : <div className="buttonContainer">
                             {rsvpCheck ? <Button onClick={() => { leaveEvent(currentEventUsers) }}>Leave event</Button> : <Button onClick={() => { joinEvent(rsvpState.id) }}>Join event</Button>}
                             {currentUserIsProtegeCheck ? <Button onClick={() => { cancelEvent(rsvpState.id) }}>Cancel event</Button> : ""}
                             {currentUserIsProtegeCheck && !editEvent ? <Button onClick={toggleEditEvent}>Edit event</Button> : ""}
-                        </div>
+                        </div>}
                     </Container> :
                     <Form id="editEventForm" onSubmit={(e) => {
                         e.preventDefault()

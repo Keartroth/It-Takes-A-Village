@@ -42,7 +42,8 @@ export const JoinVillageForm = props => {
         setPromiseState(updatedPromises)
     }
 
-    const joinVillage = () => {
+    const joinVillage = (e) => {
+        e.preventDefault()
         const timePromiseArray = promiseState.filter(p => p.promiseType === "Time")
         const treasurePromiseArray = promiseState.filter(p => p.promiseType === "Treasure")
 
