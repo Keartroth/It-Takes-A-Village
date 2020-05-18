@@ -28,3 +28,11 @@
     display: flex;
     flex-wrap: nowrap;
 }
+
+.green {
+    background-color: lightgreen;
+}
+
+.red {
+    background-color: lightcoral;
+}
