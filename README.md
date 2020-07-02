@@ -49,10 +49,17 @@ This feature will not be viable with the current dummy data, as the data does no
 ### Technologies Used
 
 [React](https://reactjs.org/)
+
 [React-Boostrap](https://react-bootstrap.github.io/) for styling
+
 [date-fns](https://date-fns.org/) library for date manipulation
+
 [React Big Calendar](https://npmjs.com/package/react-big-calendar) to organize and display village events
+
 [nivo](https://nivo.rocks/) to display village budgets and budgetary pledges
+
 [Email Js](https://emailjs.com/)to notify users when event details have been changed after RSVP'ing for an event
+
 [dbdiagram.io](https://dbdiagram.io/home) for planning the data structure
+
 [Sketchboard.me](https://sketchboard.me/home) for wireframing
