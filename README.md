@@ -11,11 +11,11 @@ You will need json-server installed in order to create the persistant data stora
 
 To start the json server, run the following command in your terminal inside of the ItTakesAVillage-api directory:
 
-```json-server -p 8088 -w database.json
+```json-server -p 8088 -w database.json```
 
 To start the application, run the following command in your terminal inside of the ItTakesAVillage directory:
 
-```npm start
+```npm start```
 
 
 ### Dummy User Data
