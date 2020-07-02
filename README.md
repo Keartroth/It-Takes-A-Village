@@ -1,68 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## It Takes a Village
 
-## Available Scripts
+It Takes a Village is a single-page social networking platform built in React that allows users to volunteer their time and treasure in an effort to help an underserved community member reshape his or her life through financial patronage and social interaction through group sponsorship.
 
-In the project directory, you can run:
 
-### `npm start`
+### Installation
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Along with the It Takes a Village repository, you will need to clone the ItTakesAVillage-API repo as well which contains the data structure and some dummy data for you to access the site.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+You will need json-server installed in order to create the persistant data storage.
 
-### `npm test`
+To start the json server, run the following command in your terminal inside of the ItTakesAVillage-api directory:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```json-server -p 8088 -w database.json
 
-### `npm run build`
+To start the application, run the following command in your terminal inside of the ItTakesAVillage directory:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```npm start
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Dummy User Data
 
-### `npm run eject`
+Login with the following dummy user data to view a user that is a patron of a village (Terry Smith's village):
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Email Adress: mecarrolljr@example.com
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Password: 123
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Login with the following dummy user data to view a user that is a protege of the same village (Terry Smith's village):
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Email Adress: terrysmith@example.com
 
-## Learn More
+Password: 123
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+If you would like to test the email updates for changed RSVP'd events, you must:
+1) 'Register' an account with an email that you have access to
+2) Join the village that belongs to Terry Smith and either A) create and join an event or B) join an existing event
+3) Log out as your current user, and then log back in as Terry Smith (email address and password listed above)
+4) Navigate to Terry Smith's village and change the event your account has RSVP'd
+5) Check your email
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This feature will not be viable with the current dummy data, as the data does not contain working email addresses.
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Technologies Used
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+[React](https://reactjs.org/)
+[React-Boostrap](https://react-bootstrap.github.io/) for styling
+[date-fns](https://date-fns.org/) library for date manipulation
+[React Big Calendar](https://npmjs.com/package/react-big-calendar) to organize and display village events
+[nivo](https://nivo.rocks/) to display village budgets and budgetary pledges
+[Email Js](https://emailjs.com/)to notify users when event details have been changed after RSVP'ing for an event
+[dbdiagram.io](https://dbdiagram.io/home) for planning the data structure
+[Sketchboard.me](https://sketchboard.me/home) for wireframing
