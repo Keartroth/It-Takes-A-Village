@@ -58,7 +58,7 @@ This feature will not be viable with the current dummy data, as the data does no
 
 [nivo](https://nivo.rocks/) to display village budgets and budgetary pledges
 
-[Email Js](https://emailjs.com/)to notify users when event details have been changed after RSVP'ing for an event
+[Email Js](https://emailjs.com/) to notify users when event details have been changed after RSVP'ing for an event
 
 [dbdiagram.io](https://dbdiagram.io/home) for planning the data structure
 
