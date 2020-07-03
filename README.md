@@ -26,13 +26,13 @@ npm start
 
 Login with the following dummy user data to view a user that is a patron of a village (Terry Smith's village):
 
-Email Adress: mecarrolljr@example.com
+Email Adress: michael@example.com
 
 Password: 123
 
 Login with the following dummy user data to view a user that is a protege of the same village (Terry Smith's village):
 
-Email Adress: terrysmith@example.com
+Email Adress: terry@example.com
 
 Password: 123
 
