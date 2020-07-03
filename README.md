@@ -1,4 +1,4 @@
-## It Takes a Village
+# It Takes a Village
 
 It Takes a Village is a single-page social networking platform built in React that allows users to volunteer their time and treasure in an effort to help an underserved community member reshape his or her life through financial patronage and social interaction through group sponsorship.
 
@@ -26,13 +26,13 @@ npm start
 
 Login with the following dummy user data to view a user that is a patron of a village (Terry Smith's village):
 
-Email Adress: michael@example.com
+Email Adress: 'michael@example.com'
 
 Password: 123
 
 Login with the following dummy user data to view a user that is a protege of the same village (Terry Smith's village):
 
-Email Adress: terry@example.com
+Email Adress: te<span>rry@ex</span>ample.com
 
 Password: 123
 
