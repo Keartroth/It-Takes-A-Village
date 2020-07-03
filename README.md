@@ -5,11 +5,15 @@ It Takes a Village is a single-page social networking platform built in React th
 
 ### Installation
 
-Along with the It Takes a Village repository, you will need to clone the ItTakesAVillage-API repo as well which contains the data structure and some dummy data for you to access the site.
+Along with this repository, you will need to clone the [ItTakesAVillage-JSON](https://github.com/Keartroth/ItTakesAVillage-JSON) repo as well, which contains the data structure and some dummy data for you to access the site.
 
-You will need json-server installed in order to create the persistant data storage.
+You will need json-server installed in order to create the persistant data storage. To install json-server run the following command in your terminal:
 
-To start the json server, run the following command in your terminal inside of the ItTakesAVillage-api directory:
+```
+npm install -g json-server
+```
+
+To start the json server, run the following command in your terminal inside of the ItTakesAVillage-JSON directory:
 
 ```
 json-server -p 8088 -w database.json
@@ -30,7 +34,7 @@ Email Adress: mic<span>hael@exa</span>mple.com
 
 Password: 123
 
-Login with the following dummy user data to view a user that is a protege of the same village (Terry Smith's village):
+Login with the following dummy user data to view a user that is the protege of the same village (Terry Smith's village):
 
 Email Adress: te<span>rry@exa</span>mple.com
 
@@ -40,7 +44,7 @@ If you would like to test the email updates for changed RSVP'd events, you must:
 1) 'Register' an account with an email that you have access to
 2) Join the village that belongs to Terry Smith and either A) create and join an event or B) join an existing event
 3) Log out as your current user, and then log back in as Terry Smith (email address and password listed above)
-4) Navigate to Terry Smith's village and change the event your account has RSVP'd
+4) Navigate to Terry Smith's village and make changes to the event your account has RSVP'd
 5) Check your email
 
 This feature will not be viable with the current dummy data, as the data does not contain working email addresses.
@@ -56,7 +60,7 @@ This feature will not be viable with the current dummy data, as the data does no
 
 [React Big Calendar](https://npmjs.com/package/react-big-calendar) to organize and display village events
 
-[nivo](https://nivo.rocks/) to display village budgets and budgetary pledges
+[nivo](https://nivo.rocks/) to display village budgets and budgetary pledges as charts
 
 [Email Js](https://emailjs.com/) to notify users when event details have been changed after RSVP'ing for an event
 
